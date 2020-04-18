@@ -19,7 +19,7 @@ public class LibrarySystem  {
 
 	private static BufferedReader  stdIn =
 		new  BufferedReader(new  InputStreamReader(System.in));
-	private static PrintWriter  stdOut = new  PrintWriter(System.out, true);
+	private static PrintWriter  stdOut = new  PrintWriter(System.out, true);//陈玲_修改时间（4.18）
 	private static PrintWriter  stdErr = new  PrintWriter(System.err, true);
 
 	private Catalog  catalog;
