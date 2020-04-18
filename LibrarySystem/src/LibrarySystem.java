@@ -52,6 +52,7 @@ public class LibrarySystem  {
 
 		catalog.addItem(new Book("B001", "Effective Java Programming", 2001,
 		                         "Joshua Bloch", 252));
+                //宋婷婷_修改时间（4\18）
 		catalog.addItem(new Book("B002", "Design Patterns", 1995,
 		                         "Erich Gamma et al", 395));
 		catalog.addItem(new Book("B003", "Refactoring", 1999,
