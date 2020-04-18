@@ -10,7 +10,7 @@ The GroupTestRepo during Java Course
 
 并且在此README文件下添加【姓名】：
 【0】
-【1】
+【1】陈玲
 【2】
 【3】
 【4】宋婷婷
