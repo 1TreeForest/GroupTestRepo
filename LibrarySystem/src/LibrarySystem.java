@@ -41,7 +41,7 @@ public class LibrarySystem  {
 
 		app.run();
 
-	}
+	}//薛漠_修改时间（4.19）
 
 	/*
 	 * Loads the information of a Catalog object.
