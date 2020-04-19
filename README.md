@@ -12,5 +12,5 @@ The GroupTestRepo during Java Course
 【0】
 【1】陈玲
 【2】
-【3】
+【3】薛漠
 【4】宋婷婷
