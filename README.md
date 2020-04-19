@@ -9,7 +9,7 @@ The GroupTestRepo during Java Course
 宋婷婷：55行
 
 并且在此README文件下添加【姓名】：
-【0】
+【0】江奕
 【1】陈玲
 【2】
 【3】薛漠
