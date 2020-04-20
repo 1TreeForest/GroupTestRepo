@@ -73,6 +73,6 @@ public class CoffeeBrewer extends ProductItem {
    	 * @return  the string representation of this brewer.
    	 */     
         public String toString() {
-       	 return getCode()+"_"+getDescription()+"_"+getPrice()+"_"+getmodel()+"_"+getwatersupply()+"_"+getnumber();     
+       	 return getcode()+"_"+getdescription()+"_"+getprice()+"_"+getmodel()+"_"+getwatersupply()+"_"+getnumber();     
        	 }
    }
