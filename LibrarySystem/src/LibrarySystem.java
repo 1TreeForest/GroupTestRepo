@@ -1,168 +1,106 @@
+
 import java.io.*;
 import java.util.*;
-
 /**
- * This class implements a library system.
+ * This class implements a coffee system.
+ * @author 29698
+ * @see Coffee
+ * @see ProductItem
+ * @see CoffeeBrewer
+ * @see CoffeeAccessary
+ * @see SalesDatabase
+ * @see Saleslist
+ * @see SalesItems
+ * @see Product
  *
- * @author A Jiayi
- * @version 1.1.0
- * @see Catalog
- * @see CatalogItem
- * @see Book//江奕_修改时间（4.19）
- * @see Recording
- * @see BorrowerDatabase
- * @see Borrower
- * @see BorrowedItems
  */
-
-public class LibrarySystem  {
+public class CoffeeSystem{
 
 	private static BufferedReader  stdIn =
-		new  BufferedReader(new  InputStreamReader(System.in));
-	private static PrintWriter  stdOut = new  PrintWriter(System.out, true);//陈玲_修改时间（4.18）
+			new  BufferedReader(new  InputStreamReader(System.in));
+	private static PrintWriter  stdOut = new  PrintWriter(System.out, true);
 	private static PrintWriter  stdErr = new  PrintWriter(System.err, true);
 
-	private Catalog  catalog;
-	private BorrowerDatabase borrowerDB;
+	private Product  product;
+	private SalesDatabase salesdatabase;
 
 	/**
-	 * The main function loads the information of the library catalog and
-	 * borrower database and starts the application.
-	 *
-	 * @param args  String arguments.  Not used.
-	 * @throws IOException if there are errors in the input.	//张宇涵_修改时间(4.19)
+	 * The main function loads the information of the product and
+   sales database and starts the application.
+
+	 * @param args
+	 * @throws IOException
 	 */
-	public static void  main(String[]  args) throws IOException  {
 
-		Catalog catalog  = load();
-		BorrowerDatabase borrowerDB = load(catalog);
+	public static void main(String[] args)throws IOException {
+		// TODO Auto-generated method stub
+		Product  product = load();
+		SalesDatabase salesdatabase = load(product);
 
-		LibrarySystem  app = new  LibrarySystem(catalog, borrowerDB);
+
+		CoffeeSystem  app = new  CoffeeSystem(product,salesdatabase);
 
 		app.run();
 
-	}//薛漠_修改时间（4.19）
-
-	/*
-	 * Loads the information of a Catalog object.
-	 */
-	private static Catalog load()  {
-
-		Catalog catalog = new Catalog();
-
-		catalog.addItem(new Book("B001", "Effective Java Programming", 2001,
-		                         "Joshua Bloch", 252));
-                //宋婷婷_修改时间（4\18）
-		catalog.addItem(new Book("B002", "Design Patterns", 1995,
-		                         "Erich Gamma et al", 395));
-		catalog.addItem(new Book("B003", "Refactoring", 1999,
-		                         "Martin Fowler", 431));
-		catalog.addItem(new Book("B004", "The Mythical Man-Month", 1995,
-		                         "Frederick P. Brooks", 322));
-		catalog.addItem(new Book("B005", "Code Complete", 1993,
-		                         "Steve C McConnell", 857));
-		catalog.addItem(new Book("B006", "The Psychology of Comp. Progr.", 1998,
-		                         "Gerald M. Weinberg", 360));
-		catalog.addItem(new Book("B007", "Programming Pearls ", 1999,
-		                         "Jon Bentley", 239));
-		catalog.addItem(new Book("B008", "The Practice of Programming", 1999,
-		                         "Brian W. Kernighan", 257));
-		catalog.addItem(new Book("B009", "Peopleware", 1999,
-		                         "Tom Demarco", 245));
-		catalog.addItem(new Book("B010", "The Java Programming Language", 2000,
-		                         "Ken Arnold", 595));
-		catalog.addItem(new Book("B011", "Core J2EE Patterns", 2001,
-		                         "Deepak Alur", 496));
-		catalog.addItem(new Book("B012", "Rapid Development", 1996,
-		                         "Steve C McConnell", 680));
-		catalog.addItem(new Book("B013", "Applying UML and Patterns", 2001,
-		                         "Craig Larman", 656));
-		catalog.addItem(new Book("B014", "The Little Schemer", 1995,
-		                         "Daniel P. Friedman", 216));
-		catalog.addItem(new Book("B015", "Agile Software Development", 2001,
-		                         "Alistair Cockburn", 256));
-
-		catalog.addItem(new Recording("R001", "Getz/Gilberto", 1963,
-		                              "Stan Getz and Joao Gilberto", "CD"));
-		catalog.addItem(new Recording("R002", "Kind of Blue", 1997,
-		                              "Miles Davis", "CD"));
-		catalog.addItem(new Recording("R003", "Supernatural", 1999,
-		                              "Santana", "Tape"));
-		catalog.addItem(new Recording("R004", "Private Collection", 1983,
-		                              "Jon & Vangelis", "Tape"));
-		catalog.addItem(new Recording("R005", "Abbey Road", 1969,
-		                              "Beatles", "CD"));
-		catalog.addItem(new Recording("R006", "Joshua Tree", 1990,
-		                              "U2", "CD"));
-
-		return catalog;
 	}
-
-	/*
-	 * Loads a BorrowerDatabase object.
+	/**
+	 * Loads the information of a product object.		
+	 * @return
 	 */
-	private static BorrowerDatabase load(Catalog catalog) {
 
-		BorrowerDatabase borrowerDB = new BorrowerDatabase();
+	private static Product load()  {
+		Product product = new Product();
 
-		Borrower borrower = new Borrower("ID001", "James Addy");
-		borrowerDB.addBorrower(borrower);
-		borrower.getBorrowedItems().addItem(catalog.getItem("B003"));
-		borrower.getBorrowedItems().addItem(catalog.getItem("R001"));
-		borrower.getBorrowedItems().addItem(catalog.getItem("B012"));
-		
-		borrower = new Borrower("ID002", "John Doust");
-		borrowerDB.addBorrower(borrower);
+		product.addItem(new Coffee("C001", "Colombia,Whole,1 lb", 17.99,
+				"Colombia", "Medium","Rich and Hearty","Rich","Medium","Full"));
+		product.addItem(new Coffee("C002", "Colombia,Ground,1 lb", 18.75,
+				"Colombia", "Medium","Rich and Hearty","Rich","Medium","Full"));
+		product.addItem(new Coffee("C007", "Guatemala,Whole,1 lb", 17.99,
+				"Guatemala", "Medium","Rich and complex","spicy","Medium to high","Medium to Full"));
+		product.addItem(new Coffee("C008", "Guatemala,Ground,1 lb", 18.75,
+				"Guatemala", "Medium","Rich and complex","Spicy","Medium to high","Medium to Full"));
+		product.addItem(new CoffeeBrewer("B001", "Home Coffee Brewer", 150.00,
+				"Brewer 100", "Pourover",6));
+		product.addItem(new CoffeeBrewer("B002", "Coffee Brewer,2 Warmers", 200.00,
+				"Brewer 200", "Pourover",12));
+		product.addItem(new CoffeeBrewer("B003", "Coffee Brewer,3 Warmers", 280.00,
+				"Brewer 210", "Pourover",12));
+		product.addItem(new CoffeeBrewer("B004", "Commercial Brewer,20 cups", 380.00,
+				"Quick Coffee 100", "Automatic",20));
+		product.addItem(new CoffeeBrewer("B005", "Commercial Brewer,40 cups", 480.00,
+				"Quick Coffee 200", "Automatic",40));
+		product.addItem(new CoffeeAccessories("A001", "Almond Flavored Syrup", 9.00));
+		product.addItem(new CoffeeAccessories("A002", "Irish Creme Flavored Syrup", 9.00));
+		product.addItem(new CoffeeAccessories("A005", "Gourmet Coffee Cokkies", 12.00));
+		product.addItem(new CoffeeAccessories("A007", "Gourmet Coffee Ceramic Mug", 8.00));
+		product.addItem(new CoffeeAccessories("A009", "Gourmet Coffee 36 Cup Filters", 45.00));
 
-		borrower = new Borrower("ID003", "Constance Foster");
-		borrowerDB.addBorrower(borrower);
-		borrower.getBorrowedItems().addItem(catalog.getItem("B006"));
-		
-		borrower = new Borrower("ID004", "Harold Gurske");
-		borrowerDB.addBorrower(borrower);
-		borrower.getBorrowedItems().addItem(catalog.getItem("B002"));
-
-		borrower = new Borrower("ID005", "Mary A. Rogers");
-		borrowerDB.addBorrower(borrower);
-
-		borrower = new Borrower("ID006", "Laura Novelle");
-		borrowerDB.addBorrower(borrower);
-		borrower.getBorrowedItems().addItem(catalog.getItem("B007"));
-		borrower.getBorrowedItems().addItem(catalog.getItem("B009"));
-
-		borrower = new Borrower("ID007", "David M. Prescott");
-		borrowerDB.addBorrower(borrower);
-		borrower.getBorrowedItems().addItem(catalog.getItem("B011"));
-
-		borrower = new Borrower("ID008", "Francis Matthews");
-		borrowerDB.addBorrower(borrower);
-		borrower.getBorrowedItems().addItem(catalog.getItem("R003"));
-		borrower.getBorrowedItems().addItem(catalog.getItem("B005"));
-
-		borrower = new Borrower("ID009", "Thomas Ferris");
-		borrowerDB.addBorrower(borrower);
-
-		borrower = new Borrower("ID010", "John Johnson");
-		borrowerDB.addBorrower(borrower);
-		borrower.getBorrowedItems().addItem(catalog.getItem("B004"));
-
-		return borrowerDB;
+		return product;
 	}
-
-	/*
-	 * Constructs a <code>LibrarySystem</code> object.
-	 * Initialize the catalog and the borrower database with
-	 * the values specified in the parameters.
+	/**
+	 * Loads a SalesDatabase object.
+	 * @param product
+	 * @return
 	 */
-	private LibrarySystem(Catalog initialCatalog,
-	                      BorrowerDatabase initialBorrowerDB) {
+	private static SalesDatabase load(Product product) {
 
-		this.catalog = initialCatalog;
-		this.borrowerDB = initialBorrowerDB;
+		SalesrDatabase salesdatabase = new Salesdatabase();
+
+		return salesdatabase;
 	}
+	/**
+	 * Initialize the product and the sales database
+	 * @param initialproduct
+	 * @param initialSalesdatabase
+	 */
+	private CoffeeSystem(Product initialproduct,SalesDatabase initialSalesdatabase) {
 
-	/*
+		this.product= initialproduct;
+		this.salesdatabase = initialSalesdatabase;
+	}
+	/**
 	 * Presents the user with a menu of options and processes the selection.
+	 * @throws IOException
 	 */
 	private void run() throws IOException  {
 
@@ -171,22 +109,29 @@ public class LibrarySystem  {
 		while (choice != 0)  {
 
 			if (choice == 1)  {
-				displayCatalog();
+				displayproduct();
 			} else if (choice == 2)  {
-				displayCatalogItem();
+				displayproductitem();
 			} else if (choice == 3)  {
-				displayBorrowerDatabase();
+				displaycurrentorder();
 			} else if (choice == 4)  {
-				displayBorrower();
+				addproduct();
 			} else if (choice == 5)  {
-				checkOut();
+				removeproduct();
 			} else if (choice == 6)  {
-				checkIn();
+				registerorder();
+			}else if (choice == 7)  {
+				displaysaleslist();
+			}else if (choice ==8)   {
+				displayspecific();
+			}else if (choice ==9)   {
+				displaytotalproduct();
 			}
-
 			choice = getChoice();
 		}
 	}
+
+
 
 	/* Validates the user's choice. */
 	private int  getChoice() throws IOException  {
@@ -197,20 +142,23 @@ public class LibrarySystem  {
 			try  {
 				stdOut.println();
 				stdOut.print("[0]  Quit\n"
-				             + "[1]  Display catalog\n"
-				             + "[2]  Display catalog item\n"
-				             + "[3]  Display borrowers\n"
-				             + "[4]  Display borrowed items\n"
-				             + "[5]  Check out\n"
-				             + "[6]  Check in\n"
-				             + "choice> ");
+						+ "[1]  Display catalog\n"
+						+ "[2]  Display product\n"
+						+ "[3]  Display current order\n"
+						+ "[4]  Add modify product to in current order\n"
+						+ "[5]  Remove product from current order\n"
+						+ "[6]  Register sale of current order\n"
+						+ "[7]  Display sales\n"
+						+ "[8]  Display number of orders with a specific product\n"
+						+ "[9]  Display the total quantity sold for each products\n"
+						+ "choice> ");
 				stdOut.flush();
 
 				input = Integer.parseInt(stdIn.readLine());
 
 				//stdErr.println();
 
-				if (0 <= input && 6 >= input)  {
+				if (0 <= input && 9 >= input)  {
 					break;
 				} else {
 					stdErr.println("Invalid choice:  " + input);
@@ -222,53 +170,63 @@ public class LibrarySystem  {
 
 		return  input;
 	}
-
 	/*
-	 * Displays the catalog.
+	 *  Displays the product.
 	 */
-	private void displayCatalog() {
 
-		int numberOfItems = this.catalog.getNumberOfItems();
+	private void displayproduct() {
+
+		int numberOfItems = this.product.getNumberOfItems();
 
 		if (numberOfItems == 0) {
 			stdErr.println("The catalog is empty");
 		} else {
-			for (Iterator<CatalogItem> i = catalog.getItemsIterator();
-				i.hasNext();) {
+			for (Iterator<ProductItem> i = product.getItemsIterator();
+					i.hasNext();) {
 
-				CatalogItem item = (CatalogItem) i.next();
+				ProductItem item = (ProductItem) i.next();
 
-				stdOut.println(item.getCode() + " " + item.getTitle() + " "
-				               + (item.isAvailable()? "(A)" : "(NA)"));
+				stdOut.println(item.getcode() + " " +item.getdescription()
+				+ (item.isAvailable()? "(A)" : "(NA)"));
 			}
 		}
 	}
-
 	/*
 	 * Displays a catalog item.
 	 */
-	private void displayCatalogItem()  throws IOException  {
 
-		CatalogItem item = readCatalogItem();
+	private void displayproductitem()  throws IOException  {
+
+		ProductItem item = readProductItem();
 
 		if (item != null) {
-			stdOut.println("  Title: " + item.getTitle());
-			stdOut.println("  Year: " + item.getYear());
-			if (item instanceof Book) {
+			stdOut.println("  Price: " + item.getprice());
+			stdOut.println("  Description: " + item.getdescription());
+			if (item instanceof Coffee) {
 
-				Book book = (Book) item;
+				Coffee coffee = (Coffee) item;
 
-				stdOut.println("  Author: " + book.getAuthor());
-				stdOut.println("  Number of pages: " + book.getNumberOfPages());
-			} else if (item instanceof Recording) {
+				stdOut.println("  Origin: " + coffee.getorigin());
+				stdOut.println("  Roast: " + coffee.getroast());
+				stdOut.println("  Flavor: " + coffee.getflavor());
+				stdOut.println("  Aroma: " + coffee.getaroma());
+				stdOut.println("  Acidity: " + coffee.getacidity());
+				stdOut.println("  Body: " + coffee.getbody());
+			} else if (item instanceof CoffeeBrewer) {
 
-				Recording recording = (Recording) item;
+				CoffeeBrewer coffeebrewer = (CoffeeBrewer) item;
 
-				stdOut.println("  Performer: " + recording.getPerformer());
-				stdOut.println("  Format: " + recording.getFormat());
+				stdOut.println("  Model: " + coffeebrewer.getmodel());
+				stdOut.println("  WaterSupply: " + coffeebrewer.getwatersupply());
+				stdOut.println("  Number: " + coffeebrewer.getnumber());
+			}else if(item instanceof CoffeeAccessary) {
+				CoffeeAccessary coffeeaccessary =(CoffeeAccessary) item;
+
+
+
 			}
 			stdOut.println("  Status: "
-			               + (item.isAvailable() ? "Available" : "Not available"));
+					+ (item.isAvailable() ? "Available" : "Not available"));
 		} else {
 			stdErr.println("There is no catalog item with that code");
 		}
@@ -277,125 +235,184 @@ public class LibrarySystem  {
 	/*
 	 * Displays the borrower database.
 	 */
-	private void displayBorrowerDatabase() {
+	private void displaycurrentorder() {
 
-		if (borrowerDB.getNumberOfBorrowers() == 0) {
-			stdErr.println("The database of borrowers is empty");
+		if (salesdatabase.getNumberOfOrders() == 0) {
+			stdErr.println("The database of order is empty");
 		} else {
-			for (Iterator<Borrower> i = borrowerDB.getBorrowersIterator();
-				i.hasNext();) {
+			for (Iterator<SalesList> i = salesdatabase.getordersiterator();
+					i.hasNext();) {
 
-				Borrower borrower = (Borrower) i.next();
+				SalesList saleslist = (SalesList) i.next();
 
-				stdOut.println(borrower.getId() + " " +	borrower.getName());
+				stdOut.println(saleslist.getquantity() + " " +	saleslist.getcode()+" "+ saleslist.getdescription()+" "+saleslist.getprice());
 			}
 		}
 	}
 
 	/*
-	 * Displays a borrower.
+	 * add a product to saleslist
 	 */
-	private void displayBorrower()  throws IOException  {
+	private void addproduct()  throws IOException {
+		ProductItem item = readProductItem();
 
-		Borrower borrower = readBorrower();
-
-		if (borrower != null) {
-
-			stdOut.println("  Name: " + borrower.getName());
-
-			BorrowedItems borrowedItems = borrower.getBorrowedItems();
-
-			if (borrowedItems.getNumberOfItems() == 0) {
-				stdOut.println("  No items borrowed");
-			} else {
-				stdOut.println("  Items Borrowed:");
-				for (Iterator<CatalogItem> i = borrowedItems.getItemsIterator();
-				     i.hasNext();) {
-
-					CatalogItem item = (CatalogItem) i.next();
-
-					stdOut.println("    " + item.getCode() + " " + item.getTitle());
-				}
-			}
-		} else {
-			stdErr.println("There is no borrower with that id");
-		}
-	}
-
-	/*
-	 * Registers the loan of a item to a borrower.
-	 */
-	private void checkOut()  throws IOException  {
-
-		CatalogItem item = readCatalogItem();
-
-		if (item == null) {
+		SalesList saleslist=salesdatabase.getorder();
+		int number=input.nextInt();
+		if (item==null) {
 			stdErr.println("There is no catalog item with that code");
 		} else if (item.isAvailable()) {
 
-			Borrower borrower = readBorrower();
-
-			if (borrower == null) {
-				stdErr.println("There is no borrower with that id");
-			} else {
-				borrower.getBorrowedItems().addItem(item);
+			if(item.getNumberOfItems()>null) {
+				stdErr.println("There is no enough items");
+			}else {
+				stdOut.print("Product item quality>");
+				Scanner input=new Scanner(System.in);
+				int  i=input.nextInt();
+				saleslist.getquantity(i);
+				saleslist.getSalesItems().addItem(item);
 				stdOut.println("The item " + item.getCode()
-				               + " has been check out by " + borrower.getId());
-			}
-		} else {
-			stdErr.println("The item " +  item.getCode() +
-				" is not available");
+				+ " has been added to the order " );
+				double total=0;
+				for (Iterator<ProductionItem> i = salesitems.getItemsIterator();
+						i.hasNext();) {
+
+					ProductItem item = (ProductItem) i.next();
+
+					total=total+saleslist.getprice()*saleslist.getquantity();
+
+
+
+				}
+
+				stdOut.println("Order total is :"+ total +".");
+			}	
 		}
 	}
 
+
 	/*
-	 * Registers the return of a item.
+	 * remove a product from saleslist
 	 */
-	private void checkIn()  throws IOException  {
+	private void removeproduct()  throws IOException  {
 
-		CatalogItem item = readCatalogItem();
-
+		ProductItem item = readProductItem();
 		if (item == null) {
 			stdErr.println("There is no catalog item with that code");
 		} else if (item.isAvailable()) {
-			stdErr.println("The item " +  item.getCode() + " is not borrowed");
-		} else {
 
-			Borrower borrower = readBorrower();
-
-			if (borrower == null) {
-				stdErr.println("There is no borrower with that id");
-			} else {
-				if (borrower.getBorrowedItems().removeItem(item)){;
-					stdOut.println("The item " +  item.getCode()
-				               + " has been returned");
-				} else {
-					stdErr.println("The item " +  item.getCode() + " is not borrowed by "
-					    + borrower.getId());
-				}
+			SalesList saleslist=salesdatabase.getorder();
+			if(saleslist .getSalesItems().removeItem(item)) {;
+			stdOut.println("The item " + item.getCode()
+			+ " has been removed from the order" );
+			}
+			else {
+				stdErr.println("The item " +  item.getCode() +
+						" is not added");
 			}
 		}
 	}
+}
+/*
+ * register the order to database
+ */
+private void registerorder() throws IOException{
 
-	/*
-	 * Obtains a CatalogItem object.
-	 */
-	private  CatalogItem readCatalogItem() throws IOException  {
 
-		stdOut.print("Catalog item code> ");
-		stdOut.flush();
+	salesdatabase.addorder(saleslist);
+	SalesList saleslist = new SalesList();
+}
 
-		return this.catalog.getItem(stdIn.readLine());
+
+/*
+ * lists all the orders that have been sold
+ */
+private void displaysaleslist()throws IOException{
+	ArrayList<SalesList> arrayList = new ArrayList<>();
+	int numberOfItems = salesdatabase.getNumberOfItems();
+	for (Iterator<SalesList> i = salesdatabase.getordersiterator();
+			i.hasNext();) {
+
+		arrayList.append(saleslist);
 	}
-
-	/*
-	 * Obtains a Borrower object.
-	 */
-	private  Borrower readBorrower()  throws IOException  {
-
-		stdOut.print("Borrower id> ");
-		stdOut.flush();
-
-		return this.borrowerDB.getBorrower(stdIn.readLine());
+	arrayList = new ArrayList<>(new HashSet<>(arrayList.getcode));
+	for (int i=0;i<arrayList.size();i++){
+		println(arrayList.get(i).getcode);
 	}
+}
+
+/*
+ * 	Display number of orders with a specific product
+ */
+private void displayspecific()throws IOException{
+	ArrayList<SalesList> arrayList = new ArrayList<>();
+	int numberOfItems = salesdatabase.getNumberOfItems();
+	for (Iterator<SalesList> i = salesdatabase.getordersiterator();
+			i.hasNext();) {
+
+		arrayList.append(saleslist);
+	}
+	ProductItem item = readProductItem();
+	boolean compare=true;
+	int number=0;
+	if (item==null) {
+		stdErr.println("There is no catalog item with that code");
+	}else {
+		for (int i=0;i<arrayList.size();i++){
+			if(compare==item.getcode.equals(arrayList.get(i).getcode)) {
+				number=number+arrayList.getSalesItems().getprice();
+			}
+		}
+	}
+	println("The number of the orders of "+item.getcode+"is"+number);
+
+
+
+}
+
+/*
+ * Display the total quantity sold for each products
+ */
+private void displaytotalproduct()throws IOException{
+	ArrayList<SalesList> arrayList = new ArrayList<>();
+	int numberOfItems = salesdatabase.getNumberOfItems();
+	for (Iterator<SalesList> i = salesdatabase.getordersiterator();
+			i.hasNext();) {
+
+		arrayList.append(saleslist);
+	}
+	for(int i=0;i<arrayList.size();i++) {
+		String compare=arrayList.get(i).getcode();
+		for(int j=0;j<arrayList.size();j++) {
+			if(arrayList.get(j).getcode()==arrayList.get(i).getcode()) {
+				arrayList.get(i).setquantity(arrayList.get(i).getquantity()+arrayList.get(j).getquantity());
+				arrayList.remove(j);}
+
+		}
+	}
+	for (int i=0;i<arrayList.size();i++){
+		println("code:"+arrayList.get(i).getcode()+"   quantity:"+arrayList.get(i).getquantity());
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+private  ProductItem readProductItem() throws IOException  {
+
+	stdOut.print("Product item code> ");
+	stdOut.flush();
+
+	return this.Product.getItem(stdIn.readLine());
+}
+
+
+
 }
