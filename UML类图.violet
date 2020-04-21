@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="13.0.2" class="java.beans.XMLDecoder">
+ <object class="com.horstmann.violet.ClassDiagramGraph">
+  <void method="addNode">
+   <object class="com.horstmann.violet.ClassNode" id="ClassNode0">
+    <void property="attributes">
+     <void property="text">
+      <string>-stdIn: BufferedReader
+-stdout: PrintWriter
+-std Err: PrintWriter
+-product: Product
+-salesdatabase: SalesDatabase</string>
+     </void>
+    </void>
+    <void property="methods">
+     <void property="text">
+      <string>+main(args: String[])
++load():Product
++load(Product):SalesDatabase
++CoffeeSystem(Product,SalesDatebase)
++run(): void
++getChioce(): int
++displayProduct(): void
++displayProductItem(): void
++displayCurrentOrder(): void
++addProduct(): void
++removeProduct(): void
++registerTheOrder(): void
++displaySaleslist(): void
++readProductItem(): void
++readSalesList(): void</string>
+     </void>
+    </void>
+    <void property="name">
+     <void property="text">
+      <string>CoffeeSystem</string>
+     </void>
+    </void>
+   </object>
+   <object class="java.awt.geom.Point2D$Double">
+    <double>850.0</double>
+    <double>0.0</double>
+   </object>
+  </void>
+  <void method="addNode">
+   <object class="com.horstmann.violet.ClassNode" id="ClassNode1">
+    <void property="attributes">
+     <void property="text">
+      <string>-orders:Vector&lt;Order&gt;
+</string>
+     </void>
+    </void>
+    <void property="methods">
+     <void property="text">
+      <string>+SalesDatebase()
++addOrder(order: Order):void
++getOrdersIterator():Iterator&lt;Order&gt;
++getOrder(code: String):Order
++getNumberOfOrders():int</string>
+     </void>
+    </void>
+    <void property="name">
+     <void property="text">
+      <string>SalesDatabase</string>
+     </void>
+    </void>
+   </object>
+   <object class="java.awt.geom.Point2D$Double">
+    <double>1200.0</double>
+    <double>30.0</double>
+   </object>
+  </void>
+  <void method="addNode">
+   <object class="com.horstmann.violet.ClassNode" id="ClassNode2">
+    <void property="attributes">
+     <void property="text">
+      <string>-quantity:int
+-code:String
+-price:double
+-total:double
+-salesItems:SalesItems</string>
+     </void>
+    </void>
+    <void property="methods">
+     <void property="text">
+      <string>+Order(initialQuantity:int,initialCode:String,initialPrice:double,initialTotal:double)
++getQuantity():int
++getCode():String
++getPrice():double
++getTotal():double
++getSalesItems():SalesItems
++equals(object: Object):boolean
++toString():String</string>
+     </void>
+    </void>
+    <void property="name">
+     <void property="text">
+      <string>Order</string>
+     </void>
+    </void>
+   </object>
+   <object class="java.awt.geom.Point2D$Double">
+    <double>1090.0</double>
+    <double>200.0</double>
+   </object>
+  </void>
+  <void method="addNode">
+   <object class="com.horstmann.violet.ClassNode" id="ClassNode3">
+    <void property="attributes">
+     <void property="text">
+      <string>-item:Vector&lt;ProductItem&gt;</string>
+     </void>
+    </void>
+    <void property="methods">
+     <void property="text">
+      <string>+SalesItems()
++addItem(productItem:ProductItem):void
++removeItem(productItem:ProductItem):boolean
++getItemsIterator():Iterator&lt;ProductItem&gt;
++getItem(code:String):ProductItem
++getNumberOfItems():int</string>
+     </void>
+    </void>
+    <void property="name">
+     <void property="text">
+      <string>SalesItems</string>
+     </void>
+    </void>
+   </object>
+   <object class="java.awt.geom.Point2D$Double">
+    <double>1180.0</double>
+    <double>470.0</double>
+   </object>
+  </void>
+  <void method="addNode">
+   <object class="com.horstmann.violet.ClassNode" id="ClassNode4">
+    <void property="attributes">
+     <void property="text">
+      <string>-items: Vector&lt; Cataloaltem&gt;
+</string>
+     </void>
+    </void>
+    <void property="methods">
+     <void property="text">
+      <string>+Product()
++addItem(productItem: ProductItem): void
++getItemsIterator(): 
++getItem(): Iterator&lt; Catalogltem&gt;
++getNumberOfItems(): int</string>
+     </void>
+    </void>
+    <void property="name">
+     <void property="text">
+      <string>Product</string>
+     </void>
+    </void>
+   </object>
+   <object class="java.awt.geom.Point2D$Double">
+    <double>470.0</double>
+    <double>70.0</double>
+   </object>
+  </void>
+  <void method="addNode">
+   <object class="com.horstmann.violet.ClassNode" id="ClassNode5">
+    <void property="attributes">
+     <void property="text">
+      <string>-code:String
+-description:String
+-price:double
+-available:boolean</string>
+     </void>
+    </void>
+    <void property="methods">
+     <void property="text">
+      <string>+ProductItem(String initialCode, String initialDescription,double initialPrice)
++getCode(): String
++getDescription(): String
++getPrice(): double
++isAvailable(): boolean
++setAvailable(newValue: boolean): void 
++equals(object: Object): boolean
++toString(): String</string>
+     </void>
+    </void>
+    <void property="name">
+     <void property="text">
+      <string>ProductItem</string>
+     </void>
+    </void>
+   </object>
+   <object class="java.awt.geom.Point2D$Double">
+    <double>390.0</double>
+    <double>270.0</double>
+   </object>
+  </void>
+  <void method="addNode">
+   <object class="com.horstmann.violet.ClassNode" id="ClassNode6">
+    <void property="attributes">
+     <void property="text">
+      <string>-origin:String
+-roast:String
+-flavor:String
+-aroma:String
+-acidity:String
+-body:String</string>
+     </void>
+    </void>
+    <void property="methods">
+     <void property="text">
+      <string>+Coffee(inicoffeeCode: String,inicoffeeDescription: String,
+	inicoffeePrice: double,iniOrigin: String,iniRoast: String,
+	iniFlavor: String,iniAroma: String,iniAcidity: String,iniBody: String)
++getOrigin():String
++getRoast():String
++getFlavor():String
++getAroma():String
++getAcidity():String
++getBody():String
++toString():String
+</string>
+     </void>
+    </void>
+    <void property="name">
+     <void property="text">
+      <string>Coffee</string>
+     </void>
+    </void>
+   </object>
+   <object class="java.awt.geom.Point2D$Double">
+    <double>10.0</double>
+    <double>210.0</double>
+   </object>
+  </void>
+  <void method="addNode">
+   <object class="com.horstmann.violet.ClassNode" id="ClassNode7">
+    <void property="methods">
+     <void property="text">
+      <string>+CoffeeAccessory(String initialCode, String initialDescription,double initialPrice)
++toString: String</string>
+     </void>
+    </void>
+    <void property="name">
+     <void property="text">
+      <string>CoffeeAccessary
+</string>
+     </void>
+    </void>
+   </object>
+   <object class="java.awt.geom.Point2D$Double">
+    <double>700.0</double>
+    <double>550.0</double>
+   </object>
+  </void>
+  <void method="addNode">
+   <object class="com.horstmann.violet.ClassNode" id="ClassNode8">
+    <void property="attributes">
+     <void property="text">
+      <string>-model:String
+-waterSupply:String
+-number:int</string>
+     </void>
+    </void>
+    <void property="methods">
+     <void property="text">
+      <string>+CoffeeBrewer(brewerCode: String, brewerDescription: String, brewerPrice: double, 
+	iniModel: String, iniWaterSupply: String, iniNumofCups: int)
++getModel():String
++getWaterSupply():String
++getNumber():int
++toString: String
+</string>
+     </void>
+    </void>
+    <void property="name">
+     <void property="text">
+      <string>CoffeeBrewer</string>
+     </void>
+    </void>
+   </object>
+   <object class="java.awt.geom.Point2D$Double">
+    <double>100.0</double>
+    <double>550.0</double>
+   </object>
+  </void>
+  <void method="connect">
+   <object class="com.horstmann.violet.ClassRelationshipEdge">
+    <void property="bentStyle">
+     <object class="com.horstmann.violet.BentStyle" field="HVH"/>
+    </void>
+    <void property="endArrowHead">
+     <object class="com.horstmann.violet.ArrowHead" field="V"/>
+    </void>
+    <void property="endLabel">
+     <string>1</string>
+    </void>
+    <void property="startLabel">
+     <string>1</string>
+    </void>
+   </object>
+   <object idref="ClassNode0"/>
+   <object idref="ClassNode4"/>
+  </void>
+  <void method="connect">
+   <object class="com.horstmann.violet.ClassRelationshipEdge">
+    <void property="bentStyle">
+     <object class="com.horstmann.violet.BentStyle" field="HVH"/>
+    </void>
+    <void property="endArrowHead">
+     <object class="com.horstmann.violet.ArrowHead" field="V"/>
+    </void>
+    <void property="endLabel">
+     <string>1</string>
+    </void>
+    <void property="startLabel">
+     <string>1</string>
+    </void>
+   </object>
+   <object idref="ClassNode0"/>
+   <object idref="ClassNode1"/>
+  </void>
+  <void method="connect">
+   <object class="com.horstmann.violet.ClassRelationshipEdge">
+    <void property="bentStyle">
+     <object class="com.horstmann.violet.BentStyle" field="HVH"/>
+    </void>
+    <void property="endArrowHead">
+     <object class="com.horstmann.violet.ArrowHead" field="V"/>
+    </void>
+    <void property="endLabel">
+     <string>0..*</string>
+    </void>
+    <void property="startLabel">
+     <string>1</string>
+    </void>
+   </object>
+   <object idref="ClassNode1"/>
+   <object idref="ClassNode2"/>
+  </void>
+  <void method="connect">
+   <object class="com.horstmann.violet.ClassRelationshipEdge">
+    <void property="bentStyle">
+     <object class="com.horstmann.violet.BentStyle" field="HVH"/>
+    </void>
+    <void property="endArrowHead">
+     <object class="com.horstmann.violet.ArrowHead" field="V"/>
+    </void>
+    <void property="endLabel">
+     <string>1</string>
+    </void>
+    <void property="startLabel">
+     <string>1</string>
+    </void>
+   </object>
+   <object idref="ClassNode2"/>
+   <object idref="ClassNode3"/>
+  </void>
+  <void method="connect">
+   <object class="com.horstmann.violet.ClassRelationshipEdge">
+    <void property="bentStyle">
+     <object class="com.horstmann.violet.BentStyle" field="HVH"/>
+    </void>
+    <void property="endArrowHead">
+     <object class="com.horstmann.violet.ArrowHead" field="V"/>
+    </void>
+    <void property="endLabel">
+     <string>0..*</string>
+    </void>
+    <void property="startLabel">
+     <string>1</string>
+    </void>
+   </object>
+   <object idref="ClassNode4"/>
+   <object idref="ClassNode5"/>
+  </void>
+  <void method="connect">
+   <object class="com.horstmann.violet.ClassRelationshipEdge">
+    <void property="bentStyle">
+     <object class="com.horstmann.violet.BentStyle" field="VHV"/>
+    </void>
+    <void property="endArrowHead">
+     <object class="com.horstmann.violet.ArrowHead" field="TRIANGLE"/>
+    </void>
+   </object>
+   <object idref="ClassNode6"/>
+   <object idref="ClassNode5"/>
+  </void>
+  <void method="connect">
+   <object class="com.horstmann.violet.ClassRelationshipEdge">
+    <void property="bentStyle">
+     <object class="com.horstmann.violet.BentStyle" field="VHV"/>
+    </void>
+    <void property="endArrowHead">
+     <object class="com.horstmann.violet.ArrowHead" field="TRIANGLE"/>
+    </void>
+   </object>
+   <object idref="ClassNode8"/>
+   <object idref="ClassNode5"/>
+  </void>
+  <void method="connect">
+   <object class="com.horstmann.violet.ClassRelationshipEdge">
+    <void property="bentStyle">
+     <object class="com.horstmann.violet.BentStyle" field="VHV"/>
+    </void>
+    <void property="endArrowHead">
+     <object class="com.horstmann.violet.ArrowHead" field="TRIANGLE"/>
+    </void>
+   </object>
+   <object idref="ClassNode7"/>
+   <object idref="ClassNode5"/>
+  </void>
+  <void method="connect">
+   <object class="com.horstmann.violet.ClassRelationshipEdge">
+    <void property="bentStyle">
+     <object class="com.horstmann.violet.BentStyle" field="VHV"/>
+    </void>
+    <void property="endArrowHead">
+     <object class="com.horstmann.violet.ArrowHead" field="V"/>
+    </void>
+    <void property="endLabel">
+     <string>0..*</string>
+    </void>
+    <void property="startLabel">
+     <string>1</string>
+    </void>
+   </object>
+   <object idref="ClassNode3"/>
+   <object idref="ClassNode5"/>
+  </void>
+ </object>
+</java>
