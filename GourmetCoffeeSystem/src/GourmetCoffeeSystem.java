@@ -2,7 +2,7 @@
 import java.io.*;
 import java.util.*;
 /**
- * This class implements a coffee system.
+ * This class implements a GourmetCoffeeSystem.
  * @author 29698
  * @see Coffee
  * @see ProductItem
@@ -14,7 +14,7 @@ import java.util.*;
  * @see Product
  *
  */
-public class CoffeeSystem{
+public class GourmetCoffeeSystem{
 
 	private static BufferedReader  stdIn =
 			new  BufferedReader(new  InputStreamReader(System.in));
@@ -38,7 +38,7 @@ public class CoffeeSystem{
 		SalesDatabase salesdatabase = load(product);
 
 
-		CoffeeSystem  app = new  CoffeeSystem(product,salesdatabase);
+		GourmetCoffeeSystem  app = new  GourmetCoffeeSystem(product,salesdatabase);
 
 		app.run();
 
@@ -84,7 +84,7 @@ public class CoffeeSystem{
 	 */
 	private static SalesDatabase load(Product product) {
 
-		SalesrDatabase salesdatabase = new Salesdatabase();
+		SalesDatabase salesdatabase = new SalesDatabase();
 
 		return salesdatabase;
 	}
@@ -93,7 +93,7 @@ public class CoffeeSystem{
 	 * @param initialproduct
 	 * @param initialSalesdatabase
 	 */
-	private CoffeeSystem(Product initialproduct,SalesDatabase initialSalesdatabase) {
+	private GourmetCoffeeSystem(Product initialproduct,SalesDatabase initialSalesdatabase) {
 
 		this.product= initialproduct;
 		this.salesdatabase = initialSalesdatabase;
@@ -123,9 +123,9 @@ public class CoffeeSystem{
 			}else if (choice == 7)  {
 				displaySaleslist();
 			}else if (choice ==8)   {
-				displaysSpecific();
+				displaySpecific();
 			}else if (choice ==9)   {
-				displaytotalproduct();
+				displayTotalProduct();
 			}
 			choice = getChoice();
 		}
@@ -186,7 +186,7 @@ public class CoffeeSystem{
 
 				ProductItem item = (ProductItem) i.next();
 
-				stdOut.println(item.getcode() + " " +item.getdescription()
+				stdOut.println(item.getCode() + " " +item.getDescription()
 				+ (item.isAvailable()? "(A)" : "(NA)"));
 			}
 		}
@@ -200,27 +200,27 @@ public class CoffeeSystem{
 		ProductItem item = readProductItem();
 
 		if (item != null) {
-			stdOut.println("  Price: " + item.getprice());
-			stdOut.println("  Description: " + item.getdescription());
+			stdOut.println("  Price: " + item.getPrice());
+			stdOut.println("  Description: " + item.getDescription());
 			if (item instanceof Coffee) {
 
 				Coffee coffee = (Coffee) item;
 
-				stdOut.println("  Origin: " + coffee.getorigin());
-				stdOut.println("  Roast: " + coffee.getroast());
-				stdOut.println("  Flavor: " + coffee.getflavor());
-				stdOut.println("  Aroma: " + coffee.getaroma());
-				stdOut.println("  Acidity: " + coffee.getacidity());
-				stdOut.println("  Body: " + coffee.getbody());
+				stdOut.println("  Origin: " + coffee.getOrigin());
+				stdOut.println("  Roast: " + coffee.getRoast());
+				stdOut.println("  Flavor: " + coffee.getFlavor());
+				stdOut.println("  Aroma: " + coffee.getAroma());
+				stdOut.println("  Acidity: " + coffee.getAcidity());
+				stdOut.println("  Body: " + coffee.getBody());
 			} else if (item instanceof CoffeeBrewer) {
 
 				CoffeeBrewer coffeebrewer = (CoffeeBrewer) item;
 
-				stdOut.println("  Model: " + coffeebrewer.getmodel());
-				stdOut.println("  WaterSupply: " + coffeebrewer.getwatersupply());
-				stdOut.println("  Number: " + coffeebrewer.getnumber());
+				stdOut.println("  Model: " + coffeebrewer.getModel());
+				stdOut.println("  WaterSupply: " + coffeebrewer.getWaterSupply());
+				stdOut.println("  Number: " + coffeebrewer.getNumber());
 			}else if(item instanceof CoffeeAccessary) {
-				CoffeeAccessary coffeeaccessary =(CoffeeAccessary) item;
+				CoffeeAccessary coffeeAccessary =(CoffeeAccessary) item;
 
 
 
@@ -235,28 +235,28 @@ public class CoffeeSystem{
 	/*
 	 * Displays the borrower database.
 	 */
-	private void displayCurrentorder() {
+	private void displayCurrentOrder() {
 
 		if (salesdatabase.getNumberOfOrders() == 0) {
 			stdErr.println("The database of order is empty");
 		} else {
-			for (Iterator<SalesList> i = salesdatabase.getordersiterator();
+			for (Iterator<Order> i = salesdatabase.getOrdersIterator();
 					i.hasNext();) {
 
-				SalesList saleslist = (SalesList) i.next();
+				Order order = (Order) i.next();
 
-				stdOut.println(saleslist.getquantity() + " " +	saleslist.getcode()+" "+ saleslist.getdescription()+" "+saleslist.getprice());
+				stdOut.println(order.getQuantity() + " " +	order.getCode()+" "+ order.getDescrption()+" "+order.getPrice());
 			}
 		}
 	}
 
 	/*
-	 * add a product to saleslist
+	 * add a product to order
 	 */
 	private void addProduct()  throws IOException {
 		ProductItem item = readProductItem();
 
-		SalesList saleslist=salesdatabase.getorder();
+		Order order=salesDatabase.getOrder();
 		int number=input.nextInt();
 		if (item==null) {
 			stdErr.println("There is no catalog item with that code");
@@ -268,17 +268,17 @@ public class CoffeeSystem{
 				stdOut.print("Product item quality>");
 				Scanner input=new Scanner(System.in);
 				int  i=input.nextInt();
-				saleslist.getquantity(i);
-				saleslist.getSalesItems().addItem(item);
+				order.getQuantity(i);
+				order.getSalesItems().addItem(item);
 				stdOut.println("The item " + item.getCode()
 				+ " has been added to the order " );
 				double total=0;
-				for (Iterator<ProductionItem> i = salesitems.getItemsIterator();
+				for (Iterator<ProductItem> i = salesitems.getItemsIterator();
 						i.hasNext();) {
 
 					ProductItem item = (ProductItem) i.next();
 
-					total=total+saleslist.getprice()*saleslist.getquantity();
+					total=total+order.getPrice()*order.getQuantity();
 
 
 
@@ -317,8 +317,8 @@ public class CoffeeSystem{
 private void registerTheOrder() throws IOException{
 
 
-	salesdatabase.addorder(saleslist);
-	SalesList saleslist = new SalesList();
+	salesdatabase.addorder(order);
+	Order saleslist = new Order();
 }
 
 
@@ -326,16 +326,16 @@ private void registerTheOrder() throws IOException{
  * lists all the orders that have been sold
  */
 private void displaySaleslist()throws IOException{
-	ArrayList<SalesList> arrayList = new ArrayList<>();
+	ArrayList<Order> arrayList = new ArrayList<Order>();
 	int numberOfItems = salesdatabase.getNumberOfItems();
-	for (Iterator<SalesList> i = salesdatabase.getordersiterator();
+	for (Iterator<Order> i = salesdatabase.getOrdersIterator();
 			i.hasNext();) {
 
-		arrayList.append(saleslist);
+		arrayList.append(order);
 	}
-	arrayList = new ArrayList<>(new HashSet<>(arrayList.getcode));
+	arrayList = new ArrayList<>(new HashSet<>(arrayList.getCode));
 	for (int i=0;i<arrayList.size();i++){
-		println(arrayList.get(i).getcode);
+		println(arrayList.get(i).getCode);
 	}
 }
 
@@ -343,12 +343,12 @@ private void displaySaleslist()throws IOException{
  * 	Display number of orders with a specific product
  */
 private void displaySpecific()throws IOException{
-	ArrayList<SalesList> arrayList = new ArrayList<>();
+	ArrayList<Order> arrayList = new ArrayList<Order>();
 	int numberOfItems = salesdatabase.getNumberOfItems();
-	for (Iterator<SalesList> i = salesdatabase.getordersiterator();
+	for (Iterator<Order> i = salesdatabase.getOrdersIterator();
 			i.hasNext();) {
 
-		arrayList.append(saleslist);
+		arrayList.append(order);
 	}
 	ProductItem item = readProductItem();
 	boolean compare=true;
@@ -357,12 +357,12 @@ private void displaySpecific()throws IOException{
 		stdErr.println("There is no catalog item with that code");
 	}else {
 		for (int i=0;i<arrayList.size();i++){
-			if(compare==item.getcode.equals(arrayList.get(i).getcode)) {
+			if(compare==item.getCode.equals(arrayList.get(i).getCode)) {
 				number=number+arrayList.getSalesItems().getprice();
 			}
 		}
 	}
-	println("The number of the orders of "+item.getcode+"is"+number);
+	println("The number of the orders of "+item.getCode+"is"+number);
 
 
 
@@ -371,25 +371,25 @@ private void displaySpecific()throws IOException{
 /*
  * Display the total quantity sold for each products
  */
-private void displaytotalproduct()throws IOException{
-	ArrayList<SalesList> arrayList = new ArrayList<>();
+private void displayTotalProduct()throws IOException{
+	ArrayList<Order> arrayList = new ArrayList<Order>();
 	int numberOfItems = salesdatabase.getNumberOfItems();
-	for (Iterator<SalesList> i = salesdatabase.getordersiterator();
+	for (Iterator<Order> i = salesdatabase.getOrdersIterator();
 			i.hasNext();) {
 
-		arrayList.append(saleslist);
+		arrayList.append(order);
 	}
 	for(int i=0;i<arrayList.size();i++) {
-		String compare=arrayList.get(i).getcode();
+		String compare=arrayList.get(i).getCode();
 		for(int j=0;j<arrayList.size();j++) {
-			if(arrayList.get(j).getcode()==arrayList.get(i).getcode()) {
-				arrayList.get(i).setquantity(arrayList.get(i).getquantity()+arrayList.get(j).getquantity());
+			if(arrayList.get(j).getCode()==arrayList.get(i).getCode()) {
+				arrayList.get(i).setQuantity(arrayList.get(i).getQuantity()+arrayList.get(j).getQuantity());
 				arrayList.remove(j);}
 
 		}
 	}
 	for (int i=0;i<arrayList.size();i++){
-		println("code:"+arrayList.get(i).getcode()+"   quantity:"+arrayList.get(i).getquantity());
+		stdOut.println("code:"+arrayList.get(i).getCode()+"   quantity:"+arrayList.get(i).getQuantity());
 	}
 }
 
