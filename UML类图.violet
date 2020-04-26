@@ -139,9 +139,9 @@
     <void property="methods">
      <void property="text">
       <string>+Product()
-+addItem(productItem: ProductItem): void
-+getItemsIterator():  Iterator&lt; ProductItem&gt;
-+getItem(code: String): ProductItem
++addProduct(productItem: ProductItem): void
++getProductsIterator():  Iterator&lt;ProductItem&gt;
++getProduct(code: String): ProductItem
 +getNumberOfItems(): int</string>
      </void>
     </void>
