@@ -47,7 +47,8 @@
     <void property="attributes">
      <void property="text">
       <string>-orders:Vector&lt;Order&gt;
-</string>
+-quantityToProductsLog:HashMap()
+-ordersNumToProductsLog:HashMap()</string>
      </void>
     </void>
     <void property="methods">
