@@ -1,21 +1,18 @@
-/**
- *闄堢幉
- *淇敼閮ㄥ垎锛氭敞閲娿�佸彉閲忓悕銆佹柟娉曞悕銆佺被鍚�
- */
+
 import java.util.*;
 
 
-public class Product  {
+public class ProductDatabase  {
 
 	/* Collection of <code>ProductItem</code> objects.*/
-	private Vector<ProductItem> items;
+	private Vector<ProductItem> productItems;
 
 	/**
 	 * Constructs an empty product.
 	 */
 	public Product() {
 
-		items = new Vector<ProductItem>();
+		productItems = new Vector<ProductItem>();
 	}
 
 	/**
@@ -23,7 +20,7 @@ public class Product  {
 	 */
 	public void addItem(ProductItem productItem) {
 
-		items.add(productItem);
+		productItems.add(productItem);
 	}
 
 	/**
@@ -33,7 +30,7 @@ public class Product  {
 	 */
 	public Iterator<ProductItem> getItemsIterator() {
 
-		return items.iterator();
+		return productItems.iterator();
 	}
 
 	/**
@@ -62,6 +59,6 @@ public class Product  {
 	 */
 	public int  getNumberOfItems()  {
 
-		return items.size();
+		return productItems.size();
 	}
 }
