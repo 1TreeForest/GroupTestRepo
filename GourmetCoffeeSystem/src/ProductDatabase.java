@@ -10,7 +10,7 @@ public class ProductDatabase  {
 	/**
 	 * Constructs an empty product.
 	 */
-	public Product() {
+	public ProductDatabase() {
 
 		productItems = new Vector<ProductItem>();
 	}
