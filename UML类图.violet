@@ -38,8 +38,8 @@
     </void>
    </object>
    <object class="java.awt.geom.Point2D$Double">
-    <double>850.0</double>
-    <double>0.0</double>
+    <double>830.0</double>
+    <double>10.0</double>
    </object>
   </void>
   <void method="addNode">
@@ -52,9 +52,10 @@
     </void>
     <void property="methods">
      <void property="text">
-      <string>+SalesDatebase()
-+addOrder(order: Order):void
-+getOrdersIterator():Iterator&lt;Order&gt;
+      <string>+SalesDatabase()
++addOrder(order:Order):void
++deleteOrder(order:Order):void
++getOrderIterator():Iterator&lt;Order&gt;
 +getOrder(code: String):Order
 +getNumberOfOrders():int</string>
      </void>
@@ -74,21 +75,17 @@
    <object class="com.horstmann.violet.ClassNode" id="ClassNode2">
     <void property="attributes">
      <void property="text">
-      <string>-quantity:int
--code:String
--price:double
+      <string>-orderCode:int
 -total:double
--salesItems:SalesItems</string>
+-salesItems:Vector&lt;SalesItem&gt;</string>
      </void>
     </void>
     <void property="methods">
      <void property="text">
-      <string>+Order(initialQuantity:int,initialCode:String,initialPrice:double,initialTotal:double)
-+getQuantity():int
-+getCode():String
-+getPrice():double
+      <string>+Order(initialOrderCode:int)
 +getTotal():double
-+getSalesItems():SalesItems
++getSalesItemIterator():Iterator&lt;SalesItem&gt;
++deleteSalesItem:void
 +equals(object: Object):boolean
 +toString():String</string>
      </void>
@@ -100,36 +97,33 @@
     </void>
    </object>
    <object class="java.awt.geom.Point2D$Double">
-    <double>1090.0</double>
-    <double>200.0</double>
+    <double>1170.0</double>
+    <double>210.0</double>
    </object>
   </void>
   <void method="addNode">
    <object class="com.horstmann.violet.ClassNode" id="ClassNode3">
     <void property="attributes">
      <void property="text">
-      <string>-item:Vector&lt;ProductItem&gt;</string>
+      <string>-quantity:int</string>
      </void>
     </void>
     <void property="methods">
      <void property="text">
-      <string>+SalesItems()
-+addItem(productItem:ProductItem):void
-+removeItem(productItem:ProductItem):boolean
-+getItemsIterator():Iterator&lt;ProductItem&gt;
-+getItem(code:String):ProductItem
-+getNumberOfItems():int</string>
+      <string>+SalesItem(initialProduct:ProductItem,initialQuantity:int)
++getQuantity():int
++setQuatity(quantity:int):void</string>
      </void>
     </void>
     <void property="name">
      <void property="text">
-      <string>SalesItems</string>
+      <string>SalesItem</string>
      </void>
     </void>
    </object>
    <object class="java.awt.geom.Point2D$Double">
-    <double>1180.0</double>
-    <double>470.0</double>
+    <double>1140.0</double>
+    <double>430.0</double>
    </object>
   </void>
   <void method="addNode">
@@ -144,8 +138,8 @@
      <void property="text">
       <string>+Product()
 +addItem(productItem: ProductItem): void
-+getItemsIterator(): 
-+getItem(): Iterator&lt; Catalogltem&gt;
++getItemsIterator():  Iterator&lt; Catalogltem&gt;
++getItem(code: String): ProductItem
 +getNumberOfItems(): int</string>
      </void>
     </void>
@@ -157,7 +151,7 @@
    </object>
    <object class="java.awt.geom.Point2D$Double">
     <double>470.0</double>
-    <double>70.0</double>
+    <double>90.0</double>
    </object>
   </void>
   <void method="addNode">
@@ -228,7 +222,7 @@
    </object>
    <object class="java.awt.geom.Point2D$Double">
     <double>10.0</double>
-    <double>210.0</double>
+    <double>230.0</double>
    </object>
   </void>
   <void method="addNode">
@@ -247,8 +241,8 @@
     </void>
    </object>
    <object class="java.awt.geom.Point2D$Double">
-    <double>700.0</double>
-    <double>550.0</double>
+    <double>600.0</double>
+    <double>580.0</double>
    </object>
   </void>
   <void method="addNode">
@@ -278,8 +272,8 @@
     </void>
    </object>
    <object class="java.awt.geom.Point2D$Double">
-    <double>100.0</double>
-    <double>550.0</double>
+    <double>110.0</double>
+    <double>580.0</double>
    </object>
   </void>
   <void method="connect">
@@ -345,7 +339,7 @@
      <object class="com.horstmann.violet.ArrowHead" field="V"/>
     </void>
     <void property="endLabel">
-     <string>1</string>
+     <string>0...*</string>
     </void>
     <void property="startLabel">
      <string>1</string>
@@ -417,7 +411,7 @@
      <object class="com.horstmann.violet.ArrowHead" field="V"/>
     </void>
     <void property="endLabel">
-     <string>0..*</string>
+     <string>1</string>
     </void>
     <void property="startLabel">
      <string>1</string>
