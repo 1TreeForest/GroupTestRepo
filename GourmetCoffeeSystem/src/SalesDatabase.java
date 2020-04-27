@@ -13,6 +13,19 @@ public class SalesDatabase {
 	private Vector<Order>orders;
 
 	/**
+	 *Hash map for quantityToProductsLog,
+	 *key is the code and value is the quantity to this kind of product
+	 */
+	private HashMap<String,Integer>quantityToProductsLog = new HashMap<String,Integer>();
+
+	/**
+	 *Hash map for ordersNumToProductsLog,
+	 *key is the code of a specific product,
+	 *value is the number of orders contain this product
+	 */
+	private HashMap<Integer,Integer> ordersNumToProductsLog = new HashMap<Integer, Integer>();
+
+	/**
 	 * Constructs an empty collection of {@link Order}
 	 * objects.
 	 */
@@ -29,6 +42,15 @@ public class SalesDatabase {
 	public void  addOrder(Order order) {
 
 		orders.add(order);
+	}
+	/**
+	 * delete a {@link Order} object from this collection.
+	 *
+	 * @param order  the {@link Order} object.
+	 */
+	public void deleteOrder(int orderCode){
+
+		orders.remove(orderCode);
 	}
 
 	/**
@@ -56,7 +78,7 @@ public class SalesDatabase {
 
 			Order order = (Order) i.next();
 
-			if (order.getCode().equals(code)) {
+			if (Integer.toString(order.getOrderCode()).equals(code)) {
 
 				return order;
 			}

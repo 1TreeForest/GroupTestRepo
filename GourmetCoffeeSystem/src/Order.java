@@ -1,3 +1,6 @@
+import java.util.Iterator;
+import java.util.Vector;
+
 /**
  * This class models a library user. It contains the following
  * information:
@@ -10,25 +13,19 @@
  *
  * @author A zyh
  * @version  1.0.0
- * @see SalesItems
+ * @see SalesItem
  * @see ProductItem
  */
 public class Order {
 
-	/* Identification quantity of the order.*/
-	private int quantity;
-
-	/* Code of the order.*/
-	private String  code;
-
-	/*Price of thr order*/
-	private double price;
+	/* Identification code of the order.*/
+	private int orderCode;
 
 	/*Total of the order*/
 	private double total;
 
 	/* Items checked out by the order.*/
-	private SalesItems  salesItems;
+	private Vector<SalesItem> salesItems;
 
 	/**
 	 * Constructs a <code>Order</code> object.
@@ -36,46 +33,16 @@ public class Order {
 	 * The collection of the borrowed items is initially empty.
 	 * </p>
 	 *
-	 * @param initialQuantity  the quantity of the borrower.
-	 * @param initialCode  the code of the borrower.
-	 * @param initialPrice  the price of the borrower.
-	 * @param initialTotal  the total of the borrower.
+	 * @param initialorderCode  the code of the order
 	 */
-	public Order(int initialQuantity, String initialCode, double initialPrice, double initialTotal) {
+	public Order(int initialorderCode) {
 
-		quantity = initialQuantity;
-		code = initialCode;
-		price = initialPrice;
-		total = initialTotal;
-		salesItems = new SalesItems();
+		orderCode = initialorderCode;
+		salesItems = new Vector<SalesItem>();
 	}
 
-	/**
-	 * Returns the identification quantity of this Order.
-	 *
-	 * @return  the identification number of this Order.
-	 */
-	public int  getQuantity()  {
-
-		return  quantity;
-	}
-
-	/**
-	 * Returns the code of this Order
-	 * @return  the code of this Order.
-	 */
-	public String  getCode () {
-
-		return  code;
-	}
-
-	/**
-	 * Returns the price of this Order
-	 * @return  the price of this Order.
-	 */
-	public double  getPrice () {
-
-		return  price;
+	public int getOrderCode(){
+		return orderCode;
 	}
 
 	/**
@@ -87,29 +54,41 @@ public class Order {
 		return  total;
 	}
 
-	/**
-	 * Returns the sales items collection.
-	 *
-	 * @return  a {@link SalesItems} object.
-	 */
-	public SalesItems getSalesItems() {
+	/*delete salesItem*/
+	public void deleteSalesItem(String code){
+		for (Iterator<SalesItem> i = getSalesItemIterator(); i.hasNext();){
 
-		return  salesItems;
+			SalesItem salesItem =(SalesItem) i.next();
+
+			if((salesItem.getProductItem().getCode()).equals(code)){
+
+				salesItems.remove(salesItem);
+			}
+		}
+
 	}
 
-	/**
-	 * Returns <code>true</code> if the code of this Order is
-	 * equal to the Order of the argument.
-	 *
-	 * @param object  object with which this Order is compared.
-	 * @return  <code>true</code> if the code of this Order is
-	 *          equal to the code of the argument; <code>false</code>
-	 *          otherwise.
-	 */
-	public boolean equals(Object object) {
 
-		return object instanceof Order
-		       && getCode().equals(((Order) object).getCode());
+	/*add salesItem*/
+	public void addSalesItem(String code,ProductDatabase productDatabase){
+		for(Iterator<ProductItem> i = productDatabase.getProductsIterator(); i.hasNext();){
+
+			ProductItem productItem = (ProductItem) i.next();
+
+			if((productItem.getCode()).equals(code)){
+				SalesItem salesItem = new SalesItem(productItem,1);
+				salesItems.add(salesItem);
+			}
+		}
+	}
+	/**
+	 * Returns the sales items iterator.
+	 *
+	 * @return  a {@link SalesItem} object.
+	 */
+	public Iterator<SalesItem> getSalesItemIterator() {
+
+		return  salesItems.iterator();
 	}
 
 	/**
@@ -119,6 +98,6 @@ public class Order {
 	 */
 	public String toString() {
 
-		return  getCode();
+		return Double.toString(getTotal());
 	}
 }
