@@ -39,9 +39,9 @@ public class SalesDatabase {
 	 *
 	 * @param order  the {@link Order} object.
 	 */
-	public void  addOrder(Order order) {
+	public void  addOrder(int orderCode) {
 
-		orders.add(order);
+		orders.add(new Order(orderCode));
 	}
 	/**
 	 * delete a {@link Order} object from this collection.
@@ -72,7 +72,7 @@ public class SalesDatabase {
 	 *          Returns <code>null</code> if the object with the
 	 *          code is not found.
 	 */
-	public Order  getOrder(String code) {
+	public Order  getOrder(int code) {
 
 		for (Iterator<Order> i = getOrdersIterator(); i.hasNext();) {
 
@@ -92,7 +92,7 @@ public class SalesDatabase {
 	 *
 	 * @return  the number of {@link Order} objects in this collection.
 	 */
-	public int  getNumberOfOrders() {
+	public int getNumberOfOrders() {
 
 		return orders.size();
 	}

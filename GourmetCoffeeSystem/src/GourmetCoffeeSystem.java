@@ -111,9 +111,9 @@ public class GourmetCoffeeSystem{
 			} else if (choice == 4)  {
 				addProduct();
 			} else if (choice == 5)  {
-				removeProduct();
+					removeProduct();
 			} else if (choice == 6)  {
-				registerTheOrder();
+				registerNewOrder();
 			}else if (choice == 7)  {
 				displaySaleslist();
 			}else if (choice ==8)   {
@@ -141,7 +141,7 @@ public class GourmetCoffeeSystem{
 						+ "[3]  Display current order\n"
 						+ "[4]  Add modify product to in current order\n"
 						+ "[5]  Remove product from current order\n"
-						+ "[6]  Register sale of current order\n"
+						+ "[6]  Register new order\n"
 						+ "[7]  Display sales\n"
 						+ "[8]  Display number of orders with a specific product\n"
 						+ "[9]  Display the total quantity sold for each products\n"
@@ -231,15 +231,14 @@ public class GourmetCoffeeSystem{
 		if (salesdatabase.getNumberOfOrders() == 0) {
 			stdErr.println("The database of order is empty");
 		} else {
-			for (Iterator<Order> i = salesdatabase.getOrdersIterator();i.hasNext();) {
-				order = (Order) i.next();
-			}
-			}
+				order = (Order) salesdatabase.getOrder(salesdatabase.getNumberOfOrders()-1);
+		}
 		stdOut.println("Quantity\tCode\tDescription\tPrice");
 			for (Iterator<SalesItem> i = order.getSalesItemIterator();i.hasNext();) {
 				SalesItem salesitem = (SalesItem) i;
 				stdOut.println(salesitem.toString()+'\t'+salesitem.getProductItem().toString2());
 			}
+			stdOut.println("Order total:\t"+order.toString());
 	}
 	/*
 	 * add a product to order
@@ -247,7 +246,7 @@ public class GourmetCoffeeSystem{
 	private void addProduct()  throws IOException {
 		ProductItem item = readProductItem();
 
-		Order order=salesDatabase.getOrder();
+		Order order=salesdatabase.getOrder(salesdatabase.getNumberOfOrders()-1);
 		int number=input.nextInt();
 		if (item==null) {
 			stdErr.println("There is no catalog item with that code");
@@ -291,8 +290,10 @@ public class GourmetCoffeeSystem{
 			stdErr.println("There is no catalog item with that code");
 		} else if (item.isAvailable()) {
 
-			SalesList saleslist=salesdatabase.getorder();
-			if(saleslist .getSalesItems().removeItem(item)) {;
+			Order order=salesdatabase.getOrder(salesdatabase.getNumberOfOrders()-1);
+			
+			if() {
+				order.deleteSalesItem(code);
 			stdOut.println("The item " + item.getCode()
 			+ " has been removed from the order" );
 			}
@@ -307,7 +308,7 @@ public class GourmetCoffeeSystem{
  */
 private void registerNewOrder() throws IOException{
 
-	salesdatabase.addorder(order);
+	salesdatabase.addOrder(salesdatabase.getNumberOfOrders());
 	Order saleslist = new Order();
 }
 

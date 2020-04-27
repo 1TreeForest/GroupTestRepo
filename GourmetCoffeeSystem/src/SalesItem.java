@@ -16,7 +16,6 @@ public class SalesItem {
 	/*quantity of the SalesItem*/
 	private int quantity;
 
-
 	/**
 	 * Sets the collection of {@link ProductItem} to empty.
 	 */
@@ -38,5 +37,8 @@ public class SalesItem {
 
 	public ProductItem getProductItem(){
 		return productItem;
+	}
+	public String toString() {
+		return Double.toString(getQuantity());
 	}
 }

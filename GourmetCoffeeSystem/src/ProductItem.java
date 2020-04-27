@@ -1,7 +1,3 @@
-/**
- *淇敼浜猴細闄堢幉
- *淇敼锛氱被鍚嶃�佹柟娉曞悕銆佹敞閲婁互鍙婇儴鍒嗗彉閲�
- */
 public class ProductItem {
 
 	/* Code of the item. */
@@ -85,6 +81,11 @@ public class ProductItem {
 
 		return  getCode() + "_" + getDescription() + "_" + getPrice()
 		        + "_" + isAvailable();
+	}
+	public String toString2() {
+
+		return  getCode() + "\t" + getDescription() + "\t" + getPrice();
+		        
 	}
 }
 
