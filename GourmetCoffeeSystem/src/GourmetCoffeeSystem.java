@@ -35,8 +35,6 @@ public class GourmetCoffeeSystem{
 	public static void main(String[] args)throws IOException {
 		// TODO Auto-generated method stub
 		ProductDatabase  productdatabase = load();
-		SalesDatabase salesdatabase = load(productdatabase);
-
 
 		GourmetCoffeeSystem  app = new  GourmetCoffeeSystem(productdatabase,salesdatabase);
 
