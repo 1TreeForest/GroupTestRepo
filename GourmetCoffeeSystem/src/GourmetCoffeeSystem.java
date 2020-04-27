@@ -21,7 +21,7 @@ public class GourmetCoffeeSystem{
 	private static PrintWriter  stdOut = new  PrintWriter(System.out, true);
 	private static PrintWriter  stdErr = new  PrintWriter(System.err, true);
 
-	private Product  product;
+	private ProductDatabase  productdatabase;
 	private SalesDatabase salesdatabase;
 
 	/**
@@ -34,11 +34,11 @@ public class GourmetCoffeeSystem{
 
 	public static void main(String[] args)throws IOException {
 		// TODO Auto-generated method stub
-		Product  product = load();
-		SalesDatabase salesdatabase = load(product);
+		ProductDatabase  productdatabase = load();
+		SalesDatabase salesdatabase = load(productdatabase);
 
 
-		GourmetCoffeeSystem  app = new  GourmetCoffeeSystem(product,salesdatabase);
+		GourmetCoffeeSystem  app = new  GourmetCoffeeSystem(productdatabase,salesdatabase);
 
 		app.run();
 
@@ -163,7 +163,7 @@ public class GourmetCoffeeSystem{
 	 *  Displays the product.
 	 */
 
-	private void displayProduct() {
+	private void displayCatalog() {
 
 		int numberOfItems = this.product.getNumberOfItems();
 
@@ -184,7 +184,7 @@ public class GourmetCoffeeSystem{
 	 * Displays a catalog item.
 	 */
 
-	private void displayProductitem()  throws IOException  {
+	private void displayProductItem()  throws IOException  {
 
 		ProductItem item = readProductItem();
 
@@ -398,7 +398,7 @@ private  ProductItem readProductItem() throws IOException  {
 	stdOut.print("Product item code> ");
 	stdOut.flush();
 
-	return this.Product.getItem(stdIn.readLine());
+	return this.ProductDatabase.getProduct(stdIn.readLine());
 }
 
 
