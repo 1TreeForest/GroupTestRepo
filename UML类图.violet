@@ -83,10 +83,9 @@
      <void property="text">
       <string>+Order(initialOrderCode:int)
 +getTotal():double
-+addSalesItem():void
++addSalesItem(code:String,productDatabase:ProductDatabase):void
 +getSalesItemIterator():Iterator&lt;SalesItem&gt;
-+deleteSalesItem:void
-+findProduct(code:String):boolean
++deleteSalesItem(code:String):void
 +toString():String</string>
      </void>
     </void>
@@ -113,7 +112,8 @@
      <void property="text">
       <string>+SalesItem(initialProduct:ProductItem,initialQuantity:int)
 +getQuantity():int
-+setQuatity(quantity:int):void</string>
++setQuatity(quantity:int):void
++getProductItem():ProductItem</string>
      </void>
     </void>
     <void property="name">
