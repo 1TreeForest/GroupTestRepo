@@ -18,7 +18,7 @@ public class ProductDatabase  {
 	/**
 	 * Adds a {@link ProductItem} object to this product.
 	 */
-	public void addItem(ProductItem productItem) {
+	public void addProduct(ProductItem productItem) {
 
 		productItems.add(productItem);
 	}
@@ -28,7 +28,7 @@ public class ProductDatabase  {
 	 *
 	 * return  an {@link Iterator}
 	 */
-	public Iterator<ProductItem> getItemsIterator() {
+	public Iterator<ProductItem> getProductsIterator() {
 
 		return productItems.iterator();
 	}
@@ -39,7 +39,7 @@ public class ProductDatabase  {
 	 *Returns <code>null</code> if the object with
 	 *          the code is not found.
 	 */
-	public ProductItem  getItem(String code)  {
+	public ProductItem  getProduct(String code)  {
 
 		for (Iterator<ProductItem> i = getItemsIterator(); i.hasNext();) {
 
