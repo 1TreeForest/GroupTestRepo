@@ -34,19 +34,26 @@ public class GourmetCoffeeSystem{
 
 	public static void main(String[] args)throws IOException {
 		// TODO Auto-generated method stub
-		ProductDatabase  productdatabase = load();
+		ProductDatabase  productdatabase = loadProductDatabase();
+		SalesDatabase  salesdatabase = loadSalesDatabase();
 
 		GourmetCoffeeSystem  app = new  GourmetCoffeeSystem(productdatabase,salesdatabase);
 
 		app.run();
 
 	}
+	
+	private static SalesDatabase loadSalesDatabase() {
+		// TODO 自动生成的方法存根
+		SalesDatabase salesdatabase = new SalesDatabase();
+		return salesdatabase;
+	}
 	/**
 	 * Loads the information of a product object.		
 	 * @return
 	 */
 
-	private static ProductDatabase load()  {
+	private static ProductDatabase loadProductDatabase()  {
 		ProductDatabase productdatabase = new ProductDatabase();
 
 		productdatabase.addProduct(new Coffee("C001", "Colombia,Whole,1 lb", 17.99,
@@ -68,7 +75,7 @@ public class GourmetCoffeeSystem{
 		productdatabase.addProduct(new CoffeeBrewer("B005", "Commercial Brewer,40 cups", 480.00,
 				"Quick Coffee 200", "Automatic",40));
 		productdatabase.addProduct(new CoffeeAccessary("A001", "Almond Flavored Syrup", 9.00));
-		productdatabase.addProduct(new CoffeeAaProduct(new CoffeeAccessary("A005", "Gourmet Coffee Cokkies", 12.00));
+		productdatabase.addProduct(new CoffeeAccessary("A005", "Gourmet Coffee Cokkies", 12.00));
 		productdatabase.addProduct(new CoffeeAccessary("A007", "Gourmet Coffee Ceramic Mug", 8.00));
 		productdatabase.addProduct(new CoffeeAccessary("A009", "Gourmet Coffee 36 Cup Filters", 45.00));
 
@@ -163,12 +170,12 @@ public class GourmetCoffeeSystem{
 
 	private void displayCatalog() {
 
-		int numberOfItems = this.product.getNumberOfItems();
+		int numberOfItems = this.productdatabase.getNumberOfItems();
 
 		if (numberOfItems == 0) {
 			stdErr.println("The catalog is empty");
 		} else {
-			for (Iterator<ProductItem> i = product.getItemsIterator();
+			for (Iterator<ProductItem> i = productdatabase.getProductsIterator();
 					i.hasNext();) {
 
 				ProductItem item = (ProductItem) i.next();
@@ -208,9 +215,6 @@ public class GourmetCoffeeSystem{
 				stdOut.println("  Number: " + coffeebrewer.getNumber());
 			}else if(item instanceof CoffeeAccessary) {
 				CoffeeAccessary coffeeAccessary =(CoffeeAccessary) item;
-
-
-
 			}
 			stdOut.println("  Status: "
 					+ (item.isAvailable() ? "Available" : "Not available"));
@@ -223,20 +227,20 @@ public class GourmetCoffeeSystem{
 	 * Displays the borrower database.
 	 */
 	private void displayCurrentOrder() {
-
+		Order order = null;
 		if (salesdatabase.getNumberOfOrders() == 0) {
 			stdErr.println("The database of order is empty");
 		} else {
-			for (Iterator<Order> i = salesdatabase.getOrdersIterator();
-					i.hasNext();) {
-
-				Order order = (Order) i.next();
-
-				stdOut.println(order.getQuantity() + " " +	order.getCode()+" "+ order.getDescrption()+" "+order.getPrice());
+			for (Iterator<Order> i = salesdatabase.getOrdersIterator();i.hasNext();) {
+				order = (Order) i.next();
 			}
-		}
+			}
+		stdOut.println("Quantity\tCode\tDescription\tPrice");
+			for (Iterator<SalesItem> i = order.getSalesItemIterator();i.hasNext();) {
+				SalesItem salesitem = (SalesItem) i;
+				stdOut.println(salesitem.toString()+'\t'+salesitem.getProductItem().toString2());
+			}
 	}
-
 	/*
 	 * add a product to order
 	 */
@@ -301,8 +305,7 @@ public class GourmetCoffeeSystem{
 /*
  * register the order to database
  */
-private void registerTheOrder() throws IOException{
-
+private void registerNewOrder() throws IOException{
 
 	salesdatabase.addorder(order);
 	Order saleslist = new Order();
@@ -379,17 +382,6 @@ private void displayTotalProduct()throws IOException{
 		stdOut.println("code:"+arrayList.get(i).getCode()+"   quantity:"+arrayList.get(i).getQuantity());
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
 
 private  ProductItem readProductItem() throws IOException  {
 

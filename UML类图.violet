@@ -16,7 +16,8 @@
      <void property="text">
       <string>+main(args: String[])
 +CoffeeSystem(Product,SalesDatebase)
-+load():ProductDatabase
++loadProductDatabase():ProductDatabase
++loadSalesDatabase():SalesDatabase
 +run(): void
 +getChioce(): int
 +displayCatalog(): void
@@ -56,7 +57,8 @@
 +addOrder(orderCode:int):void
 +deleteOrder(orderCode:int):void
 +getOrderIterator():Iterator&lt;Order&gt;
-+getOrder(orderCode:int):Order</string>
++getOrder(orderCode:int):Order
+getNumberOfOrders():int</string>
      </void>
     </void>
     <void property="name">
@@ -83,10 +85,9 @@
      <void property="text">
       <string>+Order(initialOrderCode:int)
 +getTotal():double
-+addSalesItem():void
++addSalesItem(code:String):void
 +getSalesItemIterator():Iterator&lt;SalesItem&gt;
-+deleteSalesItem:void
-+findProduct(code:String):boolean
++deleteSalesItem(code:String):void
 +toString():String</string>
      </void>
     </void>
@@ -137,7 +138,7 @@
     </void>
     <void property="methods">
      <void property="text">
-      <string>+Product()
+      <string>+ProductDatabase()
 +addProduct(productItem: ProductItem): void
 +getProductsIterator():  Iterator&lt;ProductItem&gt;
 +getProduct(code: String): ProductItem
