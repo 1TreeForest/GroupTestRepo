@@ -48,54 +48,43 @@ public class GourmetCoffeeSystem{
 	 * @return
 	 */
 
-	private static Product load()  {
-		Product product = new Product();
+	private static ProductDatabase load()  {
+		ProductDatabase productdatabase = new ProductDatabase();
 
-		product.addItem(new Coffee("C001", "Colombia,Whole,1 lb", 17.99,
+		productdatabase.addProduct(new Coffee("C001", "Colombia,Whole,1 lb", 17.99,
 				"Colombia", "Medium","Rich and Hearty","Rich","Medium","Full"));
-		product.addItem(new Coffee("C002", "Colombia,Ground,1 lb", 18.75,
+		productdatabase.addProduct(new Coffee("C002", "Colombia,Ground,1 lb", 18.75,
 				"Colombia", "Medium","Rich and Hearty","Rich","Medium","Full"));
-		product.addItem(new Coffee("C007", "Guatemala,Whole,1 lb", 17.99,
+		productdatabase.addProduct(new Coffee("C007", "Guatemala,Whole,1 lb", 17.99,
 				"Guatemala", "Medium","Rich and complex","spicy","Medium to high","Medium to Full"));
-		product.addItem(new Coffee("C008", "Guatemala,Ground,1 lb", 18.75,
+		productdatabase.addProduct(new Coffee("C008", "Guatemala,Ground,1 lb", 18.75,
 				"Guatemala", "Medium","Rich and complex","Spicy","Medium to high","Medium to Full"));
-		product.addItem(new CoffeeBrewer("B001", "Home Coffee Brewer", 150.00,
+		productdatabase.addProduct(new CoffeeBrewer("B001", "Home Coffee Brewer", 150.00,
 				"Brewer 100", "Pourover",6));
-		product.addItem(new CoffeeBrewer("B002", "Coffee Brewer,2 Warmers", 200.00,
+		productdatabase.addProduct(new CoffeeBrewer("B002", "Coffee Brewer,2 Warmers", 200.00,
 				"Brewer 200", "Pourover",12));
-		product.addItem(new CoffeeBrewer("B003", "Coffee Brewer,3 Warmers", 280.00,
+		productdatabase.addProduct(new CoffeeBrewer("B003", "Coffee Brewer,3 Warmers", 280.00,
 				"Brewer 210", "Pourover",12));
-		product.addItem(new CoffeeBrewer("B004", "Commercial Brewer,20 cups", 380.00,
+		productdatabase.addProduct(new CoffeeBrewer("B004", "Commercial Brewer,20 cups", 380.00,
 				"Quick Coffee 100", "Automatic",20));
-		product.addItem(new CoffeeBrewer("B005", "Commercial Brewer,40 cups", 480.00,
+		productdatabase.addProduct(new CoffeeBrewer("B005", "Commercial Brewer,40 cups", 480.00,
 				"Quick Coffee 200", "Automatic",40));
-		product.addItem(new CoffeeAccessary("A001", "Almond Flavored Syrup", 9.00));
-		product.addItem(new CoffeeAccessary("A002", "Irish Creme Flavored Syrup", 9.00));
-		product.addItem(new CoffeeAccessary("A005", "Gourmet Coffee Cokkies", 12.00));
-		product.addItem(new CoffeeAccessary("A007", "Gourmet Coffee Ceramic Mug", 8.00));
-		product.addItem(new CoffeeAccessary("A009", "Gourmet Coffee 36 Cup Filters", 45.00));
+		productdatabase.addProduct(new CoffeeAccessary("A001", "Almond Flavored Syrup", 9.00));
+		productdatabase.addProduct(new CoffeeAaProduct(new CoffeeAccessary("A005", "Gourmet Coffee Cokkies", 12.00));
+		productdatabase.addProduct(new CoffeeAccessary("A007", "Gourmet Coffee Ceramic Mug", 8.00));
+		productdatabase.addProduct(new CoffeeAccessary("A009", "Gourmet Coffee 36 Cup Filters", 45.00));
 
-		return product;
+		return productdatabase;
 	}
-	/**
-	 * Loads a SalesDatabase object.
-	 * @param product
-	 * @return
-	 */
-	private static SalesDatabase load(Product product) {
 
-		SalesDatabase salesdatabase = new SalesDatabase();
-
-		return salesdatabase;
-	}
 	/**
 	 * Initialize the product and the sales database
 	 * @param initialproduct
 	 * @param initialSalesdatabase
 	 */
-	private GourmetCoffeeSystem(Product initialproduct,SalesDatabase initialSalesdatabase) {
+	private GourmetCoffeeSystem(ProductDatabase initialproductdatabase,SalesDatabase initialSalesdatabase) {
 
-		this.product= initialproduct;
+		this.productdatabase= initialproductdatabase;
 		this.salesdatabase = initialSalesdatabase;
 	}
 	/**
@@ -109,9 +98,9 @@ public class GourmetCoffeeSystem{
 		while (choice != 0)  {
 
 			if (choice == 1)  {
-				displayProduct();
+				displayCatalog();
 			} else if (choice == 2)  {
-				displayProductitem();
+				displayProductItem();
 			} else if (choice == 3)  {
 				displayCurrentOrder();
 			} else if (choice == 4)  {
