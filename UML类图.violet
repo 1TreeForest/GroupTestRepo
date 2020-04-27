@@ -15,20 +15,19 @@
     <void property="methods">
      <void property="text">
       <string>+main(args: String[])
-+load():Product
-+load(Product):SalesDatabase
 +CoffeeSystem(Product,SalesDatebase)
++load():ProductDatabase
 +run(): void
 +getChioce(): int
-+displayProduct(): void
++displayCatalog(): void
 +displayProductItem(): void
 +displayCurrentOrder(): void
 +addProduct(): void
 +removeProduct(): void
-+registerTheOrder(): void
-+displaySaleslist(): void
-+readProductItem(): void
-+readSalesList(): void</string>
++registerNewOrder(): void
++displaySales(): void
++displayQuantityToProducts(): void
++displayOrdersNumToProduct(code:String): void</string>
      </void>
     </void>
     <void property="name">
