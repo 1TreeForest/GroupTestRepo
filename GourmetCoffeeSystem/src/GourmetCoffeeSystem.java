@@ -44,7 +44,7 @@ public class GourmetCoffeeSystem{
 	}
 	
 	private static SalesDatabase loadSalesDatabase() {
-		// TODO 自动生成的方法存根
+		// TODO 脳脭露炉脡煤鲁脡碌脛路陆路篓麓忙赂霉
 		SalesDatabase salesdatabase = new SalesDatabase();
 		return salesdatabase;
 	}
@@ -245,36 +245,32 @@ public class GourmetCoffeeSystem{
 	 */
 	private void addProduct()  throws IOException {
 		ProductItem item = readProductItem();
+  	    stdOut.print("Please input the code of the order:");
+		stdOut.flush();
 
-		Order order=salesdatabase.getOrder(salesdatabase.getNumberOfOrders()-1);
-		int number=input.nextInt();
+        String code=stdIn.readLine();
+		Order order=salesdatabase.getOrder(code);
 		if (item==null) {
 			stdErr.println("There is no catalog item with that code");
 		} else if (item.isAvailable()) {
 
-			if(item.getNumberOfItems()>null) {
+			if(item.isAvailable()==false) {
 				stdErr.println("There is no enough items");
 			}else {
+				
+				if(order==null) {
+					stdErr.println("There is no order with that code");
+				}
+				
+				else {
 				stdOut.print("Product item quality>");
-				Scanner input=new Scanner(System.in);
-				int  i=input.nextInt();
-				order.getQuantity(i);
+				stdOut.print("Please input the number you want:");
+				int  n=stdIn.read();
+				order.setQuantity(n);
 				order.getSalesItems().addItem(item);
 				stdOut.println("The item " + item.getCode()
 				+ " has been added to the order " );
-				double total=0;
-				for (Iterator<ProductItem> i = salesitems.getItemsIterator();
-						i.hasNext();) {
-
-					ProductItem item = (ProductItem) i.next();
-
-					total=total+order.getPrice()*order.getQuantity();
-
-
-
 				}
-
-				stdOut.println("Order total is :"+ total +".");
 			}	
 		}
 	}
@@ -286,20 +282,29 @@ public class GourmetCoffeeSystem{
 	private void removeProduct()  throws IOException  {
 
 		ProductItem item = readProductItem();
+  	    stdOut.print("Please input the code of the order:");
+		stdOut.flush();
+		
+        String code=stdIn.readLine();
+		Order order=salesdatabase.getOrder(code);
 		if (item == null) {
 			stdErr.println("There is no catalog item with that code");
 		} else if (item.isAvailable()) {
-
-			Order order=salesdatabase.getOrder(salesdatabase.getNumberOfOrders()-1);
 			
-			if() {
-				order.deleteSalesItem(code);
+			if(order==null) {
+				
+				stdErr.println("There is no order with that code");
+			}
+
+			else {
+			if(order.getSalesItems().removeItem(item)) {;
 			stdOut.println("The item " + item.getCode()
 			+ " has been removed from the order" );
 			}
 			else {
 				stdErr.println("The item " +  item.getCode() +
 						" is not added");
+			}
 			}
 		}
 	}
