@@ -54,14 +54,15 @@ public class Order {
 		return  total;
 	}
 
-	/*delete salesItem*/
-	public void deleteSalesItem(String code){
+	  /*delete salesItem*/
+	public void deleteSalesItem(String code,SalesDatabase salesDatabase){
 		for (Iterator<SalesItem> i = getSalesItemIterator(); i.hasNext();){
 
 			SalesItem salesItem =(SalesItem) i.next();
 
 			if((salesItem.getProductItem().getCode()).equals(code)){
-
+				salesDatabase.getQuantityToProductsLog().put(code,salesItem.getQuantity()-1);
+				salesDatabase.getOrdersNumToProductsLog().replace(code,salesDatabase.getNumberOfOrders()-1);
 				salesItems.remove(salesItem);
 			}
 		}
@@ -70,13 +71,19 @@ public class Order {
 
 
 	/*add salesItem*/
-	public void addSalesItem(String code,ProductDatabase productDatabase){
+	public void addSalesItem(String code,ProductDatabase productDatabase,SalesDatabase salesDatabase){
+		int count=0;
 		for(Iterator<ProductItem> i = productDatabase.getProductsIterator(); i.hasNext();){
 
 			ProductItem productItem = (ProductItem) i.next();
 
 			if((productItem.getCode()).equals(code)){
 				SalesItem salesItem = new SalesItem(productItem,1);
+				salesDatabase.getQuantityToProductsLog().put(code,salesItem.getQuantity());
+				count++;
+				int load = (int) salesDatabase.getQuantityToProductsLog().get(code);
+				if(count!=0){salesDatabase.getQuantityToProductsLog().put(code,salesItem.getQuantity()+load);}
+				salesDatabase.getOrdersNumToProductsLog().put(code,count);
 				salesItems.add(salesItem);
 			}
 		}
