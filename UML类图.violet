@@ -85,7 +85,11 @@ getNumberOfOrders():int</string>
      <void property="text">
       <string>+Order(initialOrderCode:int)
 +getTotal():double
+<<<<<<< HEAD
 +addSalesItem(code:String):void
+=======
++addSalesItem(code:String,productDatabase:ProductDatabase):void
+>>>>>>> 4e43f043d227f428cb9ee13d68eab11e0b9f24e6
 +getSalesItemIterator():Iterator&lt;SalesItem&gt;
 +deleteSalesItem(code:String):void
 +toString():String</string>
@@ -114,7 +118,8 @@ getNumberOfOrders():int</string>
      <void property="text">
       <string>+SalesItem(initialProduct:ProductItem,initialQuantity:int)
 +getQuantity():int
-+setQuatity(quantity:int):void</string>
++setQuatity(quantity:int):void
++getProductItem():ProductItem</string>
      </void>
     </void>
     <void property="name">
