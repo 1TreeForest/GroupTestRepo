@@ -1,4 +1,3 @@
-
 import java.io.*;
 import java.util.*;
 /**
@@ -27,7 +26,6 @@ public class GourmetCoffeeSystem{
 	/**
 	 * The main function loads the information of the product and
    sales database and starts the application.
-
 	 * @param args
 	 * @throws IOException
 	 */
@@ -42,16 +40,13 @@ public class GourmetCoffeeSystem{
 		app.run();
 
 	}
-	
 	private static SalesDatabase loadSalesDatabase() {
 		// TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
 		SalesDatabase salesdatabase = new SalesDatabase();
 		return salesdatabase;
 	}
-	/**
-	 * Loads the information of a product object.		
-	 * @return
-	 */
+	
+	
 
 	private static ProductDatabase loadProductDatabase()  {
 		ProductDatabase productdatabase = new ProductDatabase();
@@ -87,9 +82,9 @@ public class GourmetCoffeeSystem{
 	 * @param initialproduct
 	 * @param initialSalesdatabase
 	 */
-	private GourmetCoffeeSystem(ProductDatabase initialproductdatabase,SalesDatabase initialSalesdatabase) {
+	private CoffeeSystem(Product initialproduct,SalesDatabase initialSalesdatabase) {
 
-		this.productdatabase= initialproductdatabase;
+		this.product= initialproduct;
 		this.salesdatabase = initialSalesdatabase;
 	}
 	/**
@@ -111,15 +106,15 @@ public class GourmetCoffeeSystem{
 			} else if (choice == 4)  {
 				addProduct();
 			} else if (choice == 5)  {
-					removeProduct();
+				removeProduct();
 			} else if (choice == 6)  {
-				registerNewOrder();
+				registerTheOrder();
 			}else if (choice == 7)  {
-				displaySaleslist();
+				displaySales();
 			}else if (choice ==8)   {
-				displaySpecific();
+				displayQuantityToProducts();
 			}else if (choice ==9)   {
-				displayTotalProduct();
+				displayOrdersNumToProduct();
 			}
 			choice = getChoice();
 		}
@@ -141,7 +136,7 @@ public class GourmetCoffeeSystem{
 						+ "[3]  Display current order\n"
 						+ "[4]  Add modify product to in current order\n"
 						+ "[5]  Remove product from current order\n"
-						+ "[6]  Register new order\n"
+						+ "[6]  Register sale of current order\n"
 						+ "[7]  Display sales\n"
 						+ "[8]  Display number of orders with a specific product\n"
 						+ "[9]  Display the total quantity sold for each products\n"
@@ -170,12 +165,12 @@ public class GourmetCoffeeSystem{
 
 	private void displayCatalog() {
 
-		int numberOfItems = this.productdatabase.getNumberOfItems();
+		int numberOfItems = this.product.getNumberOfItems();
 
 		if (numberOfItems == 0) {
 			stdErr.println("The catalog is empty");
 		} else {
-			for (Iterator<ProductItem> i = productdatabase.getProductsIterator();
+			for (Iterator<ProductItem> i = product.getProductsIterator();
 					i.hasNext();) {
 
 				ProductItem item = (ProductItem) i.next();
@@ -231,24 +226,25 @@ public class GourmetCoffeeSystem{
 		if (salesdatabase.getNumberOfOrders() == 0) {
 			stdErr.println("The database of order is empty");
 		} else {
-				order = (Order) salesdatabase.getOrder(salesdatabase.getNumberOfOrders()-1);
-		}
+			for (Iterator<Order> i = salesdatabase.getOrdersIterator();i.hasNext();) {
+				order = (Order) i.next();
+			}
+			}
 		stdOut.println("Quantity\tCode\tDescription\tPrice");
 			for (Iterator<SalesItem> i = order.getSalesItemIterator();i.hasNext();) {
 				SalesItem salesitem = (SalesItem) i;
 				stdOut.println(salesitem.toString()+'\t'+salesitem.getProductItem().toString2());
 			}
-			stdOut.println("Order total:\t"+order.toString());
 	}
 	/*
 	 * add a product to order
 	 */
 	private void addProduct()  throws IOException {
-		ProductItem item = readProductItem();
+	    ProductItem item = readProductItem();
+  	    Scanner input=new Scanner(System.in);
+  	    
   	    stdOut.print("Please input the code of the order:");
-		stdOut.flush();
-
-        String code=stdIn.readLine();
+        String code=input.next();
 		Order order=salesdatabase.getOrder(code);
 		if (item==null) {
 			stdErr.println("There is no catalog item with that code");
@@ -257,20 +253,26 @@ public class GourmetCoffeeSystem{
 			if(item.isAvailable()==false) {
 				stdErr.println("There is no enough items");
 			}else {
-				
-				if(order==null) {
-					stdErr.println("There is no order with that code");
-				}
-				
-				else {
 				stdOut.print("Product item quality>");
 				stdOut.print("Please input the number you want:");
-				int  n=stdIn.read();
+				int  n=input.nextInt();
 				order.setQuantity(n);
 				order.getSalesItems().addItem(item);
 				stdOut.println("The item " + item.getCode()
 				+ " has been added to the order " );
+				double total=0;
+				for (Iterator<ProductItem> i = salesitems.getItemsIterator();
+						i.hasNext();) {
+
+					ProductItem item = (ProductItem) i.next();
+
+					total=total+order.getPrice()*order.getQuantity();
+
+
+
 				}
+
+				stdOut.println("Order total is :"+ total +".");
 			}	
 		}
 	}
@@ -282,29 +284,18 @@ public class GourmetCoffeeSystem{
 	private void removeProduct()  throws IOException  {
 
 		ProductItem item = readProductItem();
-  	    stdOut.print("Please input the code of the order:");
-		stdOut.flush();
-		
-        String code=stdIn.readLine();
-		Order order=salesdatabase.getOrder(code);
 		if (item == null) {
 			stdErr.println("There is no catalog item with that code");
 		} else if (item.isAvailable()) {
-			
-			if(order==null) {
-				
-				stdErr.println("There is no order with that code");
-			}
 
-			else {
-			if(order.getSalesItems().removeItem(item)) {;
+			SalesList saleslist=salesdatabase.getorder();
+			if(saleslist .getSalesItems().removeItem(item)) {;
 			stdOut.println("The item " + item.getCode()
 			+ " has been removed from the order" );
 			}
 			else {
 				stdErr.println("The item " +  item.getCode() +
 						" is not added");
-			}
 			}
 		}
 	}
@@ -313,7 +304,7 @@ public class GourmetCoffeeSystem{
  */
 private void registerNewOrder() throws IOException{
 
-	salesdatabase.addOrder(salesdatabase.getNumberOfOrders());
+	salesdatabase.addorder(order);
 	Order saleslist = new Order();
 }
 
@@ -321,7 +312,7 @@ private void registerNewOrder() throws IOException{
 /*
  * lists all the orders that have been sold
  */
-private void displaySaleslist()throws IOException{
+private void displaySales()throws IOException{
 	ArrayList<Order> arrayList = new ArrayList<Order>();
 	int numberOfItems = salesdatabase.getNumberOfItems();
 	for (Iterator<Order> i = salesdatabase.getOrdersIterator();
@@ -338,7 +329,7 @@ private void displaySaleslist()throws IOException{
 /*
  * 	Display number of orders with a specific product
  */
-private void displaySpecific()throws IOException{
+private void displayQuantityToProducts()throws IOException{
 	ArrayList<Order> arrayList = new ArrayList<Order>();
 	int numberOfItems = salesdatabase.getNumberOfItems();
 	for (Iterator<Order> i = salesdatabase.getOrdersIterator();
@@ -367,7 +358,7 @@ private void displaySpecific()throws IOException{
 /*
  * Display the total quantity sold for each products
  */
-private void displayTotalProduct()throws IOException{
+private void displayOrdersNumToProduct()throws IOException{
 	ArrayList<Order> arrayList = new ArrayList<Order>();
 	int numberOfItems = salesdatabase.getNumberOfItems();
 	for (Iterator<Order> i = salesdatabase.getOrdersIterator();
