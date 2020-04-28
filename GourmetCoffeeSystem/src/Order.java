@@ -56,13 +56,22 @@ public class Order {
 
 	  /*delete salesItem*/
 	public void deleteSalesItem(String code,SalesDatabase salesDatabase){
+		int count=0;
 		for (Iterator<SalesItem> i = getSalesItemIterator(); i.hasNext();){
 
 			SalesItem salesItem =(SalesItem) i.next();
 
 			if((salesItem.getProductItem().getCode()).equals(code)){
-				salesDatabase.getQuantityToProductsLog().put(code,salesItem.getQuantity()-1);
-				salesDatabase.getOrdersNumToProductsLog().replace(code,salesDatabase.getNumberOfOrders()-1);
+				count = salesItem.getQuantity();
+				int value = salesDatabase.getQuantityToProductsLog().get(code);
+				value-=salesItem.getQuantity();
+				salesDatabase.getQuantityToProductsLog().put(code,value);
+				count--;
+				if(count==0){
+					value = salesDatabase.getOrdersNumToProductsLog().get(code);
+					value-=1;
+					salesDatabase.getOrdersNumToProductsLog().put(code,value);
+				}
 				salesItems.remove(salesItem);
 			}
 		}
@@ -79,11 +88,15 @@ public class Order {
 
 			if((productItem.getCode()).equals(code)){
 				SalesItem salesItem = new SalesItem(productItem,1);
-				salesDatabase.getQuantityToProductsLog().put(code,salesItem.getQuantity());
+				int value = salesDatabase.getQuantityToProductsLog().get(code);
+				value+=salesItem.getQuantity();
+				salesDatabase.getQuantityToProductsLog().put(code,value);
+				if (count==0){
+					value = salesDatabase.getOrdersNumToProductsLog().get(code);
+					value+=1;
+					salesDatabase.getQuantityToProductsLog().put(code,value);
+				}
 				count++;
-				int load = (int) salesDatabase.getQuantityToProductsLog().get(code);
-				if(count!=0){salesDatabase.getQuantityToProductsLog().put(code,salesItem.getQuantity()+load);}
-				salesDatabase.getOrdersNumToProductsLog().put(code,count);
 				salesItems.add(salesItem);
 			}
 		}
