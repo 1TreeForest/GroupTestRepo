@@ -15,7 +15,7 @@
     <void property="methods">
      <void property="text">
       <string>+main(args: String[])
-+CoffeeSystem(Product,SalesDatebase)
++GourmetCoffeeSystem(ProductDatabase,SalesDatebase)
 +loadProductDatabase():ProductDatabase
 +loadSalesDatabase():SalesDatabase
 +run(): void
@@ -34,7 +34,7 @@
     </void>
     <void property="name">
      <void property="text">
-      <string>CoffeeSystem</string>
+      <string>GourmetCoffeeSystem</string>
      </void>
     </void>
    </object>
@@ -156,7 +156,7 @@
    </object>
    <object class="java.awt.geom.Point2D$Double">
     <double>470.0</double>
-    <double>90.0</double>
+    <double>130.0</double>
    </object>
   </void>
   <void method="addNode">
@@ -189,7 +189,7 @@
    </object>
    <object class="java.awt.geom.Point2D$Double">
     <double>390.0</double>
-    <double>290.0</double>
+    <double>320.0</double>
    </object>
   </void>
   <void method="addNode">
@@ -247,7 +247,7 @@
    </object>
    <object class="java.awt.geom.Point2D$Double">
     <double>600.0</double>
-    <double>580.0</double>
+    <double>570.0</double>
    </object>
   </void>
   <void method="addNode">
@@ -278,7 +278,7 @@
    </object>
    <object class="java.awt.geom.Point2D$Double">
     <double>110.0</double>
-    <double>580.0</double>
+    <double>570.0</double>
    </object>
   </void>
   <void method="connect">
@@ -344,7 +344,7 @@
      <object class="com.horstmann.violet.ArrowHead" field="V"/>
     </void>
     <void property="endLabel">
-     <string>1...*</string>
+     <string>0...*</string>
     </void>
     <void property="startLabel">
      <string>1</string>
