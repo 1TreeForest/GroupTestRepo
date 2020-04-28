@@ -1,3 +1,4 @@
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Vector;
 
@@ -54,7 +55,7 @@ public class Order {
 		return  total;
 	}
 
-	  /*delete salesItem*/
+	/*delete salesItem*/
 	public void deleteSalesItem(String code,SalesDatabase salesDatabase){
 		int count=0;
 		for (Iterator<SalesItem> i = getSalesItemIterator(); i.hasNext();){
@@ -80,14 +81,14 @@ public class Order {
 
 
 	/*add salesItem*/
-	public void addSalesItem(String code,ProductDatabase productDatabase,SalesDatabase salesDatabase){
+	public void addSalesItem(String code,int quantity,ProductDatabase productDatabase,SalesDatabase salesDatabase){
 		int count=0;
 		for(Iterator<ProductItem> i = productDatabase.getProductsIterator(); i.hasNext();){
 
 			ProductItem productItem = (ProductItem) i.next();
 
 			if((productItem.getCode()).equals(code)){
-				SalesItem salesItem = new SalesItem(productItem,1);
+				SalesItem salesItem = new SalesItem(productItem,quantity);
 				int value = salesDatabase.getQuantityToProductsLog().get(code);
 				value+=salesItem.getQuantity();
 				salesDatabase.getQuantityToProductsLog().put(code,value);
