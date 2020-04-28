@@ -33,7 +33,7 @@ public class GourmetCoffeeSystem{
 	public static void main(String[] args)throws IOException {
 		ProductDatabase  productdatabase = loadProductDatabase();
 		SalesDatabase  salesdatabase = loadSalesDatabase();
-
+		salesdatabase.initiateHashMap(productdatabase);
 		GourmetCoffeeSystem  app = new  GourmetCoffeeSystem(productdatabase,salesdatabase);
 
 		app.run();
