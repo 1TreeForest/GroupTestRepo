@@ -224,11 +224,15 @@ public class GourmetCoffeeSystem{
 			order = (Order) salesdatabase.getOrder(salesdatabase.getNumberOfOrders()-1);
 		}
 		stdOut.println("OrderCode:"+order.getOrderCode()+"\nQuantity\tCode\tDescription\tPrice");
+		double total=0;
 		for (Iterator<SalesItem> i = order.getSalesItemIterator();i.hasNext();) {
 			SalesItem salesitem = (SalesItem) i.next();
 			stdOut.println(salesitem.toString()+'\t'+salesitem.getProductItem().toString2());
+			total=total+salesitem.getQuantity()*salesitem.getProductItem().getPrice();
 		}
-		stdOut.println("Order total:\t"+order.toString());
+		
+		stdOut.println("Order total:\t"+total
+				);
 	}
 
 	/*
