@@ -230,7 +230,7 @@ public class GourmetCoffeeSystem{
 			stdOut.println(salesitem.toString()+'\t'+salesitem.getProductItem().toString2());
 			total=total+salesitem.getQuantity()*salesitem.getProductItem().getPrice();
 		}
-		
+
 		stdOut.println("Order total:\t"+total
 				);
 	}
@@ -259,15 +259,23 @@ public class GourmetCoffeeSystem{
 				stdOut.println("The quantity of the item:");
 
 				int n=input.nextInt();
-
+				for (Iterator<SalesItem> k = order.getSalesItemIterator(); 
+						k.hasNext(); ) {
+					SalesItem salesItem = (SalesItem) k.next();
+					if (salesItem.getProductItem().getCode().equals(item.getCode())){
+						salesItem.setQuantity(n);
+						stdOut.println("The item " + item.getCode()+" has been modified " );
+						return;
+					}
+				}
 				order.addSalesItem(item.getCode(),n,productdatabase,salesdatabase);
 				stdOut.println("The item " + item.getCode()
 				+ " has been added to the order " );
+				stdOut.flush();
 			}
 
-		}	
-		
-	}	
+		}
+	}
 
 
 	/*
@@ -284,7 +292,7 @@ public class GourmetCoffeeSystem{
 		ProductItem item = readProductItem();
 
 		if (item == null) {
-			stdErr.println("There is no catalog item with that code");
+			stdErr.println("There is no product item with that code");
 		} else if (item.isAvailable()) {
 			int flag = 0 ;
 			for (Iterator<SalesItem> k = order.getSalesItemIterator(); 
@@ -390,10 +398,10 @@ public class GourmetCoffeeSystem{
 
 	public static void pauseEnter(){ //Enter to continue
 		try {
-		System.out.println("Press any key to continue...");
-		new BufferedReader(new InputStreamReader(System.in)).readLine();
+			System.out.println("Press any key to continue...");
+			new BufferedReader(new InputStreamReader(System.in)).readLine();
 		}catch (Exception e) {
-			
+
 		}
 	}
 
