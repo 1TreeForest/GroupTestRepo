@@ -69,7 +69,6 @@ public class ProductItem {
 	 * equal to the code of the argument
 	 */
 	public boolean equals(Object object) {
-
 		return object instanceof ProductItem
 		       && getCode().equals(((ProductItem) object).getCode());
 	}

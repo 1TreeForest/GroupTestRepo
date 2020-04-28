@@ -46,7 +46,6 @@ public class ProductDatabase  {
 			ProductItem productItem = (ProductItem) i.next();
 
 			if (productItem.getCode().equals(code)) {
-
 				return productItem;
 			}
 		}

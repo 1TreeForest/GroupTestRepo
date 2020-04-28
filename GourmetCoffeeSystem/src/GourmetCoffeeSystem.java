@@ -31,7 +31,6 @@ public class GourmetCoffeeSystem{
 	 */
 
 	public static void main(String[] args)throws IOException {
-		// TODO Auto-generated method stub
 		ProductDatabase  productdatabase = loadProductDatabase();
 		SalesDatabase  salesdatabase = loadSalesDatabase();
 
@@ -41,7 +40,6 @@ public class GourmetCoffeeSystem{
 
 	}
 	private static SalesDatabase loadSalesDatabase() {
-		// TODO
 		SalesDatabase salesdatabase = new SalesDatabase();
 		return salesdatabase;
 	}
@@ -51,14 +49,11 @@ public class GourmetCoffeeSystem{
 	private static ProductDatabase loadProductDatabase()  {
 		ProductDatabase productdatabase = new ProductDatabase();
 
-		productdatabase.addProduct(new Coffee("C001", "Colombia,Whole,1 lb", 17.99,
-				"Colombia", "Medium","Rich and Hearty","Rich","Medium","Full"));
-		productdatabase.addProduct(new Coffee("C002", "Colombia,Ground,1 lb", 18.75,
-				"Colombia", "Medium","Rich and Hearty","Rich","Medium","Full"));
-		productdatabase.addProduct(new Coffee("C007", "Guatemala,Whole,1 lb", 17.99,
-				"Guatemala", "Medium","Rich and complex","spicy","Medium to high","Medium to Full"));
-		productdatabase.addProduct(new Coffee("C008", "Guatemala,Ground,1 lb", 18.75,
-				"Guatemala", "Medium","Rich and complex","Spicy","Medium to high","Medium to Full"));
+		productdatabase.addProduct(new CoffeeAccessary("A001", "Almond Flavored Syrup", 9.00));
+		productdatabase.addProduct(new CoffeeAccessary("A005", "Gourmet Coffee Cokkies", 12.00));
+		productdatabase.addProduct(new CoffeeAccessary("A007", "Gourmet Coffee Ceramic Mug", 8.00));
+		productdatabase.addProduct(new CoffeeAccessary("A009", "Gourmet Coffee 36 Cup Filters", 45.00));
+
 		productdatabase.addProduct(new CoffeeBrewer("B001", "Home Coffee Brewer", 150.00,
 				"Brewer 100", "Pourover",6));
 		productdatabase.addProduct(new CoffeeBrewer("B002", "Coffee Brewer,2 Warmers", 200.00,
@@ -69,10 +64,15 @@ public class GourmetCoffeeSystem{
 				"Quick Coffee 100", "Automatic",20));
 		productdatabase.addProduct(new CoffeeBrewer("B005", "Commercial Brewer,40 cups", 480.00,
 				"Quick Coffee 200", "Automatic",40));
-		productdatabase.addProduct(new CoffeeAccessary("A001", "Almond Flavored Syrup", 9.00));
-		productdatabase.addProduct(new CoffeeAccessary("A005", "Gourmet Coffee Cokkies", 12.00));
-		productdatabase.addProduct(new CoffeeAccessary("A007", "Gourmet Coffee Ceramic Mug", 8.00));
-		productdatabase.addProduct(new CoffeeAccessary("A009", "Gourmet Coffee 36 Cup Filters", 45.00));
+
+		productdatabase.addProduct(new Coffee("C001", "Colombia,Whole,1 lb", 17.99,
+				"Colombia", "Medium","Rich and Hearty","Rich","Medium","Full"));
+		productdatabase.addProduct(new Coffee("C002", "Colombia,Ground,1 lb", 18.75,
+				"Colombia", "Medium","Rich and Hearty","Rich","Medium","Full"));
+		productdatabase.addProduct(new Coffee("C007", "Guatemala,Whole,1 lb", 17.99,
+				"Guatemala", "Medium","Rich and complex","spicy","Medium to high","Medium to Full"));
+		productdatabase.addProduct(new Coffee("C008", "Guatemala,Ground,1 lb", 18.75,
+				"Guatemala", "Medium","Rich and complex","Spicy","Medium to high","Medium to Full"));
 
 		return productdatabase;
 	}
@@ -129,8 +129,6 @@ public class GourmetCoffeeSystem{
 		}
 	}
 
-
-
 	/* Validates the user's choice. */
 	private int  getChoice() throws IOException  {
 
@@ -153,9 +151,6 @@ public class GourmetCoffeeSystem{
 				stdOut.flush();
 
 				input = Integer.parseInt(stdIn.readLine());
-
-				//stdErr.println();
-
 				if (0 <= input && 9 >= input)  {
 					break;
 				} else {
@@ -168,16 +163,16 @@ public class GourmetCoffeeSystem{
 
 		return  input;
 	}
+
 	/*
 	 *  Displays the product.
 	 */
-
 	private void displayCatalog() {
 
 		int numberOfItems = this.productdatabase.getNumberOfItems();
 
 		if (numberOfItems == 0) {
-			stdErr.println("The catalog is empty");
+			stdErr.println("The product is empty");
 		} else {
 			for (Iterator<ProductItem> i = productdatabase.getProductsIterator();
 					i.hasNext();) {
@@ -189,10 +184,10 @@ public class GourmetCoffeeSystem{
 			}
 		}
 	}
+
 	/*
 	 * Displays a catalog item.
 	 */
-
 	private void displayProductItem()  throws IOException  {
 
 		ProductItem item = readProductItem();
@@ -217,8 +212,6 @@ public class GourmetCoffeeSystem{
 				stdOut.println("  Model: " + coffeebrewer.getModel());
 				stdOut.println("  WaterSupply: " + coffeebrewer.getWaterSupply());
 				stdOut.println("  Number: " + coffeebrewer.getNumber());
-			}else if(item instanceof CoffeeAccessary) {
-				CoffeeAccessary coffeeAccessary =(CoffeeAccessary) item;
 			}
 			stdOut.println("  Status: "
 					+ (item.isAvailable() ? "Available" : "Not available"));
@@ -245,6 +238,7 @@ public class GourmetCoffeeSystem{
 		}
 		stdOut.println("Order total:\t"+order.toString());
 	}
+
 	/*
 	 * add a product to order
 	 */
@@ -259,8 +253,6 @@ public class GourmetCoffeeSystem{
 		ProductItem item = readProductItem();
 		Scanner input=new Scanner(System.in);
 
-
-
 		if (item==null) {
 			stdErr.println("There is no product item with that code");
 		} else if (item.isAvailable()) {
@@ -270,7 +262,7 @@ public class GourmetCoffeeSystem{
 			}else {
 				stdOut.println("The quantity of the item:");
 
-				int  n=input.nextInt();
+				int n=input.nextInt();
 				((SalesItem) order.getSalesItemIterator()).setQuantity(n);
 				order.addSalesItem(item.getCode(),productdatabase,salesdatabase);
 				stdOut.println("The item " + item.getCode()
@@ -278,16 +270,18 @@ public class GourmetCoffeeSystem{
 			}
 
 		}	
+		input.close();
 	}	
 
 
 	/*
-	 * remove a product from saleslist
+	 * remove a product from order
 	 */
 	private void removeProduct()  throws IOException  {
 		Order order =null;
 		if (salesdatabase.getNumberOfOrders() == 0) {
 			stdErr.println("The database of order is empty");
+			return;
 		} else {
 			order = (Order) salesdatabase.getOrder(salesdatabase.getNumberOfOrders()-1);
 		}
@@ -296,7 +290,7 @@ public class GourmetCoffeeSystem{
 
 		Scanner input=new Scanner(System.in);
 		if (item == null) {
-			stdErr.println("There is no catalog item with that code");
+			stdErr.println("There is no product item with that code");
 		} else if (item.isAvailable()) {
 
 
@@ -335,18 +329,15 @@ public class GourmetCoffeeSystem{
 		for (Iterator<Order> i = salesdatabase.getOrdersIterator();
 				i.hasNext(); ) {
 			order = (Order) i.next();
-			if (order!=null) {
-				System.out.println("Order code: " + order.getOrderCode());
-				stdOut.println("Quantity\tCode\tDescription\tPrice");
-				for (Iterator<SalesItem> k = order.getSalesItemIterator(); k.hasNext(); ) {
-					SalesItem salesItem = (SalesItem) k.next();
-					stdOut.println(salesItem.toString() + '\t' + salesItem.getProductItem().getCode() + '\t'
-							+ salesItem.getProductItem().getDescription() + '\t' + salesItem.getProductItem().getPrice());
-				}
+
+			System.out.println("Order code: " + order.getOrderCode());
+			stdOut.println("Quantity\tCode\tDescription\tPrice");
+			for (Iterator<SalesItem> k = order.getSalesItemIterator(); k.hasNext(); ) {
+				SalesItem salesItem = (SalesItem) k.next();
+				stdOut.println(salesItem.toString() + '\t' + salesItem.getProductItem().getCode() + '\t'
+						+ salesItem.getProductItem().getDescription() + '\t' + salesItem.getProductItem().getPrice());
 			}
-			else {
-				stdErr.println("no Order!");
-			}
+
 			stdOut.println("Total:\t"+order.getTotal()+"\n");
 		}
 	}
@@ -355,23 +346,13 @@ public class GourmetCoffeeSystem{
 	 * 	Display number of orders with a specific product
 	 */
 	private void displayQuantityToProducts()throws IOException{
-		ProductItem item = readProductItem();
-		String codeOfPruduct = item.getCode();
-		int number=0;
-		if (item==null) {
-			stdErr.println("There is no sale with that code of product");
-		}
-		else {
-			HashMap<String,Integer> quantityToProductsLog = salesdatabase.getQuantityToProductsLog();
-			Iterator iterator = quantityToProductsLog.keySet().iterator();
-			System.out.println("The quantity with "+codeOfPruduct+":");
-			while (iterator.hasNext()){
-				String key = (String)iterator.next();
-				if(key==codeOfPruduct){
-					number+=quantityToProductsLog.get(key);
-				}
-			}
-			System.out.println(number);
+		HashMap<String,Integer> quantityToProductsLog = salesdatabase.getQuantityToProductsLog();
+		stdOut.println("Code\tDescription\tQuantity");
+		for (Map.Entry<String,Integer> ha : quantityToProductsLog.entrySet()){
+			String code = (String) ha.getKey();
+			String descrip=productdatabase.getProduct(code).getDescription();
+			stdOut.println(code+"\t"+descrip+"\t"+ha.getValue()+"\n");
+
 		}
 	}
 
@@ -379,30 +360,22 @@ public class GourmetCoffeeSystem{
 	 * Display the total quantity sold for each products
 	 */
 	private void displayOrdersNumToProduct()throws IOException{
-		Vector<Order> arrayList = new Vector<Order>();
-		for (Iterator<Order> i = salesdatabase.getOrdersIterator();
-				i.hasNext();) {
-
-			arrayList.add((Order) i.next());
-		}
 		ProductItem item = readProductItem();
-		String codeOfPruduct = item.getCode();
 		int number=0;
 		if (item==null) {
 			stdErr.println("There is no Order with that code of product");
+			return;
 		}else {
+			String codeOfPruduct = item.getCode();
 			HashMap<String,Integer> ordersNumToProduct = salesdatabase.getOrdersNumToProductsLog();
-			Iterator iterator = ordersNumToProduct.keySet().iterator();
-			System.out.println("The code of order with product "+codeOfPruduct+":");
-			while (iterator.hasNext()){
-				String key = (String)iterator.next();
-				if(key==codeOfPruduct){
-					System.out.print(ordersNumToProduct.get(key)+" ");
+			for (Map.Entry<String,Integer> ha : ordersNumToProduct.entrySet()){
+				if(ha.getKey()==codeOfPruduct){
+					stdOut.print(ha.getValue()+"  ");
 					number++;
 				}
 			}
+			System.out.println("The number of the orders of "+codeOfPruduct+" is "+number);
 		}
-		System.out.println("The number of the orders of "+codeOfPruduct+"is"+number);
 	}
 
 	private  ProductItem readProductItem() throws IOException  {
