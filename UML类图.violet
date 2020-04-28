@@ -8,7 +8,7 @@
       <string>-stdIn: BufferedReader
 -stdout: PrintWriter
 -std Err: PrintWriter
--product: Product
+-productdatabase: ProductDataBase
 -salesdatabase: SalesDatabase</string>
      </void>
     </void>
@@ -25,6 +25,7 @@
 +displayCurrentOrder(): void
 +addProduct(): void
 +removeProduct(): void
++registerNewOrder():void
 +displaySales(): void
 +displayQuantityToProducts(): void
 +displayOrdersNumToProduct(code:String): void
@@ -39,7 +40,7 @@
     </void>
    </object>
    <object class="java.awt.geom.Point2D$Double">
-    <double>830.0</double>
+    <double>800.0</double>
     <double>10.0</double>
    </object>
   </void>
@@ -54,7 +55,8 @@
     </void>
     <void property="methods">
      <void property="text">
-      <string>+SalesDatabase()
+      <string>+initiateHashMap(productDataBase:Productdatabase): void
++SalesDatabase()
 +addOrder(order:Order):void
 +deleteOrder(orderCode:int):void
 +getOrderIterator():Iterator&lt;Order&gt;
@@ -71,7 +73,7 @@
     </void>
    </object>
    <object class="java.awt.geom.Point2D$Double">
-    <double>1200.0</double>
+    <double>1150.0</double>
     <double>30.0</double>
    </object>
   </void>
@@ -87,10 +89,12 @@
     <void property="methods">
      <void property="text">
       <string>+Order(initialOrderCode:int)
++getOrderCode():int
 +getTotal():double
-+addSalesItem(code:String,quantity:int):void
++addSalesItem(code:String,quality:int,productDataBase:ProductDataBase,
+	salesDatabase:SalesDatabase):void
++deletesalesltem(code:String,salesDatabase:SalesDatabase): void
 +getSalesItemIterator():Iterator&lt;SalesItem&gt;
-+deleteSalesItem(code:String):void
 +toString():String</string>
      </void>
     </void>
@@ -101,7 +105,7 @@
     </void>
    </object>
    <object class="java.awt.geom.Point2D$Double">
-    <double>1200.0</double>
+    <double>1120.0</double>
     <double>280.0</double>
    </object>
   </void>
@@ -117,7 +121,9 @@
      <void property="text">
       <string>+SalesItem(initialProduct:ProductItem,initialQuantity:int)
 +getQuantity():int
-+setQuatity(quantity:int):void</string>
++setQuatity(quantity:int):void
++getProductItem():Productltem
++tostring():String</string>
      </void>
     </void>
     <void property="name">
@@ -127,8 +133,8 @@
     </void>
    </object>
    <object class="java.awt.geom.Point2D$Double">
-    <double>1150.0</double>
-    <double>490.0</double>
+    <double>1180.0</double>
+    <double>530.0</double>
    </object>
   </void>
   <void method="addNode">
@@ -178,7 +184,8 @@
 +isAvailable(): boolean
 +setAvailable(newValue: boolean): void 
 +equals(object: Object): boolean
-+toString(): String</string>
++toString(): String
++toString2():String</string>
      </void>
     </void>
     <void property="name">
@@ -247,7 +254,7 @@
    </object>
    <object class="java.awt.geom.Point2D$Double">
     <double>600.0</double>
-    <double>570.0</double>
+    <double>580.0</double>
    </object>
   </void>
   <void method="addNode">
@@ -278,7 +285,7 @@
    </object>
    <object class="java.awt.geom.Point2D$Double">
     <double>110.0</double>
-    <double>570.0</double>
+    <double>580.0</double>
    </object>
   </void>
   <void method="connect">
