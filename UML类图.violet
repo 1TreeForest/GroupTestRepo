@@ -88,7 +88,7 @@
      <void property="text">
       <string>+Order(initialOrderCode:int)
 +getTotal():double
-+addSalesItem(code:String):void
++addSalesItem(code:String,quantity:int):void
 +getSalesItemIterator():Iterator&lt;SalesItem&gt;
 +deleteSalesItem(code:String):void
 +toString():String</string>

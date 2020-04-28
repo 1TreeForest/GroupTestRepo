@@ -99,32 +99,24 @@ public class GourmetCoffeeSystem{
 
 			if (choice == 1)  {
 				displayCatalog();
-				pauseEnter();
 			} else if (choice == 2)  {
 				displayProductItem();
-				pauseEnter();
 			} else if (choice == 3)  {
 				displayCurrentOrder();
-				pauseEnter();
 			} else if (choice == 4)  {
 				addProduct();
-				pauseEnter();
 			} else if (choice == 5)  {
 				removeProduct();
-				pauseEnter();
 			} else if (choice == 6)  {
 				registerNewOrder();
-				pauseEnter();
 			}else if (choice == 7)  {
 				displaySales();
-				pauseEnter();
 			}else if (choice ==8)   {
 				displayOrdersNumToProduct();
-				pauseEnter();
 			}else if (choice ==9)   {
 				displayQuantityToProducts();
-				pauseEnter();
 			}
+			pauseEnter();
 			choice = getChoice();
 		}
 	}
@@ -263,8 +255,8 @@ public class GourmetCoffeeSystem{
 				stdOut.println("The quantity of the item:");
 
 				int n=input.nextInt();
-				((SalesItem) order.getSalesItemIterator()).setQuantity(n);
-				order.addSalesItem(item.getCode(),productdatabase,salesdatabase);
+
+				order.addSalesItem(item.getCode(),n,productdatabase,salesdatabase);
 				stdOut.println("The item " + item.getCode()
 				+ " has been added to the order " );
 			}
@@ -281,28 +273,36 @@ public class GourmetCoffeeSystem{
 		Order order =null;
 		if (salesdatabase.getNumberOfOrders() == 0) {
 			stdErr.println("The database of order is empty");
-			return;
 		} else {
 			order = (Order) salesdatabase.getOrder(salesdatabase.getNumberOfOrders()-1);
 		}
 
 		ProductItem item = readProductItem();
 
-		Scanner input=new Scanner(System.in);
 		if (item == null) {
-			stdErr.println("There is no product item with that code");
+			stdErr.println("There is no catalog item with that code");
 		} else if (item.isAvailable()) {
+			int flag = 0 ;
+			for (Iterator<SalesItem> k = order.getSalesItemIterator(); 
+					k.hasNext(); ) {
+				SalesItem salesItem = (SalesItem) k.next();
+				if (salesItem.getProductItem().getCode().equals(item.getCode())){
+					order.deleteSalesItem(item.getCode(),salesdatabase);
+					flag = 1;
+				}
+			}
 
-
-			if(((SalesItem) order.getSalesItemIterator()).getQuantity()!=0) {
-				order.deleteSalesItem(item.getCode(),salesdatabase);
+			if(flag != 0) {
 				stdOut.println("The item " + item.getCode()
 				+ " has been removed from the order" );
 			}
 			else {
-				stdErr.println("The item " +  item.getCode() +
-						" is not added");
+				stdOut.println("This item is not in the order" );
 			}
+		}
+		else {
+			stdErr.println("The item " +  item.getCode() +
+					" is not added");
 		}
 	}
 	/*
@@ -314,8 +314,6 @@ public class GourmetCoffeeSystem{
 
 		stdOut.println("A new order has been created");
 	}
-
-
 
 	/*
 	 * lists all the orders that have been sold
@@ -386,9 +384,13 @@ public class GourmetCoffeeSystem{
 		return this.productdatabase.getProduct(stdIn.readLine());
 	}
 
-	public static void pauseEnter() throws IOException  { //Enter to continue
+	public static void pauseEnter(){ //Enter to continue
+		try {
 		System.out.println("Press any key to continue...");
 		new BufferedReader(new InputStreamReader(System.in)).readLine();
+		}catch (Exception e) {
+			
+		}
 	}
 
 

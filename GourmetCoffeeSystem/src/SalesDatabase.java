@@ -33,8 +33,9 @@ public class SalesDatabase {
 	 */
 	public void initiateHashMap(ProductDatabase productDatabase){
 		for(Iterator<ProductItem> i = productDatabase.getProductsIterator(); i.hasNext();){
-			quantityToProductsLog.put(((ProductItem)i.next()).getCode(),0);
-			ordersNumToProductsLog.put(((ProductItem)i.next()).getCode(),0);
+			ProductItem item =i.next();
+			quantityToProductsLog.put(item.getCode(),0);
+			ordersNumToProductsLog.put(item.getCode(),0);
 		}
 	}
 	/**
