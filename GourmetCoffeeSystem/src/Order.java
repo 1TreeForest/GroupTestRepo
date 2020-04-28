@@ -73,7 +73,7 @@ public class Order {
 					value-=1;
 					salesDatabase.getOrdersNumToProductsLog().put(code,value);
 				}
-				salesItems.remove(salesItem);
+				i.remove();
 			}
 		}
 

@@ -133,7 +133,7 @@ public class GourmetCoffeeSystem{
 						+ "[1]  Display catalog\n"
 						+ "[2]  Display product\n"
 						+ "[3]  Display current order\n"
-						+ "[4]  Add modify product to in current order\n"
+						+ "[4]  Add|modify product to in current order\n"
 						+ "[5]  Remove product from current order\n"
 						+ "[6]  Register new order\n"
 						+ "[7]  Display sales\n"
@@ -275,7 +275,9 @@ public class GourmetCoffeeSystem{
 			}
 
 		}
+
 	}
+
 
 
 	/*
@@ -301,6 +303,7 @@ public class GourmetCoffeeSystem{
 				if (salesItem.getProductItem().getCode().equals(item.getCode())){
 					order.deleteSalesItem(item.getCode(),salesdatabase);
 					flag = 1;
+					break;
 				}
 			}
 
@@ -332,6 +335,7 @@ public class GourmetCoffeeSystem{
 	 */
 	private void displaySales()throws IOException {
 		Order order = null;
+		double total=0;
 		if (salesdatabase.getNumberOfOrders() == 0) {
 			stdErr.println("The database of order is empty");
 			return;
@@ -346,11 +350,14 @@ public class GourmetCoffeeSystem{
 				SalesItem salesItem = (SalesItem) k.next();
 				stdOut.println(salesItem.toString() + '\t' + salesItem.getProductItem().getCode() + '\t'
 						+ salesItem.getProductItem().getDescription() + '\t' + salesItem.getProductItem().getPrice());
+				total=total+salesItem.getQuantity()*salesItem.getProductItem().getPrice();
 			}
 
-			stdOut.println("Total:\t"+order.getTotal()+"\n");
+			stdOut.println("Total:\t"+total);
+			total=0;
 		}
 	}
+
 
 	/*
 	 * 	Display number of orders with a specific product
