@@ -26,6 +26,18 @@ public class SalesDatabase {
 	public HashMap<String,Integer> ordersNumToProductsLog = new HashMap<String, Integer>();
 
 	/**
+	 * initiate hashmap
+	 * @param quantityToProductsLog
+	 * @param ordersNumToProductsLog
+	 * @param productDatabase
+	 */
+	public void initiateHashMap(ProductDatabase productDatabase){
+		for(Iterator<ProductItem> i = productDatabase.getProductsIterator(); i.hasNext();){
+			quantityToProductsLog.put(((ProductItem)i.next()).getCode(),0);
+			ordersNumToProductsLog.put(((ProductItem)i.next()).getCode(),0);
+		}
+	}
+	/**
 	 * Constructs an empty collection of {@link Order}
 	 * objects.
 	 */
