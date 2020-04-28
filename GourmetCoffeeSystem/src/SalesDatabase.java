@@ -23,7 +23,7 @@ public class SalesDatabase {
 	 *key is the code of a specific product,
 	 *value is the number of orders contain this product
 	 */
-	private HashMap<Integer,Integer> ordersNumToProductsLog = new HashMap<Integer, Integer>();
+	public HashMap<String,Integer> ordersNumToProductsLog = new HashMap<String, Integer>();
 
 	/**
 	 * Constructs an empty collection of {@link Order}
@@ -39,9 +39,9 @@ public class SalesDatabase {
 	 *
 	 * @param order  the {@link Order} object.
 	 */
-	public void  addOrder(int orderCode) {
+	public void  addOrder(Order order) {
 
-		orders.add(new Order(orderCode));
+		orders.add(order);
 	}
 	/**
 	 * delete a {@link Order} object from this collection.
@@ -63,6 +63,12 @@ public class SalesDatabase {
 		return orders.iterator();
 	}
 
+	public HashMap<String, Integer> getQuantityToProductsLog(){
+		return quantityToProductsLog;
+	}
+	public HashMap<String, Integer> getOrdersNumToProductsLog(){
+		return ordersNumToProductsLog;
+	}
 	/**
 	 * Returns the {@link Order} object with the specified
 	 * <code>code</code>.
@@ -78,7 +84,7 @@ public class SalesDatabase {
 
 			Order order = (Order) i.next();
 
-			if (Integer.toString(order.getOrderCode()).equals(code)) {
+			if (order.getOrderCode()==code) {
 
 				return order;
 			}

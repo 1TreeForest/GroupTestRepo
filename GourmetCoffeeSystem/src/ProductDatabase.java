@@ -41,7 +41,7 @@ public class ProductDatabase  {
 	 */
 	public ProductItem  getProduct(String code)  {
 
-		for (Iterator<ProductItem> i = getItemsIterator(); i.hasNext();) {
+		for (Iterator<ProductItem> i = getProductsIterator(); i.hasNext();) {
 
 			ProductItem productItem = (ProductItem) i.next();
 
