@@ -99,7 +99,7 @@ public class Order {
                 if (count==0){
                     value = salesDatabase.getOrdersNumToProductsLog().get(code);
                     value+=1;
-                    salesDatabase.getQuantityToProductsLog().put(code,value);
+                    salesDatabase.getOrdersNumToProductsLog().put(code,value);
                 }
                 salesItems.add(salesItem);
                 break;
