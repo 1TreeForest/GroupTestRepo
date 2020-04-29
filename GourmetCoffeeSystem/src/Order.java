@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Vector;
 
 /**
@@ -19,106 +20,109 @@ import java.util.Vector;
  */
 public class Order {
 
-	/* Identification code of the order.*/
-	private int orderCode;
+    /* Identification code of the order.*/
+    private int orderCode;
 
-	/*Total of the order*/
-	private double total;
+    /*Total of the order*/
+    private double total;
 
-	/* Items checked out by the order.*/
-	private Vector<SalesItem> salesItems;
+    /* Items checked out by the order.*/
+    private Vector<SalesItem> salesItems;
 
-	/**
-	 * Constructs a <code>Order</code> object.
-	 * <p>
-	 * The collection of the borrowed items is initially empty.
-	 * </p>
-	 *
-	 * @param initialorderCode  the code of the order
-	 */
-	public Order(int initialorderCode) {
+    /**
+     * Constructs a <code>Order</code> object.
+     * <p>
+     * The collection of the borrowed items is initially empty.
+     * </p>
+     *
+     * @param initialorderCode  the code of the order
+     */
+    public Order(int initialorderCode) {
 
-		orderCode = initialorderCode;
-		salesItems = new Vector<SalesItem>();
-	}
+        orderCode = initialorderCode;
+        salesItems = new Vector<SalesItem>();
+    }
 
-	public int getOrderCode(){
-		return orderCode;
-	}
+    public int getOrderCode(){
+        return orderCode;
+    }
 
-	/**
-	 * Returns the total of this Order
-	 * @return  the total of this Order.
-	 */
-	public double  getTotal () {
+    /**
+     * Returns the total of this Order
+     * @return  the total of this Order.
+     */
+    public double  getTotal () {
 
-		return  total;
-	}
+        return  total;
+    }
 
-	/*delete salesItem*/
-	public void deleteSalesItem(String code,SalesDatabase salesDatabase){
-		int count=0;
-		for (Iterator<SalesItem> i = getSalesItemIterator(); i.hasNext();){
+    /*delete salesItem*/
+    public void deleteSalesItem(String code,SalesDatabase salesDatabase){
+        Vector<SalesItem> delList = new Vector<>();
+        for (Iterator<SalesItem> i = getSalesItemIterator(); i.hasNext();){
 
-			SalesItem salesItem =(SalesItem) i.next();
+            SalesItem salesItem =(SalesItem) i.next();
 
-			if((salesItem.getProductItem().getCode()).equals(code)){
-				count = salesItem.getQuantity();
-				int value = salesDatabase.getQuantityToProductsLog().get(code);
-				value-=salesItem.getQuantity();
-				salesDatabase.getQuantityToProductsLog().put(code,value);
-				count--;
-				if(count==0){
-					value = salesDatabase.getOrdersNumToProductsLog().get(code);
-					value-=1;
-					salesDatabase.getOrdersNumToProductsLog().put(code,value);
-				}
-				i.remove();
-			}
-		}
+            if((salesItem.getProductItem().getCode()).equals(code)){
+                delList.add(salesItem);
+                int value = salesDatabase.getQuantityToProductsLog().get(code);
+                value-=salesItem.getQuantity();
+                salesDatabase.getQuantityToProductsLog().put(code,value);
+                value = salesDatabase.getOrdersNumToProductsLog().get(code);
+                value-=1;
+                salesDatabase.getOrdersNumToProductsLog().put(code,value);
+            }
+        }
+        salesItems.removeAll(delList);
 
-	}
+    }
 
 
-	/*add salesItem*/
-	public void addSalesItem(String code,int quantity,ProductDatabase productDatabase,SalesDatabase salesDatabase){
-		int count=0;
-		for(Iterator<ProductItem> i = productDatabase.getProductsIterator(); i.hasNext();){
+    /*add salesItem*/
+    public void addSalesItem(String code,int quantity,ProductDatabase productDatabase,SalesDatabase salesDatabase){
+        int count=0;
+        int value;
+        for(Iterator<ProductItem> i = productDatabase.getProductsIterator(); i.hasNext();){
 
-			ProductItem productItem = (ProductItem) i.next();
+            ProductItem productItem = (ProductItem) i.next();
 
-			if((productItem.getCode()).equals(code)){
-				SalesItem salesItem = new SalesItem(productItem,quantity);
-				int value = salesDatabase.getQuantityToProductsLog().get(code);
-				value+=salesItem.getQuantity();
-				salesDatabase.getQuantityToProductsLog().put(code,value);
-				if (count==0){
-					value = salesDatabase.getOrdersNumToProductsLog().get(code);
-					value+=1;
-					salesDatabase.getQuantityToProductsLog().put(code,value);
-				}
-				count++;
-				salesItems.add(salesItem);
-			}
-		}
-	}
-	/**
-	 * Returns the sales items iterator.
-	 *
-	 * @return  a {@link SalesItem} object.
-	 */
-	public Iterator<SalesItem> getSalesItemIterator() {
+            if((productItem.getCode()).equals(code)){
+                SalesItem salesItem = new SalesItem(productItem,quantity);
+                value = salesDatabase.getQuantityToProductsLog().get(code);
+                salesDatabase.getQuantityToProductsLog().put(code,value+quantity);
+                for(Iterator<SalesItem> k = getSalesItemIterator(); k.hasNext();){
+                    SalesItem salesItem1 = (SalesItem) k.next();
+                    if((salesItem1.getProductItem().getCode()).equals(code)){
+                        count++;
+                    }
+                }
+                if (count==0){
+                    value = salesDatabase.getOrdersNumToProductsLog().get(code);
+                    value+=1;
+                    salesDatabase.getQuantityToProductsLog().put(code,value);
+                }
+                salesItems.add(salesItem);
+                break;
+            }
+        }
+    }
+    /**
+     * Returns the sales items iterator.
+     *
+     * @return  a {@link SalesItem} object.
+     */
+    public Iterator<SalesItem> getSalesItemIterator() {
 
-		return  salesItems.iterator();
-	}
+        return  salesItems.iterator();
+    }
 
-	/**
-	 * Returns the string representation of this Order.
-	 *
-	 * @return  the string representation of this Order.
-	 */
-	public String toString() {
+    /**
+     * Returns the string representation of this Order.
+     *
+     * @return  the string representation of this Order.
+     */
+    public String toString() {
 
-		return Double.toString(getTotal());
-	}
+        return Double.toString(getTotal());
+    }
 }
