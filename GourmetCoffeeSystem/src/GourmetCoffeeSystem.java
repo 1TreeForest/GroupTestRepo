@@ -377,23 +377,21 @@ public class GourmetCoffeeSystem{
 	 * Display the total quantity sold for each products
 	 */
 	private void displayOrdersNumToProduct()throws IOException{
-		ProductItem item = readProductItem();
-		int number=0;
-		if (item==null) {
-			stdErr.println("There is no Order with that code of product");
-			return;
-		}else {
-			String codeOfPruduct = item.getCode();
-			HashMap<String,Integer> ordersNumToProduct = salesdatabase.getOrdersNumToProductsLog();
-			for (Map.Entry<String,Integer> ha : ordersNumToProduct.entrySet()){
-				if(ha.getKey()==codeOfPruduct){
-					stdOut.print(ha.getValue()+"  ");
-					number++;
-				}
-			}
-			System.out.println("The number of the orders of "+codeOfPruduct+" is "+number);
-		}
-	}
+        ProductItem item = readProductItem();
+        if (item==null) {
+            stdErr.println("There is no Order with that code of product");
+            return;
+        }else {
+            String codeOfPruduct = item.getCode();
+            HashMap<String,Integer> ordersNumToProduct = salesdatabase.getOrdersNumToProductsLog();
+            for (Map.Entry<String,Integer> ha : ordersNumToProduct.entrySet()){
+                if(ha.getKey()==codeOfPruduct){
+                    System.out.println("The number of the orders of "+codeOfPruduct+" is "+ha.getValue());
+                }
+            }
+
+        }
+    }
 
 	private  ProductItem readProductItem() throws IOException  {
 
