@@ -1,23 +1,12 @@
 # GroupTestRepo
 The GroupTestRepo during Java Course
 
-已对类图进行了大量修改，修改内容大致如下：
-1.修改了Product为ProductDatabase
-2.修改了ProductDatabase中错写为CatalogItem的项为ProductItem
-3.修改了橙色部分相关UML
+在线类图链接：https://www.processon.com/view/link/5eb38075e0b34d071248a462
 
-后续实现要求如下：
-1.所有产品均new出类并添加至ProductDatabase中的vector中
-2.在order操作中，要求使用findProduct在ProductDatabase使用产品code进行比对，比对成功则将该产品类传参new出新的salesItem
-3.每次在添加和删除salesItem和order时，需要对类图中SalesDatabase中的两个hashMap类型的值进行更改，分别对应ppt中8和9功能
-4.全员比对新的类图，检查变量名、方法名等
-
-分工如下：
-1.之前开发各色块的，将色块中代码根据UML类图完善，并在主类CoffeeSystem中实现对应功能，在主类CoffeeSystem中的main方法中使用if判断用户输入的菜单操作并执行自己负责的色块功能
-2.薛漠负责跟进CoffeeSystem中功能的实现
-3.江奕仍负责PPT的扩充，可协助开发橙色色块内容
-4.陈玲和宋婷婷将后续实现要求要求中的对应功能实现好
-5.张宇涵负责橙色色块，任务重大~~~~~~~
-6.王晨霖负责开发过程中所有问题的协调，可协助橙色色块的开发以及回答关于UML类图的问题、关于本文档的问题
-
-此要求已在readme中更新，可随时查看
+一阶段任务：完善类图，即完善类图中的属性、方法等内容，严格按照格式，具体模块分工如下
+【江】PlaneWarClient，Constant，Background
+【陈】Drawable，EnemyPlane，Explode
+【宋】Item，Missile，Moveable，MyFrame
+【薛】Plane，PlaneWarObject
+【张】GameUtil，ImageUtil，MusicUtil
+【王】解决javazoom包问题，进行部分测试，安排下一阶段任务
