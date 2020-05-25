@@ -12,7 +12,7 @@ import javazoom.jl.player.Player;
  */
 public class MusicUtil extends Thread {
 	private boolean loop;
-	private static String fileName;
+	private String fileName;
 	
 	public MusicUtil(String fileName,boolean loop) {
 		this.loop = loop;
@@ -47,7 +47,7 @@ public class MusicUtil extends Thread {
 	private void play(){
         Player p=null;
 		try {   
-            BufferedInputStream buffer = new BufferedInputStream(new FileInputStream("/src/com/neusoft/planewar/music/"+fileName+".mp3"));   
+            BufferedInputStream buffer = new BufferedInputStream(new FileInputStream("plane_war/src/com/neusoft/planewar/music/"+fileName+".mp3"));   
             p=new Player(buffer);
             p.play(); 
         } catch (Exception e) {   
