@@ -9,8 +9,6 @@ import java.net.URL;
 
 import javax.imageio.ImageIO;
 
-import javazoom.jl.player.Player;
-
 /**
  * 获取当前项目中各种资源
  * @author zzk

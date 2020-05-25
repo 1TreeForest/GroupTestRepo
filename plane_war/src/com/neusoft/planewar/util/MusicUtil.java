@@ -47,7 +47,7 @@ public class MusicUtil extends Thread {
 	private void play(){
         Player p=null;
 		try {   
-            BufferedInputStream buffer = new BufferedInputStream(new FileInputStream("src/com/neusoft/planewar/music/"+fileName+".mp3"));   
+            BufferedInputStream buffer = new BufferedInputStream(new FileInputStream("/src/com/neusoft/planewar/music/"+fileName+".mp3"));   
             p=new Player(buffer);
             p.play(); 
         } catch (Exception e) {   
