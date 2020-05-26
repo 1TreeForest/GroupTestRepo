@@ -12,18 +12,18 @@ import com.neusoft.planewar.util.ImageUtil;
 import com.neusoft.planewar.util.MusicUtil;
 
 public class EnemyPlane extends Plane {
-	public int type;// ÀàĞÍ
-	public int exp;// ¾­Ñé
+	public int type;// ç±»å‹
+	public int exp;// ç»éªŒ
 
 	/**
-	 * ÎŞ²Î¹¹Ôì
+	 * æ— å‚æ„é€ 
 	 */
 	public EnemyPlane() {
 		super();
 	}
 
 	/**
-	 * ´ø²Î¹¹Ôì
+	 * å¸¦å‚æ„é€ 
 	 */
 	public EnemyPlane(int x, int y, String imageName) {
 		super(x, y, imageName);
@@ -51,7 +51,7 @@ public class EnemyPlane extends Plane {
 	}
 
 	/**
-	 * ·¢×Óµ¯
+	 * å‘å­å¼¹
 	 */
 	@Override
 	public void fire() {
@@ -97,42 +97,42 @@ public class EnemyPlane extends Plane {
 	public void move() {
 		
 		switch (type) {
-		case 100:// Ë®Æ½Æ½ÒÆ
+		case 100:// æ°´å¹³å¹³ç§»
 			if (x >= (Constant.GAME_WIDTH) || x <= 0 - width) {
 				speed = -speed;
 			}
 			x += speed;
 			break;
-		case 1:// Ë®Æ½Æ½ÒÆ
+		case 1:// æ°´å¹³å¹³ç§»
 			x += speed * 3;
 			if (x >= (Constant.GAME_WIDTH - width)) {
 				speed = -speed;
 			}
 			break;
-		case 2:// ÊúÖ±Æ½ÒÆ
+		case 2:// ç«–ç›´å¹³ç§»
 			y += speed * 3;
 			break;
-		case 3:// ÕıÏÒÏß
+		case 3:// æ­£å¼¦çº¿
 			x = (int) (center.x - width + (center.x - width) * Math.sin(theta));
 			theta += speed / 10;
 			y += speed * 10;
 			break;
-		case 4:// ÓàÏÒÏß
+		case 4:// ä½™å¼¦çº¿
 			x = (int) (center.x - width + (center.x - width) * Math.cos(theta));
 			theta += speed / 10;
 			y += speed * 10;
 			break;
-		case 5:// Ë«ÇúÏß
+		case 5:// åŒæ›²çº¿
 			x = (int) (center.x - width + 50 * 1 / Math.cos(theta));
 			y = (int) (center.y - height + 50 * Math.sin(theta) / Math.cos(theta));
 			theta += speed / 20;
 			break;
-		case 6:// ĞÇĞÎÏß
+		case 6:// æ˜Ÿå½¢çº¿
 			x = (int) (center.x - width / 2 + 200 * Math.pow(Math.cos(theta), 3));
 			y = (int) (center.y + 200 * Math.pow(Math.sin(theta), 3)) - 200;
 			theta += speed / 20;
 			break;
-		case 7:// ĞÄĞÎÏß
+		case 7:// å¿ƒå½¢çº¿
 			x = (int) (center.x + r * (2 * Math.cos(theta + Math.PI / 2) + Math.cos(2 * theta + Math.PI / 2)));
 			y = (int) (center.y + r * (2 * Math.sin(theta + Math.PI / 2) + Math.sin(2 * theta + Math.PI / 2)));
 			theta += speed;
@@ -151,17 +151,19 @@ public class EnemyPlane extends Plane {
 
 	@Override
 	public void draw(Graphics g) {
+		
+		if(!Plane.flagPause) {
 
 		if (blood <= 0 && live) {
 			live = false;
 			pwc.myPlane.score += 100 * type;
-			// ±¬Õ¨
+			// çˆ†ç‚¸
 			Explode ex = new Explode(pwc, x, y);
 			ex.x += (width - ex.width) / 2;
 			ex.y += (height - ex.height) / 2;
 			pwc.explodes.add(ex);
 
-			// ²úÉúµÀ¾ß
+			// äº§ç”Ÿé“å…·
 			Item item = new Item(pwc, x, y);
 			item.x += (width - item.width) / 2;
 			item.y += height;
@@ -175,21 +177,22 @@ public class EnemyPlane extends Plane {
 		}
 		if (type == 100 && live) {
 			g.drawImage(img, x, y, null);
-			drawBlood(g);// »­ÑªÌõ
+			drawBlood(g);// ç”»è¡€æ¡
 		}
 		if (type != 100 && count[type - 1] >= 4 * type) {
 			count[type - 1] = 4 * (type - 1);
 		}
 		if (type != 100 && live) {
 			g.drawImage(images[count[type - 1]], x, y, null);
-			drawBlood(g);// »­ÑªÌõ
+			drawBlood(g);// ç”»è¡€æ¡
 			count[type - 1]++;
 		}
 		move();
 	}
+	}
 
 	/**
-	 * »­ÑªÌõ
+	 * ç”»è¡€æ¡
 	 * 
 	 * @param g
 	 */
