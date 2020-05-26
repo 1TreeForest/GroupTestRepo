@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.io.*;
 
 import com.neusoft.planewar.client.PlaneWarClient;
 import com.neusoft.planewar.constant.Constant;
@@ -12,16 +13,17 @@ import com.neusoft.planewar.util.ImageUtil;
 import com.neusoft.planewar.util.MusicUtil;
 
 public class Plane extends PlaneWarObject {
-	public double speed = 10;// 速度
+	public double speed = 10;// 閫熷害
 	public boolean left, up, right, down;
-	public int blood;// 血量
-	public int level;// 等级
-	public int type;// 等级
-	public int score = 0;// 积分
+	public int blood;// 琛�閲�
+	public int level;// 绛夌骇
+	public int type;// 绛夌骇
+	public int score = 0;// 绉垎
 	public static boolean flagPause=false;
+	public int topscore=getTopscore();	//历史最高分，通过读取文件获得
 
 	/**
-	 * 无参构造
+	 * 鏃犲弬鏋勯��
 	 */
 	public Plane() {
 		super();
@@ -42,7 +44,7 @@ public class Plane extends PlaneWarObject {
 	}
 
 	/**
-	 * 带参构造
+	 * 甯﹀弬鏋勯��
 	 */
 
 	public Plane(int x, int y, Image img, int width, int height) {
@@ -73,7 +75,7 @@ public class Plane extends PlaneWarObject {
 	}
 
 	/**
-	 * 判断我方飞机出界问题
+	 * 鍒ゆ柇鎴戞柟椋炴満鍑虹晫闂
 	 */
 	private void outOfBounds() {
 		if (x <= 0-width/2)
@@ -87,12 +89,12 @@ public class Plane extends PlaneWarObject {
 	}
 
 	/**
-	 * 是否开火
+	 * 鏄惁寮�鐏�
 	 */
 	public boolean fire;
 
 	/**
-	 * 我方飞机发子弹的方法
+	 * 鎴戞柟椋炴満鍙戝瓙寮圭殑鏂规硶
 	 */
 	public void fire() {
 		// pwc.musics.add(mu);
@@ -106,7 +108,7 @@ public class Plane extends PlaneWarObject {
 	boolean superFire;
 
 	/**
-	 * 超级子弹
+	 * 瓒呯骇瀛愬脊
 	 */
 	public void superFire() {
 		if (superFireCount > 0) {
@@ -127,7 +129,7 @@ public class Plane extends PlaneWarObject {
 	}
 
 	/**
-	 * 判断是否存活
+	 * 鍒ゆ柇鏄惁瀛樻椿
 	 */
 	public boolean live = true;
 
@@ -177,7 +179,7 @@ public class Plane extends PlaneWarObject {
 	}
 
 	/**
-	 * 画血条和积分
+	 * 鐢昏鏉″拰绉垎
 	 * 
 	 * @param g
 	 */
@@ -185,6 +187,7 @@ public class Plane extends PlaneWarObject {
 		Image bloodImg = ImageUtil.images.get("myBlood");
 		Image blood_blank = ImageUtil.images.get("myBlood_blank");
 		Image scoreImg = ImageUtil.images.get("score");
+		Image topscoreImg = ImageUtil.images.get("topscore");
 		int i = 0;
 		g.drawImage(bloodImg, 10, 40, null);
 		int num = (int) (((double) ((bloodImg.getWidth(null)) - 56) / (Constant.MYPLANE_MAX_BOOLD))
@@ -198,15 +201,20 @@ public class Plane extends PlaneWarObject {
 		g.setFont(new Font("微软雅黑", Font.BOLD, 40));
 		g.setColor(Color.WHITE);
 		g.drawString(score + "", 10 + scoreImg.getWidth(null) + 10, 40 + bloodImg.getHeight(null) + 50);
+		//画最高积分
+		g.drawImage(ImageUtil.images.get("topscore"), bloodImg.getWidth(null)+30, topscoreImg.getHeight(null), null);
+		g.setFont(new Font("微软雅黑", Font.BOLD, 30));
+		g.setColor(Color.BLUE);
+		g.drawString(getTopscore()+ "", scoreImg.getWidth(null) + 150, topscoreImg.getHeight(null)+75);
 	}
 
 	/**
-	 * 大招剩余次数
+	 * 澶ф嫑鍓╀綑娆℃暟
 	 */
 	public int superFireCount = 0;
 
 	/**
-	 * 按下键盘的方法
+	 * 鎸変笅閿洏鐨勬柟娉�
 	 * 
 	 * @param e
 	 */
@@ -224,11 +232,11 @@ public class Plane extends PlaneWarObject {
 		case KeyEvent.VK_W:
 			up = true;
 			break;
-		case KeyEvent.VK_J:// 发子弹
+		case KeyEvent.VK_J:// 鍙戝瓙寮�
 			superFire = false;
 			fire = true;
 			break;
-		case KeyEvent.VK_SPACE:// 发超级子弹
+		case KeyEvent.VK_SPACE:// 鍙戣秴绾у瓙寮�
 			fire = false;
 			superFire = true;
 			break;
@@ -245,10 +253,10 @@ public class Plane extends PlaneWarObject {
 	}
 
 	/**
-	 * 松开键盘的方法
+	 * 鏉惧紑閿洏鐨勬柟娉�
 	 * 
 	 * @param e
-	 *            键盘事件
+	 *            閿洏浜嬩欢
 	 */
 	public void keyReleased(KeyEvent e) {
 		switch (e.getKeyCode()) {
@@ -264,9 +272,91 @@ public class Plane extends PlaneWarObject {
 		case KeyEvent.VK_W:
 			up = false;
 			break;
-		case KeyEvent.VK_J:// 发子弹
+		case KeyEvent.VK_J:// 鍙戝瓙寮�
 			fire = false;
 			break;
+		}
+	}
+	/**
+	 * 从文件中读取最高分
+	 * @return
+	 */
+	public int getTopscore(){
+		int top=readFile();
+		return top;
+	}
+
+	/**
+	 * 更改最高分
+	 */
+	public void writeTopscore(){
+		if(score>topscore){
+			writeFile();
+		}
+	}
+
+	/**
+	 * 读取文件内容操作
+	 * @return
+	 */
+	public int readFile(){
+		File file = new File("TopScore.txt");
+		//如果文件不存在，文件输出流会自动创建文件
+		if (!file.exists()) {
+			try {
+				file.createNewFile();
+				String a = String.valueOf(0);
+				BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file)));
+				bw.write(a);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		//读取文件
+		int topscorenow=0;
+		try {
+			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+			String topscorenow1 =br.readLine();
+			if(topscorenow1!=null) {
+				topscorenow = Integer.parseInt(topscorenow1);
+			}
+			br.close();
+
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return topscorenow;
+	}
+	public void writeFile(){
+		File file = new File("TopScore.txt");
+		//如果文件不存在，文件输出流会自动创建文件
+		if (!file.exists()) {
+			try {
+				file.createNewFile();
+                String a = String.valueOf(0);
+				BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file)));
+				bw.write(a);//向文件写入初始最高分
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		//写文件
+		try {
+            String a = String.valueOf(score);
+			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file)));
+			bw.write(a);//向文件写入最高分
+			bw.close();//关闭流
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 }
