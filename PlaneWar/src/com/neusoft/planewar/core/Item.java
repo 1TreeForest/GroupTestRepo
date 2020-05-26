@@ -49,6 +49,7 @@ public class Item extends PlaneWarObject {
 	private int preType;
 	@Override
 	public void draw(Graphics g) {
+		if(!Plane.flagPause) {
 		if (live) {
 			if (num <= 2) {
 				type = 1;
@@ -75,7 +76,7 @@ public class Item extends PlaneWarObject {
 			move();
 			outOfBounds();
 		} else {
-			// Ð§¹û
+			// æ•ˆæžœ
 			generateEffect(g);
 			long end = System.currentTimeMillis();
 			if(end-effectStart>=50&&end-effectStart<100)
@@ -85,20 +86,21 @@ public class Item extends PlaneWarObject {
 			}
 		}
 	}
+	}
 	boolean flag = false;
 	private void generateEffect(Graphics g) {
 		switch (type) {
-		case 1://Éý¼¶
+		case 1://å‡çº§
 			if(myPlane.level<3&&preLevel==myPlane.level){
 				myPlane.level+=1;
 			}
 			break;
-		case 2://»»×Óµ¯
+		case 2://æ¢å­å¼¹
 			if(myPlane.type==preType&&type<=3){
 				myPlane.type= new Random().nextInt(3)+1;
 			}
 			break;
-		case 3:// ¼ÓÑª
+		case 3:// åŠ è¡€
 			if (myPlane.blood >= (Constant.MYPLANE_MAX_BOOLD - 20)) {
 				myPlane.blood = Constant.MYPLANE_MAX_BOOLD;
 			} else {
@@ -106,19 +108,19 @@ public class Item extends PlaneWarObject {
 				preBlood+=20;
 			}
 			break;
-		case 4:// ·À»¤ÕÖ
+		case 4:// é˜²æŠ¤ç½©
 			Image img = ImageUtil.images.get("effect_0" + (type));
 			g.drawImage(img, myPlane.x + (myPlane.width - img.getWidth(null)) / 2,
 					myPlane.y + (myPlane.height - img.getHeight(null)) / 2, null);
 			myPlane.blood=preBlood;
 			break;
-		case 5://ÐÇÐÇ¼Ó»ý·Ö
+		case 5://æ˜Ÿæ˜ŸåŠ ç§¯åˆ†
 			if(preScore==myPlane.score){
 				myPlane.score+=200;
 			}
 			break;
-		case 6://¸ø´óÕÐ
-			if(flag){//Èç¹ûÃ»ÓÐ³ÔµÀ¾ß
+		case 6://ç»™å¤§æ‹›
+			if(flag){//å¦‚æžœæ²¡æœ‰åƒé“å…·
 				myPlane.superFireCount++;
 			}
 			flag=false;
@@ -128,7 +130,7 @@ public class Item extends PlaneWarObject {
 
 	long time=0;
 	/**
-	 * µÀ¾ßÓöµ½ÎÒ·½·É»úµÄ·½·¨
+	 * é“å…·é‡åˆ°æˆ‘æ–¹é£žæœºçš„æ–¹æ³•
 	 */
 	public boolean hitMyPlane(Plane p) {
 		if (this.getRectangle().intersects(p.getRectangle()) && p.live) {
@@ -140,7 +142,7 @@ public class Item extends PlaneWarObject {
 	}
 
 	/**
-	 * µÀ¾ß±ß½ç´¦Àí
+	 * é“å…·è¾¹ç•Œå¤„ç†
 	 */
 	private void outOfBounds() {
 		if ((x >= (Constant.GAME_WIDTH - width) || x <= 0) || (y >= (Constant.GAME_HEIGHT - height) || y <= 0)) {
