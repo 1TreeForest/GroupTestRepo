@@ -12,15 +12,15 @@ import com.neusoft.planewar.util.ImageUtil;
 import com.neusoft.planewar.util.MusicUtil;
 
 public class Plane extends PlaneWarObject {
-	public double speed = 10;// ËÙ¶È
+	public double speed = 10;// é€Ÿåº¦
 	public boolean left, up, right, down;
-	public int blood;// ÑªÁ¿
-	public int level;// µÈ¼¶
-	public int type;// µÈ¼¶
-	public int score = 0;// »ı·Ö
+	public int blood;// è¡€é‡
+	public int level;// ç­‰çº§
+	public int type;// ç­‰çº§
+	public int score = 0;// ç§¯åˆ†
 
 	/**
-	 * ÎŞ²Î¹¹Ôì
+	 * æ— å‚æ„é€ 
 	 */
 	public Plane() {
 		super();
@@ -41,7 +41,7 @@ public class Plane extends PlaneWarObject {
 	}
 
 	/**
-	 * ´ø²Î¹¹Ôì
+	 * å¸¦å‚æ„é€ 
 	 */
 
 	public Plane(int x, int y, Image img, int width, int height) {
@@ -72,7 +72,7 @@ public class Plane extends PlaneWarObject {
 	}
 
 	/**
-	 * ÅĞ¶ÏÎÒ·½·É»ú³ö½çÎÊÌâ
+	 * åˆ¤æ–­æˆ‘æ–¹é£æœºå‡ºç•Œé—®é¢˜
 	 */
 	private void outOfBounds() {
 		if (x <= 0-width/2)
@@ -86,12 +86,12 @@ public class Plane extends PlaneWarObject {
 	}
 
 	/**
-	 * ÊÇ·ñ¿ª»ğ
+	 * æ˜¯å¦å¼€ç«
 	 */
 	public boolean fire;
 
 	/**
-	 * ÎÒ·½·É»ú·¢×Óµ¯µÄ·½·¨
+	 * æˆ‘æ–¹é£æœºå‘å­å¼¹çš„æ–¹æ³•
 	 */
 	public void fire() {
 		// pwc.musics.add(mu);
@@ -105,7 +105,7 @@ public class Plane extends PlaneWarObject {
 	boolean superFire;
 
 	/**
-	 * ³¬¼¶×Óµ¯
+	 * è¶…çº§å­å¼¹
 	 */
 	public void superFire() {
 		if (superFireCount > 0) {
@@ -126,12 +126,13 @@ public class Plane extends PlaneWarObject {
 	}
 
 	/**
-	 * ÅĞ¶ÏÊÇ·ñ´æ»î
+	 * åˆ¤æ–­æ˜¯å¦å­˜æ´»
 	 */
 	public boolean live = true;
 
 	@Override
 	public void move() {
+		if(!Plane.flagPause) {
 		if (left) {
 			x -= speed;
 		}
@@ -149,6 +150,7 @@ public class Plane extends PlaneWarObject {
 			fire();
 		if (superFire)
 			superFire();
+	}
 	}
 
 	@Override
@@ -174,7 +176,7 @@ public class Plane extends PlaneWarObject {
 	}
 
 	/**
-	 * »­ÑªÌõºÍ»ı·Ö
+	 * ç”»è¡€æ¡å’Œç§¯åˆ†
 	 * 
 	 * @param g
 	 */
@@ -190,20 +192,20 @@ public class Plane extends PlaneWarObject {
 			g.drawImage(blood_blank, 10 + bloodImg.getWidth(null) - blood_blank.getWidth(null) * (j + 1), 40 + 14,
 					null);
 		}
-		// »­»ı·Ö
+		// ç”»ç§¯åˆ†
 		g.drawImage(ImageUtil.images.get("score"), 10, 40 + bloodImg.getHeight(null) + 12, null);
-		g.setFont(new Font("Î¢ÈíÑÅºÚ", Font.BOLD, 40));
+		g.setFont(new Font("å¾®è½¯é›…é»‘", Font.BOLD, 40));
 		g.setColor(Color.WHITE);
 		g.drawString(score + "", 10 + scoreImg.getWidth(null) + 10, 40 + bloodImg.getHeight(null) + 50);
 	}
 
 	/**
-	 * ´óÕĞÊ£Óà´ÎÊı
+	 * å¤§æ‹›å‰©ä½™æ¬¡æ•°
 	 */
 	public int superFireCount = 0;
 
 	/**
-	 * °´ÏÂ¼üÅÌµÄ·½·¨
+	 * æŒ‰ä¸‹é”®ç›˜çš„æ–¹æ³•
 	 * 
 	 * @param e
 	 */
@@ -221,11 +223,11 @@ public class Plane extends PlaneWarObject {
 		case KeyEvent.VK_W:
 			up = true;
 			break;
-		case KeyEvent.VK_J:// ·¢×Óµ¯
+		case KeyEvent.VK_J:// å‘å­å¼¹
 			superFire = false;
 			fire = true;
 			break;
-		case KeyEvent.VK_SPACE:// ·¢³¬¼¶×Óµ¯
+		case KeyEvent.VK_SPACE:// å‘è¶…çº§å­å¼¹
 			fire = false;
 			superFire = true;
 			break;
@@ -233,10 +235,10 @@ public class Plane extends PlaneWarObject {
 	}
 
 	/**
-	 * ËÉ¿ª¼üÅÌµÄ·½·¨
+	 * æ¾å¼€é”®ç›˜çš„æ–¹æ³•
 	 * 
 	 * @param e
-	 *            ¼üÅÌÊÂ¼ş
+	 *            é”®ç›˜äº‹ä»¶
 	 */
 	public void keyReleased(KeyEvent e) {
 		switch (e.getKeyCode()) {
@@ -252,7 +254,7 @@ public class Plane extends PlaneWarObject {
 		case KeyEvent.VK_W:
 			up = false;
 			break;
-		case KeyEvent.VK_J:// ·¢×Óµ¯
+		case KeyEvent.VK_J:// å‘å­å¼¹
 			fire = false;
 			break;
 		}
