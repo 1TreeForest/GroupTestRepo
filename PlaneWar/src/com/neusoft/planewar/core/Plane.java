@@ -18,6 +18,7 @@ public class Plane extends PlaneWarObject {
 	public int level;// 等级
 	public int type;// 等级
 	public int score = 0;// 积分
+	public static boolean flagPause=false;
 
 	/**
 	 * 无参构造
@@ -230,6 +231,15 @@ public class Plane extends PlaneWarObject {
 		case KeyEvent.VK_SPACE:// 发超级子弹
 			fire = false;
 			superFire = true;
+			break;
+		case KeyEvent.VK_L:
+			if(!flagPause) {
+				
+			flagPause =true;
+			}else {
+				
+				flagPause=false;
+			}
 			break;
 		}
 	}
