@@ -57,6 +57,8 @@ public class ImageUtil {
 		images.put("myBlood", GameUtil.getImage(Constant.IMG_PRE + "blood/myBlood.png"));
 		// 积分
 		images.put("score", GameUtil.getImage(Constant.IMG_PRE + "score/score.png"));
+		//最高积分
+		images.put("topscore", GameUtil.getImage(Constant.IMG_PRE + "score/topscore.png"));
 		// 警告
 		images.put("warning", GameUtil.getImage(Constant.IMG_PRE + "warning.png"));
 		images.put("success", GameUtil.getImage(Constant.IMG_PRE + "success.png"));
