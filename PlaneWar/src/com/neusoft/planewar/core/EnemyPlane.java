@@ -97,42 +97,41 @@ public class EnemyPlane extends Plane {
 	public void move() {
 		
 		switch (type) {
-		case 100:// 姘村钩骞崇Щ
+		case 100:// 水平平移
 			if (x >= (Constant.GAME_WIDTH) || x <= 0 - width) {
 				speed = -speed;
 			}
 			x += speed;
 			break;
-		case 1:// 姘村钩骞崇Щ
-			x += speed * 3;
-			if (x >= (Constant.GAME_WIDTH - width)) {
-				speed = -speed;
-			}
+		case 1:// 竖直平移
+			y += speed * 5;
 			break;
-		case 2:// 绔栫洿骞崇Щ
-			y += speed * 3;
-			break;
-		case 3:// 姝ｅ鸡绾�
+		case 2:// 圆圈
+			x=(int) (center.x+2*r*Math.cos(theta+Math.PI/2));
+			y=(int) (center.y+2*r*Math.sin(theta+Math.PI/2));
+		        theta+=speed/10;
+		        break;
+		case 3:// 正弦线
 			x = (int) (center.x - width + (center.x - width) * Math.sin(theta));
 			theta += speed / 10;
 			y += speed * 10;
 			break;
-		case 4:// 浣欏鸡绾�
+		case 4:// 余弦线
 			x = (int) (center.x - width + (center.x - width) * Math.cos(theta));
 			theta += speed / 10;
 			y += speed * 10;
 			break;
-		case 5:// 鍙屾洸绾�
+		case 5:// 双曲线
 			x = (int) (center.x - width + 50 * 1 / Math.cos(theta));
 			y = (int) (center.y - height + 50 * Math.sin(theta) / Math.cos(theta));
 			theta += speed / 20;
 			break;
-		case 6:// 鏄熷舰绾�
+		case 6:// 星形线
 			x = (int) (center.x - width / 2 + 200 * Math.pow(Math.cos(theta), 3));
 			y = (int) (center.y + 200 * Math.pow(Math.sin(theta), 3)) - 200;
 			theta += speed / 20;
 			break;
-		case 7:// 蹇冨舰绾�
+		case 7:// 心形线
 			x = (int) (center.x + r * (2 * Math.cos(theta + Math.PI / 2) + Math.cos(2 * theta + Math.PI / 2)));
 			y = (int) (center.y + r * (2 * Math.sin(theta + Math.PI / 2) + Math.sin(2 * theta + Math.PI / 2)));
 			theta += speed;
