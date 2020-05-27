@@ -207,19 +207,14 @@ public class Plane extends PlaneWarObject {
 		g.setColor(Color.BLUE);
 		g.drawString(getTopscore()+ "", scoreImg.getWidth(null) + 150, topscoreImg.getHeight(null)+75);
 		
-<<<<<<< HEAD
-=======
-		
->>>>>>> 819a3939811a30b4d1e4888f74c4733f63d07b01
+
+
 		if(flagPause) {
 			g.setFont(new Font("微软雅黑",Font.BOLD,80));
 			g.setColor(Color.RED);
 			g.drawString("游戏暂停", 100, 400);
-<<<<<<< HEAD
-		}
-=======
+
 		}//游戏暂停
->>>>>>> 819a3939811a30b4d1e4888f74c4733f63d07b01
 	}
 
 	/**
