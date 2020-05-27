@@ -5,6 +5,16 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Random;
 import java.util.Timer;
@@ -31,7 +41,7 @@ public class PlaneWarClient extends MyFrame {
 	public List<Missile> missiles = new CopyOnWriteArrayList<>();
 	public List<Item> items = new CopyOnWriteArrayList<>();
 	public List<MusicUtil> musics = new CopyOnWriteArrayList<>();
-
+	public long explodeTime;//最后一次爆炸的时间
 
 	public Random random = new Random();
 
@@ -53,16 +63,21 @@ public class PlaneWarClient extends MyFrame {
 		PlaneWarClient pwc = this;
 		new Thread() {
 			@Override
-			public void run() {
+			public void run() {   
+				pwc.explodeTime = System.currentTimeMillis();
+				long currentTime = System.currentTimeMillis();//当前时间
+				EnemyPlane boss = new EnemyPlane(pwc, 1, 100, 100, false);
+				boss.live = false;
+				
 				while (true) {
 					int r = random.nextInt(6);
 					EnemyPlane enemyPlane = null;
 					switch (r) {
-					case 1:
+					case 0:
 						enemyPlane = new EnemyPlane(pwc, (int) (-400 + 100 * Math.random() * 6), 300, 1, false);
 						enemyPlanes.add(enemyPlane);
 						break;
-					case 2:
+					case 1:
 						enemyPlane = new EnemyPlane(pwc, (int) (50 + 80 * Math.random() * 6), -100, 2, false);
 						enemyPlanes.add(enemyPlane);
 						break;
@@ -76,16 +91,21 @@ public class PlaneWarClient extends MyFrame {
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-					
-					while((myPlane.score)%((myPlane.level)*1000)==0 && (myPlane.score>0)) {
+	
+					currentTime = System.currentTimeMillis();
+					/**
+					 * 当前时间和最后一次爆炸的时间相差十五秒且上一个boss已经没了，就实例化一个新boss
+					 */
+					while((currentTime-explodeTime)>=15000 && (boss.live == false)) {
 						enemyPlane = new EnemyPlane(pwc, 1, 100, 100, false);
 						enemyPlanes.add(enemyPlane);
+						boss = enemyPlane;
 						try {
 							Thread.sleep(30000);
 						} catch (InterruptedException e1) {
 							e1.printStackTrace();
 						}
-					}
+					}					
 				}
 			}
 		}.start();
@@ -135,7 +155,7 @@ public class PlaneWarClient extends MyFrame {
 		}
 
 	}
-
+	
 	public static void main(String[] args) {
 		PlaneWarClient c = new PlaneWarClient();
 		c.launchFrame();
