@@ -107,9 +107,9 @@ public class EnemyPlane extends Plane {
 			y += speed * 5;
 			break;
 		case 2:// 圆圈
-			x=(int) (center.x+2*r*Math.cos(theta+Math.PI/2));
-			y=(int) (center.y+2*r*Math.sin(theta+Math.PI/2));
-		        theta+=speed/10;
+			x=(int) (center.x+2*r*Math.cos(theta));
+			y=(int) (center.y+2*r*Math.sin(theta));
+		        theta+=speed/20;
 		        break;
 		case 3:// 正弦线
 			x = (int) (center.x - width + (center.x - width) * Math.sin(theta));
