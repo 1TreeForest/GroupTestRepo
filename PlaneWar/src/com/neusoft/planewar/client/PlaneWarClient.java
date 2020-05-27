@@ -38,7 +38,7 @@ public class PlaneWarClient extends MyFrame {
 	@Override
 	public void launchFrame() {
 		super.launchFrame();
-		// Ìí¼Ó¼üÅÌ¼àÌýÆ÷
+		// ï¿½ï¿½Ó¼ï¿½ï¿½Ì¼ï¿½ï¿½ï¿½ï¿½ï¿½
 		addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -55,18 +55,9 @@ public class PlaneWarClient extends MyFrame {
 			@Override
 			public void run() {
 				while (true) {
-					int r = random.nextInt(7);
+					int r = random.nextInt(6);
 					EnemyPlane enemyPlane = null;
 					switch (r) {
-					case 0://boss
-						enemyPlane = new EnemyPlane(pwc, 1, 100, 100, false);
-						enemyPlanes.add(enemyPlane);
-						try {
-							Thread.sleep(30000);
-						} catch (InterruptedException e1) {
-							e1.printStackTrace();
-						}
-						break;
 					case 1:
 						enemyPlane = new EnemyPlane(pwc, (int) (-400 + 100 * Math.random() * 6), 300, 1, false);
 						enemyPlanes.add(enemyPlane);
@@ -84,6 +75,16 @@ public class PlaneWarClient extends MyFrame {
 						Thread.sleep(3000);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
+					}
+					
+					while((myPlane.score)%((myPlane.level)*1000)==0 && (myPlane.score>0)) {
+						enemyPlane = new EnemyPlane(pwc, 1, 100, 100, false);
+						enemyPlanes.add(enemyPlane);
+						try {
+							Thread.sleep(30000);
+						} catch (InterruptedException e1) {
+							e1.printStackTrace();
+						}
 					}
 				}
 			}
