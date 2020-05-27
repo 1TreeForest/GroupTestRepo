@@ -107,9 +107,9 @@ public class EnemyPlane extends Plane {
 			y += speed * 5;
 			break;
 		case 2:// 圆圈
-			x=(int) (center.x+2*r*Math.cos(theta+Math.PI/2));
-			y=(int) (center.y+2*r*Math.sin(theta+Math.PI/2));
-		        theta+=speed/10;
+			x=(int) (center.x+2*r*Math.cos(theta));
+			y=(int) (center.y+2*r*Math.sin(theta));
+		        theta+=speed/20;
 		        break;
 		case 3:// 正弦线
 			x = (int) (center.x - width + (center.x - width) * Math.sin(theta));
@@ -158,6 +158,12 @@ public class EnemyPlane extends Plane {
 			pwc.myPlane.score += 100 * type;
 			//最高分更新
 			pwc.myPlane.writeTopscore();
+			/**
+			 * boss死了就更新最后一次爆炸时间
+			 */
+			if(type == 100) {
+				pwc.explodeTime = System.currentTimeMillis();
+			}
 			// 鐖嗙偢
 			Explode ex = new Explode(pwc, x, y);
 			ex.x += (width - ex.width) / 2;
