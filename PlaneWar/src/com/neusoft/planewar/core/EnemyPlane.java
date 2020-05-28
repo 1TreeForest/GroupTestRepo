@@ -103,10 +103,10 @@ public class EnemyPlane extends Plane {
 			}
 			x += speed;
 			break;
-		case 1:// 水平平移
+		case 1:// 竖直平移
 			y += speed * 5;
 			break;
-		case 2:// 竖直平移
+		case 2:// 圆圈
 			x=(int) (center.x+2*r*Math.cos(theta));
 			y=(int) (center.y+2*r*Math.sin(theta));
 		        theta+=speed/20;
