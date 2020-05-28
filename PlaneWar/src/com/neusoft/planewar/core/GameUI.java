@@ -20,7 +20,7 @@ public class GameUI extends JFrame implements ActionListener {
 	
 	public GameUI(String name){   
 		super(name);
-		JLabel imgLabel = new JLabel(new ImageIcon("4.png"));//将图片放在标签里。
+		JLabel imgLabel = new JLabel(new ImageIcon("background.png"));//将图片放在标签里。
 		this.getLayeredPane().add(imgLabel, new Integer(Integer.MIN_VALUE));//将背景标签添加到JFrame的LayeredPane面板里（分层）
 		imgLabel.setBounds(0,0,1000, 700);//设置背景标签的位置
 		imagePanel = (JPanel)this.getContentPane();//将Frame的内容窗格放到Panel上
