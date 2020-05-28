@@ -212,9 +212,9 @@ public class Plane extends PlaneWarObject {
 		if(flagPause) {
 			g.setFont(new Font("微软雅黑",Font.BOLD,80));
 			g.setColor(Color.RED);
-			g.drawString("娓告垙鏆傚仠", 100, 400);
+			g.drawString("游戏暂停", 100, 400);
 
-		}//娓告垙鏆傚仠
+		}//游戏暂停
 	}
 
 	/**
