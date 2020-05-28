@@ -1,3 +1,5 @@
+package com.neusoft.planewar.core;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
