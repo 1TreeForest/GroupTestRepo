@@ -2,19 +2,19 @@ package com.neusoft.planewar.constant;
 
 public class Constant {
 	/**
-	 * ´°¿Ú¿í¶È
+	 * çª—å£å®½åº¦
 	 */
 	public static final int GAME_WIDTH = 512;
 	/**
-	 * ´°¿Ú¸ß¶È
+	 * çª—å£é«˜åº¦
 	 */
 	public static final int GAME_HEIGHT = 768;
 	/**
-	 * Í¼Æ¬Â·¾¶Ç°×º
+	 * å›¾ç‰‡è·¯å¾„å‰ç¼€
 	 */
 	public static final String IMG_PRE="com/neusoft/planewar/img/";
 	/*
-	 *ÑªÁ¿
+	 *è¡€é‡
 	 */
 	public static final int MYPLANE_MAX_BOOLD=300;
 	public static final int ENEMYPLANE_MAX_BOOLD=500;

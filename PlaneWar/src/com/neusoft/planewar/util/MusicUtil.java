@@ -6,7 +6,7 @@ import java.net.URL;
 
 import javazoom.jl.player.Player;
 /**
- * ÒôÀÖ²¥·ÅÀà
+ * éŸ³ä¹æ’­æ”¾ç±»
  * @author zzk
  *
  */
@@ -23,7 +23,7 @@ public class MusicUtil extends Thread {
 		this.fileName = fileName;
 	}
 	/**
-	 * ¸ù¾İÊÇ·ñÑ­»·²¥·ÅÒôÀÖ
+	 * æ ¹æ®æ˜¯å¦å¾ªç¯æ’­æ”¾éŸ³ä¹
 	 */
 	@Override
 	public void run() {
@@ -40,7 +40,7 @@ public class MusicUtil extends Thread {
 		}
 	}
 	/**
-	 * ¸ù¾İÒôÀÖµÄÏà¶ÔÂ·¾¶»ñÈ¡ÒôÀÖ(mp3)
+	 * æ ¹æ®éŸ³ä¹çš„ç›¸å¯¹è·¯å¾„è·å–éŸ³ä¹(mp3)
 	 * @param fileName
 	 * @return
 	 */

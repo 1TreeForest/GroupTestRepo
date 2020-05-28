@@ -1,5 +1,6 @@
 eclipse.preferences.version=1
 encoding//src/com/neusoft/planewar/client/PlaneWarClient.java=UTF-8
+encoding//src/com/neusoft/planewar/constant/Constant.java=UTF-8
 encoding//src/com/neusoft/planewar/core/Background.java=UTF-8
 encoding//src/com/neusoft/planewar/core/Drawable.java=UTF-8
 encoding//src/com/neusoft/planewar/core/EnemyPlane.java=UTF-8
@@ -12,3 +13,6 @@ encoding//src/com/neusoft/planewar/core/MyFrame.java=UTF-8
 encoding//src/com/neusoft/planewar/core/Plane.java=UTF-8
 encoding//src/com/neusoft/planewar/core/PlaneWarObject.java=UTF-8
 encoding//src/com/neusoft/planewar/core/RuleFrame.java=UTF-8
+encoding//src/com/neusoft/planewar/util/GameUtil.java=UTF-8
+encoding//src/com/neusoft/planewar/util/ImageUtil.java=UTF-8
+encoding//src/com/neusoft/planewar/util/MusicUtil.java=UTF-8
