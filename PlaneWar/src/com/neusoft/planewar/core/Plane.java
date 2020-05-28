@@ -206,6 +206,10 @@ public class Plane extends PlaneWarObject {
 		g.setFont(new Font("微软雅黑", Font.BOLD, 30));
 		g.setColor(Color.BLUE);
 		g.drawString(getTopscore()+ "", scoreImg.getWidth(null) + 150, topscoreImg.getHeight(null)+75);
+		//画暂停提示
+		g.setFont(new Font("微软雅黑",Font.BOLD,20));
+		g.setColor(Color.WHITE);
+		g.drawString("按P键暂停", 400, 110);
 		
 
 
@@ -249,7 +253,7 @@ public class Plane extends PlaneWarObject {
 			fire = false;
 			superFire = true;
 			break;
-		case KeyEvent.VK_L:
+		case KeyEvent.VK_P:
 			if(!flagPause) {
 				
 			flagPause =true;
