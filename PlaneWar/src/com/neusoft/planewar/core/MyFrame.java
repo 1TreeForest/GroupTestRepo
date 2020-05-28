@@ -12,37 +12,37 @@ import com.neusoft.planewar.constant.Constant;
 import com.neusoft.planewar.util.ImageUtil;
 
 /**
- * ÓÎÏ·ÖĞ×Ô¶¨Òå´°¿ÚµÄ¸¸Àà ÉèÖÃÒ»´Î£¬ÖÕÉíÊ¹ÓÃ
+ * æ¸¸æˆä¸­è‡ªå®šä¹‰çª—å£çš„çˆ¶ç±» è®¾ç½®ä¸€æ¬¡ï¼Œç»ˆèº«ä½¿ç”¨
  * 
  * @author zzk
  *
  */
 public class MyFrame extends Frame {
 	/**
-	 * ×Ô¶¨ÒåÉú³É´°¿ÚµÄ·½·¨
+	 * è‡ªå®šä¹‰ç”Ÿæˆçª—å£çš„æ–¹æ³•
 	 * 
 	 * @throws InterruptedException
 	 */
 	public void launchFrame() {
-		// ÉèÖÃ´°¿Ú´óĞ¡
+		// è®¾ç½®çª—å£å¤§å°
 		setSize(Constant.GAME_WIDTH, Constant.GAME_HEIGHT);
-		// ÉèÖÃ´°¿ÚÎ»ÖÃ
+		// è®¾ç½®çª—å£ä½ç½®
 		// setLocation(0, 0);
-		setLocationRelativeTo(null);// Ïà¶Ô¾ÓÖĞ£¬´«Èënull£¬Ïà¶ÔÓÚÏÔÊ¾Æ÷ÆÁÄ»
-		// ÉèÖÃ´°¿Ú±êÌâ
-		setTitle("·É»ú´óÕ½(ÎŞ¾¡°æ)");
-		// ÉèÖÃ¿É¼û
+		setLocationRelativeTo(null);// ç›¸å¯¹å±…ä¸­ï¼Œä¼ å…¥nullï¼Œç›¸å¯¹äºæ˜¾ç¤ºå™¨å±å¹•
+		// è®¾ç½®çª—å£æ ‡é¢˜
+		setTitle("é£æœºå¤§æˆ˜(æ— å°½ç‰ˆ)");
+		// è®¾ç½®å¯è§
 		setVisible(true);
-		// ÉèÖÃ²»ÄÜ¸Ä±ä´óĞ¡
+		// è®¾ç½®ä¸èƒ½æ”¹å˜å¤§å°
 		setResizable(false);
-		// ÉèÖÃ¹Ø±Õ´°¿Ú
+		// è®¾ç½®å…³é—­çª—å£
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				System.exit(0);// ÉèÖÃ¹Ø±Õ
+				System.exit(0);// è®¾ç½®å…³é—­
 			}
 		});
-		enableInputMethods(false);//ÆÁ±ÎÊäÈë·¨
+		enableInputMethods(false);//å±è”½è¾“å…¥æ³•
 		setBackground(Color.BLACK);
 
 		new MyThread().start();
@@ -50,7 +50,7 @@ public class MyFrame extends Frame {
 	}
 
 	/**
-	 * ·ÀÖ¹Í¼Æ¬ÉÁË¸
+	 * é˜²æ­¢å›¾ç‰‡é—ªçƒ
 	 * 
 	 * @param g
 	 */
@@ -71,7 +71,7 @@ public class MyFrame extends Frame {
 	}
 
 	/**
-	 * ÕâÖÖ ´´½¨Ò»¸öÖØĞÂ»­µÄÏß³ÌÄÚ²¿Àà
+	 * è¿™ç§ åˆ›å»ºä¸€ä¸ªé‡æ–°ç”»çš„çº¿ç¨‹å†…éƒ¨ç±»
 	 * 
 	 * @param args
 	 */

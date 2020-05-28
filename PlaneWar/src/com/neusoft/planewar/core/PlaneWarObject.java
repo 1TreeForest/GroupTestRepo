@@ -7,8 +7,8 @@ import java.awt.Rectangle;
 import com.neusoft.planewar.client.PlaneWarClient;
 
 public abstract class PlaneWarObject implements Drawable,Moveable{
-	//½¨Á¢¹ØÏµ(´ó¹ØÏµ)
-	//µ÷Í£ÕßÉè¼ÆÄ£Ê½
+	//å»ºç«‹å…³ç³»(å¤§å…³ç³»)
+	//è°ƒåœè€…è®¾è®¡æ¨¡å¼
 	public PlaneWarClient pwc;
 	public int x;
 	public int y;
@@ -17,7 +17,7 @@ public abstract class PlaneWarObject implements Drawable,Moveable{
 	public int height;
 	public boolean good;
 	/**
-	 * ËùÓĞ·É»ú´óÕ½ÖĞÍ³Ò»µÄ»­µÄ·½·¨
+	 * æ‰€æœ‰é£æœºå¤§æˆ˜ä¸­ç»Ÿä¸€çš„ç”»çš„æ–¹æ³•
 	 */
 	@Override
 	public void draw(Graphics g) {
@@ -25,7 +25,7 @@ public abstract class PlaneWarObject implements Drawable,Moveable{
 		move();
 	}
 	/**
-	 * ÅĞ¶ÏÊÇµĞ·½»¹ÊÇ¼º·½
+	 * åˆ¤æ–­æ˜¯æ•Œæ–¹è¿˜æ˜¯å·±æ–¹
 	 */
 	
 	public boolean isGood() {
@@ -36,12 +36,12 @@ public abstract class PlaneWarObject implements Drawable,Moveable{
 		this.good = good;
 	}
 	/**
-	 * ÈÃ×ÓÀà×Ô¼ºÊµÏÖ×Ô¼ºµÄmove·½·¨
+	 * è®©å­ç±»è‡ªå·±å®ç°è‡ªå·±çš„moveæ–¹æ³•
 	 */
 	@Override
 	public abstract void move();
 	/**
-	 * »ñÈ¡×Óµ¯¶ÔÓ¦µÄ¾ØĞÎ
+	 * è·å–å­å¼¹å¯¹åº”çš„çŸ©å½¢
 	 */
 	public Rectangle getRectangle(){
 		return new Rectangle(x, y, width, height);

@@ -16,8 +16,8 @@ public class Constant {
 	/*
 	 *ÑªÁ¿
 	 */
-	public static final int MYPLANE_MAX_BOOLD=1000;
+	public static final int MYPLANE_MAX_BOOLD=300;
 	public static final int ENEMYPLANE_MAX_BOOLD=500;
-	public static final int ENEMYPLANE_BOSS_MAX_BOOLD=30000;
+	public static final int ENEMYPLANE_BOSS_MAX_BOOLD=15000;
 	
 }

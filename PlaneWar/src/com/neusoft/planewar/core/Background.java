@@ -6,7 +6,7 @@ import java.awt.Image;
 import com.neusoft.planewar.constant.Constant;
 import com.neusoft.planewar.util.ImageUtil;
 /**
- * Ñ­»·±³¾°Í¼
+ * å¾ªçŽ¯èƒŒæ™¯å›¾
  * @author zzk
  *
  */

@@ -1,0 +1,13 @@
+eclipse.preferences.version=1
+encoding//src/com/neusoft/planewar/core/Background.java=UTF-8
+encoding//src/com/neusoft/planewar/core/Drawable.java=UTF-8
+encoding//src/com/neusoft/planewar/core/EnemyPlane.java=UTF-8
+encoding//src/com/neusoft/planewar/core/Explode.java=UTF-8
+encoding//src/com/neusoft/planewar/core/GameUI.java=UTF-8
+encoding//src/com/neusoft/planewar/core/Item.java=UTF-8
+encoding//src/com/neusoft/planewar/core/Missile.java=UTF-8
+encoding//src/com/neusoft/planewar/core/Moveable.java=UTF-8
+encoding//src/com/neusoft/planewar/core/MyFrame.java=UTF-8
+encoding//src/com/neusoft/planewar/core/Plane.java=UTF-8
+encoding//src/com/neusoft/planewar/core/PlaneWarObject.java=UTF-8
+encoding//src/com/neusoft/planewar/core/RuleFrame.java=UTF-8

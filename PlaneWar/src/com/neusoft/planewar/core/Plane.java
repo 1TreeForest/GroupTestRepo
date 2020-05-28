@@ -13,17 +13,17 @@ import com.neusoft.planewar.util.ImageUtil;
 import com.neusoft.planewar.util.MusicUtil;
 
 public class Plane extends PlaneWarObject {
-	public double speed = 10;// 閫熷害
+	public double speed = 10;// 闁喎瀹�
 	public boolean left, up, right, down;
-	public int blood;// 琛�閲�
-	public int level;// 绛夌骇
-	public int type;// 绛夌骇
-	public int score = 0;// 绉垎
+	public int blood;// 鐞涳拷闁诧拷
+	public int level;// 缁涘楠�
+	public int type;// 缁涘楠�
+	public int score = 0;// 缁夘垰鍨�
 	public static boolean flagPause=false;
-	public int topscore=getTopscore();	//历史最高分，通过读取文件获得
+	public int topscore=getTopscore();	//鍘嗗彶鏈�楂樺垎锛岄�氳繃璇诲彇鏂囦欢鑾峰緱
 
 	/**
-	 * 鏃犲弬鏋勯��
+	 * 閺冪姴寮弸鍕拷锟�
 	 */
 	public Plane() {
 		super();
@@ -44,7 +44,7 @@ public class Plane extends PlaneWarObject {
 	}
 
 	/**
-	 * 甯﹀弬鏋勯��
+	 * 鐢箑寮弸鍕拷锟�
 	 */
 
 	public Plane(int x, int y, Image img, int width, int height) {
@@ -75,7 +75,7 @@ public class Plane extends PlaneWarObject {
 	}
 
 	/**
-	 * 鍒ゆ柇鎴戞柟椋炴満鍑虹晫闂
+	 * 閸掋倖鏌囬幋鎴炴煙妞嬬偞婧�閸戣櫣鏅梻顕�顣�
 	 */
 	private void outOfBounds() {
 		if (x <= 0-width/2)
@@ -89,12 +89,12 @@ public class Plane extends PlaneWarObject {
 	}
 
 	/**
-	 * 鏄惁寮�鐏�
+	 * 閺勵垰鎯佸锟介悘锟�
 	 */
 	public boolean fire;
 
 	/**
-	 * 鎴戞柟椋炴満鍙戝瓙寮圭殑鏂规硶
+	 * 閹存垶鏌熸鐐存簚閸欐垵鐡欏鍦畱閺傝纭�
 	 */
 	public void fire() {
 		// pwc.musics.add(mu);
@@ -108,7 +108,7 @@ public class Plane extends PlaneWarObject {
 	boolean superFire;
 
 	/**
-	 * 瓒呯骇瀛愬脊
+	 * 鐡掑懐楠囩�涙劕鑴�
 	 */
 	public void superFire() {
 		if (superFireCount > 0) {
@@ -129,7 +129,7 @@ public class Plane extends PlaneWarObject {
 	}
 
 	/**
-	 * 鍒ゆ柇鏄惁瀛樻椿
+	 * 閸掋倖鏌囬弰顖氭儊鐎涙ɑ妞�
 	 */
 	public boolean live = true;
 
@@ -179,7 +179,7 @@ public class Plane extends PlaneWarObject {
 	}
 
 	/**
-	 * 鐢昏鏉″拰绉垎
+	 * 閻㈡槒顢呴弶鈥虫嫲缁夘垰鍨�
 	 * 
 	 * @param g
 	 */
@@ -196,34 +196,34 @@ public class Plane extends PlaneWarObject {
 			g.drawImage(blood_blank, 10 + bloodImg.getWidth(null) - blood_blank.getWidth(null) * (j + 1), 40 + 14,
 					null);
 		}
-		// 画积分
+		// 鐢荤Н鍒�
 		g.drawImage(ImageUtil.images.get("score"), 10, 40 + bloodImg.getHeight(null) + 12, null);
-		g.setFont(new Font("微软雅黑", Font.BOLD, 40));
+		g.setFont(new Font("寰蒋闆呴粦", Font.BOLD, 40));
 		g.setColor(Color.WHITE);
 		g.drawString(score + "", 10 + scoreImg.getWidth(null) + 10, 40 + bloodImg.getHeight(null) + 50);
-		//画最高积分
+		//鐢绘渶楂樼Н鍒�
 		g.drawImage(ImageUtil.images.get("topscore"), bloodImg.getWidth(null)+30, topscoreImg.getHeight(null), null);
-		g.setFont(new Font("微软雅黑", Font.BOLD, 30));
+		g.setFont(new Font("寰蒋闆呴粦", Font.BOLD, 30));
 		g.setColor(Color.BLUE);
 		g.drawString(getTopscore()+ "", scoreImg.getWidth(null) + 150, topscoreImg.getHeight(null)+75);
 		
 
 
 		if(flagPause) {
-			g.setFont(new Font("微软雅黑",Font.BOLD,80));
+			g.setFont(new Font("寰蒋闆呴粦",Font.BOLD,80));
 			g.setColor(Color.RED);
-			g.drawString("游戏暂停", 100, 400);
+			g.drawString("娓告垙鏆傚仠", 100, 400);
 
-		}//游戏暂停
+		}//娓告垙鏆傚仠
 	}
 
 	/**
-	 * 澶ф嫑鍓╀綑娆℃暟
+	 * 婢堆勫珣閸撯晙缍戝▎鈩冩殶
 	 */
 	public int superFireCount = 0;
 
 	/**
-	 * 鎸変笅閿洏鐨勬柟娉�
+	 * 閹稿绗呴柨顔炬磸閻ㄥ嫭鏌熷▔锟�
 	 * 
 	 * @param e
 	 */
@@ -241,11 +241,11 @@ public class Plane extends PlaneWarObject {
 		case KeyEvent.VK_W:
 			up = true;
 			break;
-		case KeyEvent.VK_J:// 鍙戝瓙寮�
+		case KeyEvent.VK_J:// 閸欐垵鐡欏锟�
 			superFire = false;
 			fire = true;
 			break;
-		case KeyEvent.VK_SPACE:// 鍙戣秴绾у瓙寮�
+		case KeyEvent.VK_SPACE:// 閸欐垼绉寸痪褍鐡欏锟�
 			fire = false;
 			superFire = true;
 			break;
@@ -262,10 +262,10 @@ public class Plane extends PlaneWarObject {
 	}
 
 	/**
-	 * 鏉惧紑閿洏鐨勬柟娉�
+	 * 閺夋儳绱戦柨顔炬磸閻ㄥ嫭鏌熷▔锟�
 	 * 
 	 * @param e
-	 *            閿洏浜嬩欢
+	 *            闁款喚娲忔禍瀣╂
 	 */
 	public void keyReleased(KeyEvent e) {
 		switch (e.getKeyCode()) {
@@ -281,13 +281,13 @@ public class Plane extends PlaneWarObject {
 		case KeyEvent.VK_W:
 			up = false;
 			break;
-		case KeyEvent.VK_J:// 鍙戝瓙寮�
+		case KeyEvent.VK_J:// 閸欐垵鐡欏锟�
 			fire = false;
 			break;
 		}
 	}
 	/**
-	 * 从文件中读取最高分
+	 * 浠庢枃浠朵腑璇诲彇鏈�楂樺垎
 	 * @return
 	 */
 	public int getTopscore(){
@@ -296,7 +296,7 @@ public class Plane extends PlaneWarObject {
 	}
 
 	/**
-	 * 更改最高分
+	 * 鏇存敼鏈�楂樺垎
 	 */
 	public void writeTopscore(){
 		if(score>topscore){
@@ -305,12 +305,12 @@ public class Plane extends PlaneWarObject {
 	}
 
 	/**
-	 * 读取文件内容操作
+	 * 璇诲彇鏂囦欢鍐呭鎿嶄綔
 	 * @return
 	 */
 	public int readFile(){
 		File file = new File("TopScore.txt");
-		//如果文件不存在，文件输出流会自动创建文件
+		//濡傛灉鏂囦欢涓嶅瓨鍦紝鏂囦欢杈撳嚭娴佷細鑷姩鍒涘缓鏂囦欢
 		if (!file.exists()) {
 			try {
 				file.createNewFile();
@@ -321,7 +321,7 @@ public class Plane extends PlaneWarObject {
 				e.printStackTrace();
 			}
 		}
-		//读取文件
+		//璇诲彇鏂囦欢
 		int topscorenow=0;
 		try {
 			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
@@ -342,23 +342,23 @@ public class Plane extends PlaneWarObject {
 	}
 	public void writeFile(){
 		File file = new File("TopScore.txt");
-		//如果文件不存在，文件输出流会自动创建文件
+		//濡傛灉鏂囦欢涓嶅瓨鍦紝鏂囦欢杈撳嚭娴佷細鑷姩鍒涘缓鏂囦欢
 		if (!file.exists()) {
 			try {
 				file.createNewFile();
                 String a = String.valueOf(0);
 				BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file)));
-				bw.write(a);//向文件写入初始最高分
+				bw.write(a);//鍚戞枃浠跺啓鍏ュ垵濮嬫渶楂樺垎
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
-		//写文件
+		//鍐欐枃浠�
 		try {
             String a = String.valueOf(score);
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file)));
-			bw.write(a);//向文件写入最高分
-			bw.close();//关闭流
+			bw.write(a);//鍚戞枃浠跺啓鍏ユ渶楂樺垎
+			bw.close();//鍏抽棴娴�
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
