@@ -48,7 +48,7 @@ public class PlaneWarClient extends MyFrame {
 	@Override
 	public void launchFrame() {
 		super.launchFrame();
-		// ��Ӽ��̼�����
+		// 添加键盘监听器
 		addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {

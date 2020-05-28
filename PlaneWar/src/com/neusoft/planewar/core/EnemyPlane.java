@@ -12,18 +12,18 @@ import com.neusoft.planewar.util.ImageUtil;
 import com.neusoft.planewar.util.MusicUtil;
 
 public class EnemyPlane extends Plane {
-	public int type;// 缁鐎�
-	public int exp;// 缂佸繘鐛�
+	public int type;// 类型
+	public int exp;// 经验
 
 	/**
-	 * 閺冪姴寮弸鍕拷锟�
+	 * 无参构造
 	 */
 	public EnemyPlane() {
 		super();
 	}
 
 	/**
-	 * 鐢箑寮弸鍕拷锟�
+	 * 带参构造
 	 */
 	public EnemyPlane(int x, int y, String imageName) {
 		super(x, y, imageName);
@@ -51,7 +51,7 @@ public class EnemyPlane extends Plane {
 	}
 
 	/**
-	 * 閸欐垵鐡欏锟�
+	 * 发子弹
 	 */
 	@Override
 	public void fire() {
@@ -97,41 +97,41 @@ public class EnemyPlane extends Plane {
 	public void move() {
 		
 		switch (type) {
-		case 100:// 姘村钩骞崇Щ
+		case 100:// 水平平移
 			if (x >= (Constant.GAME_WIDTH) || x <= 0 - width) {
 				speed = -speed;
 			}
 			x += speed;
 			break;
-		case 1:// 绔栫洿骞崇Щ
+		case 1:// 水平平移
 			y += speed * 5;
 			break;
-		case 2:// 鍦嗗湀
+		case 2:// 竖直平移
 			x=(int) (center.x+2*r*Math.cos(theta));
 			y=(int) (center.y+2*r*Math.sin(theta));
 		        theta+=speed/20;
 		        break;
-		case 3:// 姝ｅ鸡绾�
+		case 3:// 正弦线
 			x = (int) (center.x - width + (center.x - width) * Math.sin(theta));
 			theta += speed / 10;
 			y += speed * 10;
 			break;
-		case 4:// 浣欏鸡绾�
+		case 4:// 余弦线
 			x = (int) (center.x - width + (center.x - width) * Math.cos(theta));
 			theta += speed / 10;
 			y += speed * 10;
 			break;
-		case 5:// 鍙屾洸绾�
+		case 5:// 双曲线
 			x = (int) (center.x - width + 50 * 1 / Math.cos(theta));
 			y = (int) (center.y - height + 50 * Math.sin(theta) / Math.cos(theta));
 			theta += speed / 20;
 			break;
-		case 6:// 鏄熷舰绾�
+		case 6:// 星形线
 			x = (int) (center.x - width / 2 + 200 * Math.pow(Math.cos(theta), 3));
 			y = (int) (center.y + 200 * Math.pow(Math.sin(theta), 3)) - 200;
 			theta += speed / 20;
 			break;
-		case 7:// 蹇冨舰绾�
+		case 7:// 心形线
 			x = (int) (center.x + r * (2 * Math.cos(theta + Math.PI / 2) + Math.cos(2 * theta + Math.PI / 2)));
 			y = (int) (center.y + r * (2 * Math.sin(theta + Math.PI / 2) + Math.sin(2 * theta + Math.PI / 2)));
 			theta += speed;
@@ -156,7 +156,7 @@ public class EnemyPlane extends Plane {
 		if (blood <= 0 && live) {
 			live = false;
 			pwc.myPlane.score += 100 * type;
-			//鏈�楂樺垎鏇存柊
+			//写入最高分
 			pwc.myPlane.writeTopscore();
 			/**
 			 * boss死了就更新最后一次爆炸时间
@@ -164,13 +164,13 @@ public class EnemyPlane extends Plane {
 			if(type == 100) {
 				pwc.explodeTime = System.currentTimeMillis();
 			}
-			// 鐖嗙偢
+			// 爆炸
 			Explode ex = new Explode(pwc, x, y);
 			ex.x += (width - ex.width) / 2;
 			ex.y += (height - ex.height) / 2;
 			pwc.explodes.add(ex);
 
-			// 娴溠呮晸闁挸鍙�
+			// 产生道具
 			Item item = new Item(pwc, x, y);
 			item.x += (width - item.width) / 2;
 			item.y += height;
@@ -184,14 +184,14 @@ public class EnemyPlane extends Plane {
 		}
 		if (type == 100 && live) {
 			g.drawImage(img, x, y, null);
-			drawBlood(g);// 閻㈡槒顢呴弶锟�
+			drawBlood(g);// 画血条
 		}
 		if (type != 100 && count[type - 1] >= 4 * type) {
 			count[type - 1] = 4 * (type - 1);
 		}
 		if (type != 100 && live) {
 			g.drawImage(images[count[type - 1]], x, y, null);
-			drawBlood(g);// 閻㈡槒顢呴弶锟�
+			drawBlood(g);// 画血条
 			count[type - 1]++;
 		}
 		move();
@@ -199,7 +199,7 @@ public class EnemyPlane extends Plane {
 	}
 
 	/**
-	 * 閻㈡槒顢呴弶锟�
+	 * 画血条
 	 * 
 	 * @param g
 	 */
