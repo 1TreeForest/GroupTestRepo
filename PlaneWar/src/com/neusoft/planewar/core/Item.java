@@ -76,7 +76,7 @@ public class Item extends PlaneWarObject {
 			move();
 			outOfBounds();
 		} else {
-			// 鏁堟灉
+			// 效果
 			generateEffect(g);
 			long end = System.currentTimeMillis();
 			if(end-effectStart>=50&&end-effectStart<100)
@@ -90,17 +90,17 @@ public class Item extends PlaneWarObject {
 	boolean flag = false;
 	private void generateEffect(Graphics g) {
 		switch (type) {
-		case 1://鍗囩骇
+		case 1://升级
 			if(myPlane.level<3&&preLevel==myPlane.level){
 				myPlane.level+=1;
 			}
 			break;
-		case 2://鎹㈠瓙寮�
+		case 2://换子弹
 			if(myPlane.type==preType&&type<=3){
 				myPlane.type= new Random().nextInt(3)+1;
 			}
 			break;
-		case 3:// 鍔犺
+		case 3:// 加血
 			if (myPlane.blood >= (Constant.MYPLANE_MAX_BOOLD - 20)) {
 				myPlane.blood = Constant.MYPLANE_MAX_BOOLD;
 			} else {
@@ -108,21 +108,21 @@ public class Item extends PlaneWarObject {
 				preBlood+=20;
 			}
 			break;
-		case 4:// 闃叉姢缃�
+		case 4:// 防护罩
 			Image img = ImageUtil.images.get("effect_0" + (type));
 			g.drawImage(img, myPlane.x + (myPlane.width - img.getWidth(null)) / 2,
 					myPlane.y + (myPlane.height - img.getHeight(null)) / 2, null);
 			myPlane.blood=preBlood;
 			break;
-		case 5://鏄熸槦鍔犵Н鍒�
+		case 5://星星加积分
 			if(preScore==myPlane.score){
 				myPlane.score+=200;
 				//最高分更新
 				myPlane.writeTopscore();
 			}
 			break;
-		case 6://缁欏ぇ鎷�
-			if(flag){//濡傛灉娌℃湁鍚冮亾鍏�
+		case 6://给大招
+			if(flag){//如果没有吃道具
 				myPlane.superFireCount++;
 			}
 			flag=false;
@@ -132,7 +132,7 @@ public class Item extends PlaneWarObject {
 
 	long time=0;
 	/**
-	 * 閬撳叿閬囧埌鎴戞柟椋炴満鐨勬柟娉�
+	 * 道具遇到我方飞机的方法
 	 */
 	public boolean hitMyPlane(Plane p) {
 		if (this.getRectangle().intersects(p.getRectangle()) && p.live) {
@@ -144,7 +144,7 @@ public class Item extends PlaneWarObject {
 	}
 
 	/**
-	 * 閬撳叿杈圭晫澶勭悊
+	 * 道具边界处理
 	 */
 	private void outOfBounds() {
 		if ((x >= (Constant.GAME_WIDTH - width) || x <= 0) || (y >= (Constant.GAME_HEIGHT - height) || y <= 0)) {

@@ -7,8 +7,8 @@ import java.util.Map;
 import com.neusoft.planewar.constant.Constant;
 
 /**
- * ´æ·ÅÏîÄ¿ÖĞËùÓĞµÄÍ¼Æ¬<br>
- * Ê¹ÓÃMap½á¹¹´Ö·ÅÊ±£¬Ê¹ÓÃ¾²Ì¬´úÂë¿éºÍ¾²Ì¬³õÊ¼»¯<br>
+ * å­˜æ”¾é¡¹ç›®ä¸­æ‰€æœ‰çš„å›¾ç‰‡<br>
+ * ä½¿ç”¨Mapç»“æ„ç²—æ”¾æ—¶ï¼Œä½¿ç”¨é™æ€ä»£ç å—å’Œé™æ€åˆå§‹åŒ–<br>
  * 
  * @author zzk
  *
@@ -17,19 +17,19 @@ public class ImageUtil {
 	public static Map<String, Image> images = new HashMap<>();
 
 	static {
-		// ±³¾°Í¼
+		// èƒŒæ™¯å›¾
 		for (int i = 1; i <= 7; i++) {
 			images.put("background_0" + i,
 					GameUtil.getImage(Constant.IMG_PRE + "background/background_0" + i + ".png"));
 		}
-		// ÎÒ·½1ºÅ·É»ú
+		// æˆ‘æ–¹1å·é£æœº
 		for (int i = 1; i <= 3; i++) {
 			for (int j = 1; j <= 3; j++) {
 				images.put("myPlane_0" + i + "_0" + j,
 						GameUtil.getImage(Constant.IMG_PRE + "plane/myPlane/myPlane_0" + i + "_0" + j + ".png"));
 			}
 		}
-		// ÎÒ·½1ºÅ·É»ú×Óµ¯
+		// æˆ‘æ–¹1å·é£æœºå­å¼¹
 		for (int i = 1; i <= 3; i++) {
 			for (int j = 1; j <= 3; j++) {
 				images.put("myPlane_missile_0" + i + "_0" + j, GameUtil
@@ -39,7 +39,7 @@ public class ImageUtil {
 		images.put("myPlane_missile_super",
 				GameUtil.getImage(Constant.IMG_PRE + "missile/myPlane/myPlane_missile_super.png"));
 
-		// µôÂäÎïÆ·
+		// æ‰è½ç‰©å“
 		for (int i = 1; i <= 6; i++) {
 			images.put("item_0" + i, GameUtil.getImage(Constant.IMG_PRE + "item/item_0" + i + ".png"));
 		}
@@ -52,43 +52,43 @@ public class ImageUtil {
 		images.put("myPlane_missile_05_03",
 				GameUtil.getImage(Constant.IMG_PRE + "missile/myPlane/myPlane_missile_05_03.png"));
 
-		// ÎÒ·½ÑªÌõ
+		// æˆ‘æ–¹è¡€æ¡
 		images.put("myBlood_blank", GameUtil.getImage(Constant.IMG_PRE + "blood/myBlood_blank.png"));
 		images.put("myBlood", GameUtil.getImage(Constant.IMG_PRE + "blood/myBlood.png"));
-		// »ı·Ö
+		// ç§¯åˆ†
 		images.put("score", GameUtil.getImage(Constant.IMG_PRE + "score/score.png"));
-		//×î¸ß»ı·Ö
+		//æœ€é«˜ç§¯åˆ†
 		images.put("topscore", GameUtil.getImage(Constant.IMG_PRE + "score/topscore.png"));
-		// ¾¯¸æ
+		// è­¦å‘Š
 		images.put("warning", GameUtil.getImage(Constant.IMG_PRE + "warning.png"));
 		images.put("success", GameUtil.getImage(Constant.IMG_PRE + "success.png"));
 		images.put("fail", GameUtil.getImage(Constant.IMG_PRE + "fail.png"));
 
-		// µĞÈËÑªÌõ
+		// æ•Œäººè¡€æ¡
 		images.put("blood_blank", GameUtil.getImage(Constant.IMG_PRE + "blood/blood_blank.png"));
 		images.put("blood", GameUtil.getImage(Constant.IMG_PRE + "blood/blood.png"));
-		// µĞÈË×Óµ¯
+		// æ•Œäººå­å¼¹
 		for (int i = 1; i <= 6; i++) {
 			images.put("enemyPlane_missile_0" + i,
 					GameUtil.getImage(Constant.IMG_PRE + "missile/enemyPlane/enemyPlane_missile_0" + i + ".png"));
 		}
-		// boss×Óµ¯
+		// bosså­å¼¹
 		images.put("enemyPlane_missile_0100",
 				GameUtil.getImage(Constant.IMG_PRE + "missile/enemyPlane/enemyPlane_missile_0100.png"));
 
-		// ±¬Õ¨
+		// çˆ†ç‚¸
 		for (int i = 1; i <= 8; i++) {
 			images.put("explode_0" + i, GameUtil.getImage(Constant.IMG_PRE + "explode/explode_0" + i + ".png"));
 		}
 
-		// µĞ·½·É»ú1-5£¨¶¯Í¼£©
+		// æ•Œæ–¹é£æœº1-5ï¼ˆåŠ¨å›¾ï¼‰
 		for (int i = 1; i <= 6; i++) {
 			for (int j = 1; j <= 4; j++) {
 				images.put("enemyPlane_0" + i + "_0" + j,
 						GameUtil.getImage(Constant.IMG_PRE + "plane/emenyPlane/enemyPlane_0" + i + "_0" + j + ".png"));
 			}
 		}
-		// µĞ·½boss·É»ú
+		// æ•Œæ–¹bossé£æœº
 		for (int i = 1; i <= 5; i++) {
 			images.put("enemyPlane_boss_0" + i,
 					GameUtil.getImage(Constant.IMG_PRE + "plane/boss/enemyPlane_boss_0" + i + ".png"));

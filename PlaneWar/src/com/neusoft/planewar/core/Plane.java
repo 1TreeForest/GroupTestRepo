@@ -103,6 +103,7 @@ public class Plane extends PlaneWarObject {
 		missile.x += (this.width - missile.width) / 2;
 		missile.y -= height;
 		pwc.missiles.add(missile);
+		
 	}
 
 	boolean superFire;

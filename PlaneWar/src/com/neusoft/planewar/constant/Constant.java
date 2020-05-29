@@ -17,7 +17,7 @@ public class Constant {
 	 *血量
 	 */
 	public static final int MYPLANE_MAX_BOOLD=300;
-	public static final int ENEMYPLANE_MAX_BOOLD=500;
-	public static final int ENEMYPLANE_BOSS_MAX_BOOLD=15000;
+	public static final int ENEMYPLANE_MAX_BOOLD=300;
+	public static final int ENEMYPLANE_BOSS_MAX_BOOLD=10000;
 	
 }
