@@ -23,14 +23,14 @@ public class ImageUtil {
 					GameUtil.getImage(Constant.IMG_PRE + "background/background_0" + i + ".png"));
 		}
 		// 我方1号飞机
-		for (int i = 1; i <= 3; i++) {
+		for (int i = 1; i <= 5; i++) {
 			for (int j = 1; j <= 3; j++) {
 				images.put("myPlane_0" + i + "_0" + j,
 						GameUtil.getImage(Constant.IMG_PRE + "plane/myPlane/myPlane_0" + i + "_0" + j + ".png"));
 			}
 		}
 		// 我方1号飞机子弹
-		for (int i = 1; i <= 3; i++) {
+		for (int i = 1; i <= 5; i++) {
 			for (int j = 1; j <= 3; j++) {
 				images.put("myPlane_missile_0" + i + "_0" + j, GameUtil
 						.getImage(Constant.IMG_PRE + "missile/myPlane/myPlane_missile_0" + i + "_0" + j + ".png"));
@@ -45,12 +45,12 @@ public class ImageUtil {
 		}
 		images.put("effect_04", GameUtil.getImage(Constant.IMG_PRE + "item/effect/effect_04.png"));
 
-		images.put("myPlane_missile_05_01",
-				GameUtil.getImage(Constant.IMG_PRE + "missile/myPlane/myPlane_missile_05_01.png"));
-		images.put("myPlane_missile_05_02",
-				GameUtil.getImage(Constant.IMG_PRE + "missile/myPlane/myPlane_missile_05_02.png"));
-		images.put("myPlane_missile_05_03",
-				GameUtil.getImage(Constant.IMG_PRE + "missile/myPlane/myPlane_missile_05_03.png"));
+		images.put("myPlane_missile_06_01",
+				GameUtil.getImage(Constant.IMG_PRE + "missile/myPlane/myPlane_missile_06_01.png"));
+		images.put("myPlane_missile_06_02",
+				GameUtil.getImage(Constant.IMG_PRE + "missile/myPlane/myPlane_missile_06_02.png"));
+		images.put("myPlane_missile_06_03",
+				GameUtil.getImage(Constant.IMG_PRE + "missile/myPlane/myPlane_missile_06_03.png"));
 
 		// 我方血条
 		images.put("myBlood_blank", GameUtil.getImage(Constant.IMG_PRE + "blood/myBlood_blank.png"));

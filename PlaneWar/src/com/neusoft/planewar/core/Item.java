@@ -40,7 +40,7 @@ public class Item extends PlaneWarObject {
 	}
 
 	private Random random = new Random();
-	int num = random.nextInt(100);
+	int num = random.nextInt(6);
 	long effectStart;
 
 	private int preBlood;
@@ -97,7 +97,7 @@ public class Item extends PlaneWarObject {
 			break;
 		case 2://换子弹
 			if(myPlane.type==preType&&type<=3){
-				myPlane.type= new Random().nextInt(3)+1;
+				myPlane.type= new Random().nextInt(5)+1;
 			}
 			break;
 		case 3:// 加血
