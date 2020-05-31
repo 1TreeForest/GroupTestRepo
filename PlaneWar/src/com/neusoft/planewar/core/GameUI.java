@@ -55,16 +55,17 @@ public class GameUI extends JFrame implements ActionListener {
 		if(e.getSource() == begin){
 			PlaneWarClient s=new PlaneWarClient();//点“开始”后，出现一个新界面，作为游戏界面
 			s.setTitle("飞机大战");//界面的标题
-			s.setSize(997, 747);//界面初始大小
+			s.setSize(Constant.GAME_HEIGHT, Constant.GAME_WIDTH);//界面初始大小
 			s.setLocationRelativeTo(null);//确定窗口位置，null时在屏幕中间
 			s.setVisible(true);	//令组件可见
 			s.launchFrame();  //启动游戏方法
+			System.exit(0);
 		}
 
 		if(e.getSource() == rule){
 			RuleFrame r = new RuleFrame();  //点击“规则”后，出现一个新界面
 			r.setTitle("游戏规则");  //界面的标题
-			r.setSize(1000, 740);  //界面初始大小
+			r.setSize(Constant.GAME_HEIGHT,Constant.GAME_WIDTH);  //界面初始大小
 			r.setLocationRelativeTo(null);  //确定窗口位置，null时在屏幕中间
 			r.setVisible(true);	//令组件可见
 		}
