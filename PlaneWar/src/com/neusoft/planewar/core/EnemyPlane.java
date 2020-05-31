@@ -68,10 +68,28 @@ public class EnemyPlane extends Plane {
 				pwc.missiles.add(missile);
 			}
 		} else {
-			Missile missile = new Missile(pwc, this.x, this.y, "enemyPlane_missile_0" + type, type, good);
-			missile.x += (this.width - missile.width) / 2;
-			missile.y += height;
-			pwc.missiles.add(missile);
+                        int m = random.nextInt(2);
+			if (m == 0) {
+				Missile missile = new Missile(pwc, this.x, this.y, "enemyPlane_missile_0" + type, type, good);
+				missile.x += (this.width - missile.width) / 2;
+				missile.y += height;
+				pwc.missiles.add(missile);
+			} else if (m == 1) {
+				Missile missile = new Missile(pwc, this.x, this.y, "enemyPlane_missile_0" + type, type, good);
+				int theta = 45 / 360;
+				missile.x = (int) (missile.x + (width / 2 + r * Math.sin(Math.toRadians(theta)) - missile.width / 2));
+				missile.y = (int) (missile.y
+						- ((r * Math.cos(Math.toRadians(theta)) - height / 2 + missile.height / 2)));
+				pwc.missiles.add(missile);
+			} else if (m == 2) {
+				Missile missile = new Missile(pwc, this.x, this.y, "enemyPlane_missile_0" + type, type, good);
+				int theta = 45 / 360;
+				missile.x = (int) (missile.x - (width / 2 + r * Math.sin(Math.toRadians(theta)) - missile.width / 2));
+				missile.y = (int) (missile.y
+						- ((r * Math.cos(Math.toRadians(theta)) - height / 2 + missile.height / 2)));
+				pwc.missiles.add(missile);
+			}
+		}
 		}
 	}
 
