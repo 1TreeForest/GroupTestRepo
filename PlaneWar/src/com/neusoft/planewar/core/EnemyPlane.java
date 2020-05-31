@@ -4,6 +4,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
 import java.util.Random;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.neusoft.planewar.client.PlaneWarClient;
 import com.neusoft.planewar.constant.Constant;
@@ -56,17 +58,41 @@ public class EnemyPlane extends Plane {
 	@Override
 	public void fire() {
 		if (type == 100) {
-			int num = (int) (Math.random()*36)+24;
-			for (int i = 1; i <= num; i++) {
-				Missile missile = new Missile(pwc, this.x, this.y, "enemyPlane_missile_0" + type, type+new Random().nextInt(3), good);
-				int r = (int) (Math.sqrt(width * width + height * height) / 2);
-				int theta = 360 * i / num;
-				missile.setTheta(theta);
-				missile.x = (int) (missile.x + (width / 2 + r * Math.sin(Math.toRadians(theta)) - missile.width / 2));
-				missile.y = (int) (missile.y
-						- ((r * Math.cos(Math.toRadians(theta)) - height / 2 + missile.height / 2)));
-				pwc.missiles.add(missile);
+			if(pwc.bossMissiles.isEmpty()) {
+				List<Missile> bossMissilesTemp = new CopyOnWriteArrayList<>();
+				int num = 24;
+				for (int i = 1; i <= num; i++) {
+					//Missile missile = new Missile(pwc, this.x, this.y, "enemyPlane_missile_0" + type, type+new Random().nextInt(3), good);
+					Missile missile = new Missile(pwc, this.x, this.y, "enemyPlane_missile_0" + type, 100, good);
+					int r = (int) (Math.sqrt(width * width + height * height) / 2);
+					int theta = 360 * i / num;
+					missile.setTheta(theta);
+					missile.x = (int) (missile.x + (width / 2 + r * Math.sin(Math.toRadians(theta)) - missile.width / 2));
+					missile.y = (int) (missile.y
+							- ((r * Math.cos(Math.toRadians(theta)) - height / 2 + missile.height / 2)));
+					bossMissilesTemp.add(missile);
+				}
+				
+				int typeboss = new Random().nextInt(3);
+				for (int i = 1; i <= num; i++) {
+					//Missile missile = new Missile(pwc, this.x, this.y, "enemyPlane_missile_0" + type, type+new Random().nextInt(3), good);
+					Missile missile = new Missile(pwc, this.x, this.y, "enemyPlane_missile_0" + type, 100+typeboss, good);
+					int r = (int) (Math.sqrt(width * width + height * height) / 2);
+					int theta = 360 * i / num;
+					missile.setTheta(theta);
+					missile.x = (int) (missile.x + (width / 2 + r * Math.sin(Math.toRadians(theta)) - missile.width / 2));
+					missile.y = (int) (missile.y
+							- ((r * Math.cos(Math.toRadians(theta)) - height / 2 + missile.height / 2)));
+					bossMissilesTemp.add(missile);
+				}
+				
+				pwc.bossMissiles.addAll(bossMissilesTemp);
 			}
+					Missile missile = new Missile(pwc, this.x, this.y, "enemyPlane_missile_0" + type, 10, good);
+					missile.x += (this.width - missile.width) / 2;
+					missile.y += height;
+					pwc.missiles.add(missile);
+			
 		} else {
                         int m = random.nextInt(2);
 			if (m == 0) {
