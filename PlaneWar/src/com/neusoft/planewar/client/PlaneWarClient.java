@@ -41,6 +41,7 @@ public class PlaneWarClient extends MyFrame {
 	public List<EnemyPlane> enemyPlanes = new CopyOnWriteArrayList<>();
 	public Background background = new Background(0, 4, "background_08");
 	public List<Explode> explodes = new CopyOnWriteArrayList<>();
+	public List<Missile> bossMissiles = new CopyOnWriteArrayList<>();//boss的多发子弹
 	public List<Missile> missiles = new CopyOnWriteArrayList<>();
 	public List<Item> items = new CopyOnWriteArrayList<>();
 	public List<MusicUtil> musics = new CopyOnWriteArrayList<>();
@@ -143,6 +144,11 @@ public class PlaneWarClient extends MyFrame {
 		}
 		for (EnemyPlane enemyPlane : enemyPlanes) {
 			enemyPlane.draw(g);
+		}
+		for (Missile missile : bossMissiles) {
+			missile.hitPlanes(enemyPlanes);
+			missile.hitPlane(myPlane);
+			missile.draw(g);
 		}
 		for (Missile missile : missiles) {
 			missile.hitPlanes(enemyPlanes);
