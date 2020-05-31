@@ -117,6 +117,9 @@ public class Missile extends PlaneWarObject {
 			x+=speed/4;
 			y-=speed;
 			break;
+		case 10:
+			y+=speed*4;
+			break;
 		default:
 			y -= speed;
 			break;
@@ -131,7 +134,11 @@ public class Missile extends PlaneWarObject {
 	private void outOfBounds() {
 		if ((x >= (Constant.GAME_WIDTH-width) || x <= 0) || (y >= (Constant.GAME_HEIGHT - height) || y <= 0)) {
 			this.live = false;
-			this.pwc.missiles.remove(this);
+			if(type>=100) {
+				this.pwc.bossMissiles.remove(this);
+			}else {
+				this.pwc.missiles.remove(this);
+			}
 		}
 	}
 
