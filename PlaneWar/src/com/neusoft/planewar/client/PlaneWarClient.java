@@ -95,7 +95,26 @@ public class PlaneWarClient extends MyFrame {
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-	
+					/**
+					 * 积分到1000分以上，不定时出现由10个同路线飞机组成的机群
+					 */
+	                                 if(myPlane.score>1000) {
+
+						for(int i=0;i<10;i++) {
+							enemyPlane = new EnemyPlane(pwc, (int) (-400 + 100 * Math.random() * 6), 300, 2, false);
+                                                        enemyPlanes.add(enemyPlane);
+							try {
+								Thread.sleep(1000);
+							} catch (InterruptedException e) {
+								e.printStackTrace();
+							}
+						}
+						try {
+							Thread.sleep(5000);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
 					currentTime = System.currentTimeMillis();
 					/**
 					 * 当前时间和最后一次爆炸的时间相差十五秒且上一个boss已经没了，就实例化一个新boss
