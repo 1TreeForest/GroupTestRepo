@@ -112,9 +112,15 @@ public class PlaneWarClient extends MyFrame {
 					/**
 					 * 当积分到3000分以上，并且是600的倍数时，出现由相同路线的敌机组成的机群
 					 **/
-					if(myPlane.score>3000&&myPlane.score%300==0) {
+					if(myPlane.score>3000&&myPlane.score%600==0) {
 						int t=random.nextInt(5)+2;
-						for(int i=0;i<10;i++) {
+						int number;
+						if(myPlane.score<=10000) {
+							number=myPlane.score/1000;
+						}else {
+							number=12;
+						}
+						for(int i=0;i<number;i++) {
 							enemyPlane = new EnemyPlane(pwc, (int) (-400 + 100 * Math.random() * 6), 300, t, false);
 							enemyPlanes.add(enemyPlane);
 							try {
