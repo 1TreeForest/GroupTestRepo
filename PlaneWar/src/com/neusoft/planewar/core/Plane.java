@@ -21,6 +21,9 @@ public class Plane extends PlaneWarObject {
 	public int score = 0;// 积分
 	public static boolean flagPause=false;
 	public int topscore=getTopscore();	//历史最高分，通过读取文件获得
+	public int life=3; //初始3条命
+	public boolean lifeFlag=false;	//复活后无敌时间判断
+	public long timestart;
 
 	/**
 	 * 无参构造
@@ -160,7 +163,7 @@ public class Plane extends PlaneWarObject {
 	@Override
 	public void draw(Graphics g) {
 		img = ImageUtil.images.get("myPlane_0" + type + "_0" + level);
-		if (blood <= 0 && live) {
+		if (blood <= 0 && live && life-1==0) {	//生命值为0且没有剩余命了
 			live = false;
 			Explode ex = new Explode(pwc, x, y);
 			ex.x += (width - ex.width) / 2;
@@ -169,11 +172,34 @@ public class Plane extends PlaneWarObject {
 			pwc.enemyPlanes.clear();
 			pwc.missiles.clear();
 			pwc.items.clear();
-
+			life-=1;
+		}
+		else if(blood <= 0 && live && life-1!=0){	//死亡一次但还有命
+			life-=1;
+			x=(Constant.GAME_WIDTH - width) / 2;
+			y=Constant.GAME_HEIGHT - height;
+			g.drawImage(img,x,y,null);	//在初始地方复活
+			blood=Constant.MYPLANE_MAX_BOOLD;
+			Image img = ImageUtil.images.get("effect_0" + (4));
+			g.drawImage(img, x + (width - img.getWidth(null)) / 2,
+					y + (height - img.getHeight(null)) / 2, null);//保护罩
+			lifeFlag=true;
+			timestart = System.currentTimeMillis();//获取此时时间,用于判断无敌时间
 		}
 
-		if (live) {
-			g.drawImage(img, x, y, null);
+		if (live) {	//还活着
+			if(lifeFlag){
+				long timeend=System.currentTimeMillis();
+				if(timeend-timestart<=3000){	//无敌时间3s
+					Image img = ImageUtil.images.get("effect_0" + (4));
+					g.drawImage(img, x + (width - img.getWidth(null)) / 2,
+							y + (height - img.getHeight(null)) / 2, null);	//加上保护罩
+					blood = Constant.MYPLANE_MAX_BOOLD;
+					move();
+				}
+				else{lifeFlag=false;}
+			}
+			g.drawImage(img, x, y, null);	//不再无敌，正常移动
 			move();
 		}
 		drawBloodAndScore(g);
@@ -207,6 +233,10 @@ public class Plane extends PlaneWarObject {
 		g.setFont(new Font("微软雅黑", Font.BOLD, 30));
 		g.setColor(Color.BLUE);
 		g.drawString(getTopscore()+ "", scoreImg.getWidth(null) + 150, topscoreImg.getHeight(null)+75);
+		//画生命
+		g.setFont(new Font("微软雅黑", Font.BOLD, 40));
+		g.setColor(Color.WHITE);
+		g.drawString("LIFE: " +getLife()+"", 10,  bloodImg.getHeight(null) + 150);
 		//画暂停提示
 		g.setFont(new Font("微软雅黑",Font.BOLD,20));
 		g.setColor(Color.WHITE);
@@ -221,7 +251,7 @@ public class Plane extends PlaneWarObject {
 
 		}//游戏暂停
 	}
-
+	public int getLife(){return life;}
 	/**
 	 * 大招剩余次数
 	 */
