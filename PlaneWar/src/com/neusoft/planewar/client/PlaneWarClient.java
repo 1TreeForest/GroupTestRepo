@@ -194,7 +194,7 @@ public class PlaneWarClient extends MyFrame {
 	public static void main(String[] args) {
 	try {
 			JFrame f=new GameUI("飞机大战");
-	        f.setSize(1000, 740);//界面初始大小
+	        f.setSize(Constant.GAME_HEIGHT, Constant.GAME_WIDTH);//界面初始大小
 			f.setLocationRelativeTo(null);//确定窗口位置，null时在屏幕中间
 			f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//点击关闭，则程序退出
 			f.setVisible(true);	//令组件可见
