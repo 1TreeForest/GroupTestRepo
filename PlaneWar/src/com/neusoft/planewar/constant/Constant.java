@@ -12,12 +12,12 @@ public class Constant {
 	/**
 	 * 图片路径前缀
 	 */
-	public static final String IMG_PRE="com/neusoft/planewar/img/";
+	public static final String IMG_PRE = "com/neusoft/planewar/img/";
 	/*
-	 *血量
+	 * 血量
 	 */
-	public static final int MYPLANE_MAX_BOOLD=300;
-	public static final int ENEMYPLANE_MAX_BOOLD=300;
-	public static final int ENEMYPLANE_BOSS_MAX_BOOLD=10000;
-	
+	public static final int MYPLANE_MAX_BOOLD = 300;
+	public static final int ENEMYPLANE_MAX_BOOLD = 300;
+	public static final int ENEMYPLANE_BOSS_MAX_BOOLD = 10000;
+
 }

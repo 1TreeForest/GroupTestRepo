@@ -34,18 +34,17 @@ import com.neusoft.planewar.core.GameUI;
 import com.neusoft.planewar.util.ImageUtil;
 import com.neusoft.planewar.util.MusicUtil;
 
-
 public class PlaneWarClient extends MyFrame {
 	Point center = new Point((Constant.GAME_WIDTH) / 2, (Constant.GAME_HEIGHT) / 2);
 	public Plane myPlane = new Plane(this, true);
 	public List<EnemyPlane> enemyPlanes = new CopyOnWriteArrayList<>();
 	public Background background = new Background(0, 4, "background_08");
 	public List<Explode> explodes = new CopyOnWriteArrayList<>();
-	public List<Missile> bossMissiles = new CopyOnWriteArrayList<>();//boss的多发子弹
+	public List<Missile> bossMissiles = new CopyOnWriteArrayList<>();// boss的多发子弹
 	public List<Missile> missiles = new CopyOnWriteArrayList<>();
 	public List<Item> items = new CopyOnWriteArrayList<>();
 	public List<MusicUtil> musics = new CopyOnWriteArrayList<>();
-	public long explodeTime;//最后一次爆炸的时间
+	public long explodeTime;// 最后一次爆炸的时间
 
 	public Random random = new Random();
 
@@ -67,12 +66,12 @@ public class PlaneWarClient extends MyFrame {
 		PlaneWarClient pwc = this;
 		new Thread() {
 			@Override
-			public void run() {   
+			public void run() {
 				pwc.explodeTime = System.currentTimeMillis();
-				long currentTime = System.currentTimeMillis();//当前时间
+				long currentTime = System.currentTimeMillis();// 当前时间
 				EnemyPlane boss = new EnemyPlane(pwc, 1, 100, 100, false);
 				boss.live = false;
-				
+
 				while (true) {
 					int r = random.nextInt(6);
 					EnemyPlane enemyPlane = null;
@@ -99,7 +98,7 @@ public class PlaneWarClient extends MyFrame {
 					/**
 					 * 当前时间和最后一次爆炸的时间相差十五秒且上一个boss已经没了，就实例化一个新boss
 					 */
-					while((currentTime-explodeTime)>=15000 && (boss.live == false)) {
+					while ((currentTime - explodeTime) >= 15000 && (boss.live == false)) {
 						enemyPlane = new EnemyPlane(pwc, 1, 100, 100, false);
 						enemyPlanes.add(enemyPlane);
 						boss = enemyPlane;
@@ -108,19 +107,19 @@ public class PlaneWarClient extends MyFrame {
 						} catch (InterruptedException e1) {
 							e1.printStackTrace();
 						}
-					}	
+					}
 					/**
 					 * 当积分到3000分以上，并且是600的倍数时，出现由相同路线的敌机组成的机群
 					 **/
-					if(myPlane.score>3000&&myPlane.score%600==0) {
-						int t=random.nextInt(5)+2;
+					if (myPlane.score > 3000 && myPlane.score % 600 == 0) {
+						int t = random.nextInt(5) + 2;
 						int number;
-						if(myPlane.score<=10000) {
-							number=myPlane.score/1000;
-						}else {
-							number=12;
+						if (myPlane.score <= 10000) {
+							number = myPlane.score / 1000;
+						} else {
+							number = 12;
 						}
-						for(int i=0;i<number;i++) {
+						for (int i = 0; i < number; i++) {
 							enemyPlane = new EnemyPlane(pwc, (int) (-400 + 100 * Math.random() * 6), 300, t, false);
 							enemyPlanes.add(enemyPlane);
 							try {
@@ -139,13 +138,13 @@ public class PlaneWarClient extends MyFrame {
 				}
 			}
 		}.start();
-		new Thread(){
+		new Thread() {
 			@Override
 			public void run() {
-				while(true){
-					int r = random.nextInt(7)+1;
+				while (true) {
+					int r = random.nextInt(7) + 1;
 					System.out.println(r);
-					background=new Background(0, 4, "background_0"+r); 
+					background = new Background(0, 4, "background_0" + r);
 					try {
 						Thread.sleep(10000);
 					} catch (InterruptedException e) {
@@ -190,16 +189,16 @@ public class PlaneWarClient extends MyFrame {
 		}
 
 	}
-	
+
 	public static void main(String[] args) {
-	try {
-			JFrame f=new GameUI("飞机大战");
-	        f.setSize(Constant.GAME_HEIGHT, Constant.GAME_WIDTH);//界面初始大小
-			f.setLocationRelativeTo(null);//确定窗口位置，null时在屏幕中间
-			f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//点击关闭，则程序退出
-			f.setVisible(true);	//令组件可见
+		try {
+			JFrame f = new GameUI("飞机大战");
+			f.setSize(Constant.GAME_HEIGHT, Constant.GAME_WIDTH);// 界面初始大小
+			f.setLocationRelativeTo(null);// 确定窗口位置，null时在屏幕中间
+			f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// 点击关闭，则程序退出
+			f.setVisible(true); // 令组件可见
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	}
+}

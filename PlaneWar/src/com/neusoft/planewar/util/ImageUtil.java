@@ -10,7 +10,7 @@ import com.neusoft.planewar.constant.Constant;
  * 存放项目中所有的图片<br>
  * 使用Map结构粗放时，使用静态代码块和静态初始化<br>
  * 
- * @author zzk
+ * @author
  *
  */
 public class ImageUtil {
@@ -57,7 +57,7 @@ public class ImageUtil {
 		images.put("myBlood", GameUtil.getImage(Constant.IMG_PRE + "blood/myBlood.png"));
 		// 积分
 		images.put("score", GameUtil.getImage(Constant.IMG_PRE + "score/score.png"));
-		//最高积分
+		// 最高积分
 		images.put("topscore", GameUtil.getImage(Constant.IMG_PRE + "score/topscore.png"));
 		// 警告
 		images.put("warning", GameUtil.getImage(Constant.IMG_PRE + "warning.png"));

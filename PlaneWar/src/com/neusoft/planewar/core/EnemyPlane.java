@@ -37,7 +37,7 @@ public class EnemyPlane extends Plane {
 		this.x = x;
 		this.y = y;
 		if (type == 100) {
-			img = ImageUtil.images.get("enemyPlane_boss_0"+(int)(Math.random()*5+1));
+			img = ImageUtil.images.get("enemyPlane_boss_0" + (int) (Math.random() * 5 + 1));
 			this.width = img.getWidth(null);
 			this.height = img.getHeight(null);
 			this.blood = Constant.ENEMYPLANE_BOSS_MAX_BOOLD;
@@ -58,43 +58,48 @@ public class EnemyPlane extends Plane {
 	@Override
 	public void fire() {
 		if (type == 100) {
-			if(pwc.bossMissiles.isEmpty()) {
+			if (pwc.bossMissiles.isEmpty()) {
 				List<Missile> bossMissilesTemp = new CopyOnWriteArrayList<>();
 				int num = 24;
 				for (int i = 1; i <= num; i++) {
-					//Missile missile = new Missile(pwc, this.x, this.y, "enemyPlane_missile_0" + type, type+new Random().nextInt(3), good);
+					// Missile missile = new Missile(pwc, this.x, this.y, "enemyPlane_missile_0" +
+					// type, type+new Random().nextInt(3), good);
 					Missile missile = new Missile(pwc, this.x, this.y, "enemyPlane_missile_0" + type, 100, good);
 					int r = (int) (Math.sqrt(width * width + height * height) / 2);
 					int theta = 360 * i / num;
 					missile.setTheta(theta);
-					missile.x = (int) (missile.x + (width / 2 + r * Math.sin(Math.toRadians(theta)) - missile.width / 2));
+					missile.x = (int) (missile.x
+							+ (width / 2 + r * Math.sin(Math.toRadians(theta)) - missile.width / 2));
 					missile.y = (int) (missile.y
 							- ((r * Math.cos(Math.toRadians(theta)) - height / 2 + missile.height / 2)));
 					bossMissilesTemp.add(missile);
 				}
-				
+
 				int typeboss = new Random().nextInt(3);
 				for (int i = 1; i <= num; i++) {
-					//Missile missile = new Missile(pwc, this.x, this.y, "enemyPlane_missile_0" + type, type+new Random().nextInt(3), good);
-					Missile missile = new Missile(pwc, this.x, this.y, "enemyPlane_missile_0" + type, 100+typeboss, good);
+					// Missile missile = new Missile(pwc, this.x, this.y, "enemyPlane_missile_0" +
+					// type, type+new Random().nextInt(3), good);
+					Missile missile = new Missile(pwc, this.x, this.y, "enemyPlane_missile_0" + type, 100 + typeboss,
+							good);
 					int r = (int) (Math.sqrt(width * width + height * height) / 2);
 					int theta = 360 * i / num;
 					missile.setTheta(theta);
-					missile.x = (int) (missile.x + (width / 2 + r * Math.sin(Math.toRadians(theta)) - missile.width / 2));
+					missile.x = (int) (missile.x
+							+ (width / 2 + r * Math.sin(Math.toRadians(theta)) - missile.width / 2));
 					missile.y = (int) (missile.y
 							- ((r * Math.cos(Math.toRadians(theta)) - height / 2 + missile.height / 2)));
 					bossMissilesTemp.add(missile);
 				}
-				
+
 				pwc.bossMissiles.addAll(bossMissilesTemp);
 			}
-					Missile missile = new Missile(pwc, this.x, this.y, "enemyPlane_missile_0" + type, 10, good);
-					missile.x += (this.width - missile.width) / 2;
-					missile.y += height;
-					pwc.missiles.add(missile);
-			
+			Missile missile = new Missile(pwc, this.x, this.y, "enemyPlane_missile_0" + type, 10, good);
+			missile.x += (this.width - missile.width) / 2;
+			missile.y += height;
+			pwc.missiles.add(missile);
+
 		} else {
-                        int m = random.nextInt(2);
+			int m = random.nextInt(2);
 			if (m == 0) {
 				Missile missile = new Missile(pwc, this.x, this.y, "enemyPlane_missile_0" + type, type, good);
 				missile.x += (this.width - missile.width) / 2;
@@ -115,7 +120,6 @@ public class EnemyPlane extends Plane {
 						- ((r * Math.cos(Math.toRadians(theta)) - height / 2 + missile.height / 2)));
 				pwc.missiles.add(missile);
 			}
-		}
 		}
 	}
 
@@ -139,7 +143,7 @@ public class EnemyPlane extends Plane {
 
 	@Override
 	public void move() {
-		
+
 		switch (type) {
 		case 100:// 水平平移
 			if (x >= (Constant.GAME_WIDTH) || x <= 0 - width) {
@@ -151,10 +155,10 @@ public class EnemyPlane extends Plane {
 			y += speed * 5;
 			break;
 		case 2:// 圆圈
-			x=(int) (center.x+2*r*Math.cos(theta));
-			y=(int) (center.y+2*r*Math.sin(theta));
-		        theta+=speed/20;
-		        break;
+			x = (int) (center.x + 2 * r * Math.cos(theta));
+			y = (int) (center.y + 2 * r * Math.sin(theta));
+			theta += speed / 20;
+			break;
 		case 3:// 正弦线
 			x = (int) (center.x - width + (center.x - width) * Math.sin(theta));
 			theta += speed / 10;
@@ -181,10 +185,10 @@ public class EnemyPlane extends Plane {
 			theta += speed;
 			break;
 		}
-		if (type!=100&&random.nextInt(1000) > 995 && live) {
+		if (type != 100 && random.nextInt(1000) > 995 && live) {
 			fire();
 		}
-		if(type==100&&random.nextInt(1000)>980&&live){
+		if (type == 100 && random.nextInt(1000) > 980 && live) {
 			fire();
 		}
 	}
@@ -194,52 +198,52 @@ public class EnemyPlane extends Plane {
 
 	@Override
 	public void draw(Graphics g) {
-		
-		if(!Plane.flagPause) {
 
-		if (blood <= 0 && live) {
-			live = false;
-			pwc.myPlane.score += 100 * type;
-			//写入最高分
-			pwc.myPlane.writeTopscore();
-			/**
-			 * boss死了就更新最后一次爆炸时间
-			 */
-			if(type == 100) {
-				pwc.explodeTime = System.currentTimeMillis();
-			}
-			// 爆炸
-			Explode ex = new Explode(pwc, x, y);
-			ex.x += (width - ex.width) / 2;
-			ex.y += (height - ex.height) / 2;
-			pwc.explodes.add(ex);
+		if (!Plane.flagPause) {
 
-			// 产生道具
-			Item item = new Item(pwc, x, y);
-			item.x += (width - item.width) / 2;
-			item.y += height;
-			pwc.items.add(item);
-			
-			if(type==100){
-				pwc.enemyPlanes.clear();
-				pwc.missiles.clear();
-				pwc.items.clear();
+			if (blood <= 0 && live) {
+				live = false;
+				pwc.myPlane.score += 100 * type;
+				// 写入最高分
+				pwc.myPlane.writeTopscore();
+				/**
+				 * boss死了就更新最后一次爆炸时间
+				 */
+				if (type == 100) {
+					pwc.explodeTime = System.currentTimeMillis();
+				}
+				// 爆炸
+				Explode ex = new Explode(pwc, x, y);
+				ex.x += (width - ex.width) / 2;
+				ex.y += (height - ex.height) / 2;
+				pwc.explodes.add(ex);
+
+				// 产生道具
+				Item item = new Item(pwc, x, y);
+				item.x += (width - item.width) / 2;
+				item.y += height;
+				pwc.items.add(item);
+
+				if (type == 100) {
+					pwc.enemyPlanes.clear();
+					pwc.missiles.clear();
+					pwc.items.clear();
+				}
 			}
+			if (type == 100 && live) {
+				g.drawImage(img, x, y, null);
+				drawBlood(g);// 画血条
+			}
+			if (type != 100 && count[type - 1] >= 4 * type) {
+				count[type - 1] = 4 * (type - 1);
+			}
+			if (type != 100 && live) {
+				g.drawImage(images[count[type - 1]], x, y, null);
+				drawBlood(g);// 画血条
+				count[type - 1]++;
+			}
+			move();
 		}
-		if (type == 100 && live) {
-			g.drawImage(img, x, y, null);
-			drawBlood(g);// 画血条
-		}
-		if (type != 100 && count[type - 1] >= 4 * type) {
-			count[type - 1] = 4 * (type - 1);
-		}
-		if (type != 100 && live) {
-			g.drawImage(images[count[type - 1]], x, y, null);
-			drawBlood(g);// 画血条
-			count[type - 1]++;
-		}
-		move();
-	}
 	}
 
 	/**
@@ -254,19 +258,19 @@ public class EnemyPlane extends Plane {
 		for (; i < width / bloodImg.getWidth(null); i++) {
 			g.drawImage(bloodImg, x + bloodImg.getWidth(null) * i, y + height, null);
 		}
-		if(type==100){
+		if (type == 100) {
 			int num = (int) (((double) (bloodImg.getWidth(null) * i) / (Constant.ENEMYPLANE_BOSS_MAX_BOOLD))
 					* (Constant.ENEMYPLANE_BOSS_MAX_BOOLD - blood) / blood_blank.getWidth(null));
 			for (int j = 0; j < num; j++) {
-				g.drawImage(blood_blank, x + bloodImg.getWidth(null) * i - blood_blank.getWidth(null) * (j + 1), y + height,
-						null);
+				g.drawImage(blood_blank, x + bloodImg.getWidth(null) * i - blood_blank.getWidth(null) * (j + 1),
+						y + height, null);
 			}
-		}else{
+		} else {
 			int num = (int) (((double) (bloodImg.getWidth(null) * i) / (Constant.ENEMYPLANE_MAX_BOOLD))
 					* (Constant.ENEMYPLANE_MAX_BOOLD - blood) / blood_blank.getWidth(null));
 			for (int j = 0; j < num; j++) {
-				g.drawImage(blood_blank, x + bloodImg.getWidth(null) * i - blood_blank.getWidth(null) * (j + 1), y + height,
-						null);
+				g.drawImage(blood_blank, x + bloodImg.getWidth(null) * i - blood_blank.getWidth(null) * (j + 1),
+						y + height, null);
 			}
 		}
 	}

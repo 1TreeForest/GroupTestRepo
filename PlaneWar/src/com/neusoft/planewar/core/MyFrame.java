@@ -42,7 +42,7 @@ public class MyFrame extends Frame {
 				System.exit(0);// 设置关闭
 			}
 		});
-		enableInputMethods(false);//屏蔽输入法
+		enableInputMethods(false);// 屏蔽输入法
 		setBackground(Color.BLACK);
 
 		new MyThread().start();
@@ -66,7 +66,7 @@ public class MyFrame extends Frame {
 		backg.setColor(Color.BLACK);
 		backg.fillRect(0, 0, Constant.GAME_WIDTH, Constant.GAME_HEIGHT);
 		backg.setColor(c);
-		paint(backg);		
+		paint(backg);
 		g.drawImage(backImg, 0, 0, null);
 	}
 

@@ -47,57 +47,60 @@ public class Item extends PlaneWarObject {
 	private int preLevel;
 	private int preScore;
 	private int preType;
+
 	@Override
 	public void draw(Graphics g) {
-		if(!Plane.flagPause) {
-		if (live) {
-			if (num <= 2) {
-				type = 1;
-			} else if (num <= 4) {
-				type = 2;
-			} else if (num <= 6) {
-				type = 3;
-			} else if (num <= 10) {
-				type = 4;
-			} else if (num <= 14) {
-				type = 5;
-			} else if (num <= 20) {
-				type = 6;
-				flag=true;
-			}
-			if(type!=0){
-				preBlood=myPlane.blood;
-				preLevel=myPlane.level;
-				preScore=myPlane.score;
-				preType=myPlane.type;
-				effectStart = System.currentTimeMillis();
-				g.drawImage(imgs[type-1], x, y, null);
-			}
-			move();
-			outOfBounds();
-		} else {
-			// 效果
-			generateEffect(g);
-			long end = System.currentTimeMillis();
-			if(end-effectStart>=50&&end-effectStart<100)
-				new MusicUtil("getItem").start();
-			if(end-effectStart>=5000&&end-effectStart<=5100){
-				pwc.items.remove(this);
+		if (!Plane.flagPause) {
+			if (live) {
+				if (num <= 2) {
+					type = 1;
+				} else if (num <= 4) {
+					type = 2;
+				} else if (num <= 6) {
+					type = 3;
+				} else if (num <= 10) {
+					type = 4;
+				} else if (num <= 14) {
+					type = 5;
+				} else if (num <= 20) {
+					type = 6;
+					flag = true;
+				}
+				if (type != 0) {
+					preBlood = myPlane.blood;
+					preLevel = myPlane.level;
+					preScore = myPlane.score;
+					preType = myPlane.type;
+					effectStart = System.currentTimeMillis();
+					g.drawImage(imgs[type - 1], x, y, null);
+				}
+				move();
+				outOfBounds();
+			} else {
+				// 效果
+				generateEffect(g);
+				long end = System.currentTimeMillis();
+				if (end - effectStart >= 50 && end - effectStart < 100)
+					new MusicUtil("getItem").start();
+				if (end - effectStart >= 5000 && end - effectStart <= 5100) {
+					pwc.items.remove(this);
+				}
 			}
 		}
 	}
-	}
+
 	boolean flag = false;
+
 	private void generateEffect(Graphics g) {
 		switch (type) {
-		case 1://升级
-			if(myPlane.level<3&&preLevel==myPlane.level){
-				myPlane.level+=1;
+		case 1:// 升级
+			if (myPlane.level < 3 && preLevel == myPlane.level) {
+				myPlane.level += 1;
 			}
 			break;
-		case 2://换子弹
-			if(myPlane.type==preType&&type<=3){
-				myPlane.type= new Random().nextInt(5)+1;
+		case 2:// 换子弹
+			if (myPlane.type == preType && type <= 3) {
+				myPlane.type = new Random().nextInt(5) + 1;
 			}
 			break;
 		case 3:// 加血
@@ -105,32 +108,33 @@ public class Item extends PlaneWarObject {
 				myPlane.blood = Constant.MYPLANE_MAX_BOOLD;
 			} else {
 				myPlane.blood += 20;
-				preBlood+=20;
+				preBlood += 20;
 			}
 			break;
 		case 4:// 防护罩
 			Image img = ImageUtil.images.get("effect_0" + (type));
 			g.drawImage(img, myPlane.x + (myPlane.width - img.getWidth(null)) / 2,
 					myPlane.y + (myPlane.height - img.getHeight(null)) / 2, null);
-			myPlane.blood=preBlood;
+			myPlane.blood = preBlood;
 			break;
-		case 5://星星加积分
-			if(preScore==myPlane.score){
-				myPlane.score+=200;
-				//最高分更新
+		case 5:// 星星加积分
+			if (preScore == myPlane.score) {
+				myPlane.score += 200;
+				// 最高分更新
 				myPlane.writeTopscore();
 			}
 			break;
-		case 6://给大招
-			if(flag){//如果没有吃道具
+		case 6:// 给大招
+			if (flag) {// 如果没有吃道具
 				myPlane.superFireCount++;
 			}
-			flag=false;
+			flag = false;
 			break;
 		}
 	}
 
-	long time=0;
+	long time = 0;
+
 	/**
 	 * 道具遇到我方飞机的方法
 	 */

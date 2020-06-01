@@ -19,10 +19,10 @@ public class Plane extends PlaneWarObject {
 	public int level;// 等级
 	public int type;// 等级
 	public int score = 0;// 积分
-	public static boolean flagPause=false;
-	public int topscore=getTopscore();	//历史最高分，通过读取文件获得
-	public int life=3; //初始3条命
-	public boolean lifeFlag=false;	//复活后无敌时间判断
+	public static boolean flagPause = false;
+	public int topscore = getTopscore(); // 历史最高分，通过读取文件获得
+	public int life = 3; // 初始3条命
+	public boolean lifeFlag = false; // 复活后无敌时间判断
 	public long timestart;
 
 	/**
@@ -81,10 +81,10 @@ public class Plane extends PlaneWarObject {
 	 * 判断我方飞机出界问题
 	 */
 	private void outOfBounds() {
-		if (x <= 0-width/2)
-			x = 0-width/2;
-		if (x >= (Constant.GAME_WIDTH - width/2))
-			x = Constant.GAME_WIDTH - width/2;
+		if (x <= 0 - width / 2)
+			x = 0 - width / 2;
+		if (x >= (Constant.GAME_WIDTH - width / 2))
+			x = Constant.GAME_WIDTH - width / 2;
 		if (y <= 0)
 			y = 0;
 		if (y >= (Constant.GAME_HEIGHT - height))
@@ -106,7 +106,7 @@ public class Plane extends PlaneWarObject {
 		missile.x += (this.width - missile.width) / 2;
 		missile.y -= height;
 		pwc.missiles.add(missile);
-		
+
 	}
 
 	boolean superFire;
@@ -139,31 +139,31 @@ public class Plane extends PlaneWarObject {
 
 	@Override
 	public void move() {
-		if(!Plane.flagPause) {
-		if (left) {
-			x -= speed;
+		if (!Plane.flagPause) {
+			if (left) {
+				x -= speed;
+			}
+			if (right) {
+				x += speed;
+			}
+			if (up) {
+				y -= speed;
+			}
+			if (down) {
+				y += speed;
+			}
+			outOfBounds();
+			if (fire)
+				fire();
+			if (superFire)
+				superFire();
 		}
-		if (right) {
-			x += speed;
-		}
-		if (up) {
-			y -= speed;
-		}
-		if (down) {
-			y += speed;
-		}
-		outOfBounds();
-		if (fire)
-			fire();
-		if (superFire)
-			superFire();
-	}
 	}
 
 	@Override
 	public void draw(Graphics g) {
 		img = ImageUtil.images.get("myPlane_0" + type + "_0" + level);
-		if (blood <= 0 && live && life-1==0) {	//生命值为0且没有剩余命了
+		if (blood <= 0 && live && life - 1 == 0) { // 生命值为0且没有剩余命了
 			live = false;
 			Explode ex = new Explode(pwc, x, y);
 			ex.x += (width - ex.width) / 2;
@@ -172,34 +172,33 @@ public class Plane extends PlaneWarObject {
 			pwc.enemyPlanes.clear();
 			pwc.missiles.clear();
 			pwc.items.clear();
-			life-=1;
-		}
-		else if(blood <= 0 && live && life-1!=0){	//死亡一次但还有命
-			life-=1;
-			x=(Constant.GAME_WIDTH - width) / 2;
-			y=Constant.GAME_HEIGHT - height;
-			g.drawImage(img,x,y,null);	//在初始地方复活
-			blood=Constant.MYPLANE_MAX_BOOLD;
+			life -= 1;
+		} else if (blood <= 0 && live && life - 1 != 0) { // 死亡一次但还有命
+			life -= 1;
+			x = (Constant.GAME_WIDTH - width) / 2;
+			y = Constant.GAME_HEIGHT - height;
+			g.drawImage(img, x, y, null); // 在初始地方复活
+			blood = Constant.MYPLANE_MAX_BOOLD;
 			Image img = ImageUtil.images.get("effect_0" + (4));
-			g.drawImage(img, x + (width - img.getWidth(null)) / 2,
-					y + (height - img.getHeight(null)) / 2, null);//保护罩
-			lifeFlag=true;
-			timestart = System.currentTimeMillis();//获取此时时间,用于判断无敌时间
+			g.drawImage(img, x + (width - img.getWidth(null)) / 2, y + (height - img.getHeight(null)) / 2, null);// 保护罩
+			lifeFlag = true;
+			timestart = System.currentTimeMillis();// 获取此时时间,用于判断无敌时间
 		}
 
-		if (live) {	//还活着
-			if(lifeFlag){
-				long timeend=System.currentTimeMillis();
-				if(timeend-timestart<=3000){	//无敌时间3s
+		if (live) { // 还活着
+			if (lifeFlag) {
+				long timeend = System.currentTimeMillis();
+				if (timeend - timestart <= 3000) { // 无敌时间3s
 					Image img = ImageUtil.images.get("effect_0" + (4));
-					g.drawImage(img, x + (width - img.getWidth(null)) / 2,
-							y + (height - img.getHeight(null)) / 2, null);	//加上保护罩
+					g.drawImage(img, x + (width - img.getWidth(null)) / 2, y + (height - img.getHeight(null)) / 2,
+							null); // 加上保护罩
 					blood = Constant.MYPLANE_MAX_BOOLD;
 					move();
+				} else {
+					lifeFlag = false;
 				}
-				else{lifeFlag=false;}
 			}
-			g.drawImage(img, x, y, null);	//不再无敌，正常移动
+			g.drawImage(img, x, y, null); // 不再无敌，正常移动
 			move();
 		}
 		drawBloodAndScore(g);
@@ -228,30 +227,32 @@ public class Plane extends PlaneWarObject {
 		g.setFont(new Font("微软雅黑", Font.BOLD, 40));
 		g.setColor(Color.WHITE);
 		g.drawString(score + "", 10 + scoreImg.getWidth(null) + 10, 40 + bloodImg.getHeight(null) + 50);
-		//画最高积分
-		g.drawImage(ImageUtil.images.get("topscore"), bloodImg.getWidth(null)+30, topscoreImg.getHeight(null), null);
+		// 画最高积分
+		g.drawImage(ImageUtil.images.get("topscore"), bloodImg.getWidth(null) + 30, topscoreImg.getHeight(null), null);
 		g.setFont(new Font("微软雅黑", Font.BOLD, 30));
 		g.setColor(Color.BLUE);
-		g.drawString(getTopscore()+ "", scoreImg.getWidth(null) + 150, topscoreImg.getHeight(null)+75);
-		//画生命
+		g.drawString(getTopscore() + "", scoreImg.getWidth(null) + 150, topscoreImg.getHeight(null) + 75);
+		// 画生命
 		g.setFont(new Font("微软雅黑", Font.BOLD, 40));
 		g.setColor(Color.WHITE);
-		g.drawString("LIFE: " +getLife()+"", 10,  bloodImg.getHeight(null) + 150);
-		//画暂停提示
-		g.setFont(new Font("微软雅黑",Font.BOLD,20));
+		g.drawString("LIFE: " + getLife() + "", 10, bloodImg.getHeight(null) + 150);
+		// 画暂停提示
+		g.setFont(new Font("微软雅黑", Font.BOLD, 20));
 		g.setColor(Color.WHITE);
 		g.drawString("按P键暂停", 400, 110);
-		
 
-
-		if(flagPause) {
-			g.setFont(new Font("微软雅黑",Font.BOLD,80));
+		if (flagPause) {
+			g.setFont(new Font("微软雅黑", Font.BOLD, 80));
 			g.setColor(Color.RED);
 			g.drawString("游戏暂停", 100, 400);
 
-		}//游戏暂停
+		} // 游戏暂停
 	}
-	public int getLife(){return life;}
+
+	public int getLife() {
+		return life;
+	}
+
 	/**
 	 * 大招剩余次数
 	 */
@@ -285,12 +286,12 @@ public class Plane extends PlaneWarObject {
 			superFire = true;
 			break;
 		case KeyEvent.VK_P:
-			if(!flagPause) {
-				
-			flagPause =true;
-			}else {
-				
-				flagPause=false;
+			if (!flagPause) {
+
+				flagPause = true;
+			} else {
+
+				flagPause = false;
 			}
 			break;
 		}
@@ -299,8 +300,7 @@ public class Plane extends PlaneWarObject {
 	/**
 	 * 松开键盘的方法
 	 *
-	 * @param e
-	 *            键盘事件
+	 * @param e 键盘事件
 	 */
 	public void keyReleased(KeyEvent e) {
 		switch (e.getKeyCode()) {
@@ -321,31 +321,34 @@ public class Plane extends PlaneWarObject {
 			break;
 		}
 	}
+
 	/**
 	 * 从文件中读取最高分
+	 * 
 	 * @return
 	 */
-	public int getTopscore(){
-		int top=readFile();
+	public int getTopscore() {
+		int top = readFile();
 		return top;
 	}
 
 	/**
 	 * 更改最高分
 	 */
-	public void writeTopscore(){
-		if(score>topscore){
+	public void writeTopscore() {
+		if (score > topscore) {
 			writeFile();
 		}
 	}
 
 	/**
 	 * 读取文件内容操作
+	 * 
 	 * @return
 	 */
-	public int readFile(){
+	public int readFile() {
 		File file = new File("TopScore.txt");
-		//如果文件不存在，文件输出流会自动创建文件
+		// 如果文件不存在，文件输出流会自动创建文件
 		if (!file.exists()) {
 			try {
 				file.createNewFile();
@@ -356,12 +359,12 @@ public class Plane extends PlaneWarObject {
 				e.printStackTrace();
 			}
 		}
-		//读取文件
-		int topscorenow=0;
+		// 读取文件
+		int topscorenow = 0;
 		try {
 			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
-			String topscorenow1 =br.readLine();
-			if(topscorenow1!=null) {
+			String topscorenow1 = br.readLine();
+			if (topscorenow1 != null) {
 				topscorenow = Integer.parseInt(topscorenow1);
 			}
 			br.close();
@@ -375,25 +378,26 @@ public class Plane extends PlaneWarObject {
 		}
 		return topscorenow;
 	}
-	public void writeFile(){
+
+	public void writeFile() {
 		File file = new File("TopScore.txt");
-		//如果文件不存在，文件输出流会自动创建文件
+		// 如果文件不存在，文件输出流会自动创建文件
 		if (!file.exists()) {
 			try {
 				file.createNewFile();
-                String a = String.valueOf(0);
+				String a = String.valueOf(0);
 				BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file)));
-				bw.write(a);//向文件写入初始最高分
+				bw.write(a);// 向文件写入初始最高分
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
-		//写文件
+		// 写文件
 		try {
-            String a = String.valueOf(score);
+			String a = String.valueOf(score);
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file)));
-			bw.write(a);//向文件写入最高分
-			bw.close();//关闭流
+			bw.write(a);// 向文件写入最高分
+			bw.close();// 关闭流
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
