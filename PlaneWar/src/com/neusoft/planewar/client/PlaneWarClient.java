@@ -67,6 +67,27 @@ public class PlaneWarClient extends MyFrame {
 		new Thread() {
 			@Override
 			public void run() {
+				while(true) {
+					if(myPlane.fire) {
+						myPlane.fire();
+						try {
+							Thread.sleep(200);
+						} catch (InterruptedException e1) {
+							e1.printStackTrace();
+						}
+					}
+					//System.out.println("tt");
+					try {
+						Thread.sleep(10);
+					} catch (InterruptedException e1) {
+						e1.printStackTrace();
+					}
+				}
+			}
+		}.start();
+		new Thread() {
+			@Override
+			public void run() {
 				pwc.explodeTime = System.currentTimeMillis();
 				long currentTime = System.currentTimeMillis();// 当前时间
 				EnemyPlane boss = new EnemyPlane(pwc, 1, 100, 100, false);
