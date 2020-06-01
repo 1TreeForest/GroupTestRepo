@@ -48,9 +48,9 @@ public class Missile extends PlaneWarObject {
 		if (this.getRectangle().intersects(p.getRectangle()) && this.good != p.isGood() && p.live) {
 			this.live = false;
 			if (p.level >= 1) {
-				p.blood -= 10 * p.level;
+				p.blood -= 50 * p.level;
 			} else {
-				p.blood -= 20;
+				p.blood -= 100;
 			}
 			pwc.missiles.remove(this);
 			return true;
