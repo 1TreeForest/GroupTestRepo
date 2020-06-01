@@ -153,8 +153,8 @@ public class Plane extends PlaneWarObject {
 				y += speed;
 			}
 			outOfBounds();
-			if (fire)
-				fire();
+			//if (fire)
+				//fire();
 			if (superFire)
 				superFire();
 		}
