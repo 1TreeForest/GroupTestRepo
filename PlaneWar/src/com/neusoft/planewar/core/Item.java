@@ -40,7 +40,7 @@ public class Item extends PlaneWarObject {
 	}
 
 	private Random random = new Random();
-	int num = random.nextInt(6);
+	int num = random.nextInt(100);
 	long effectStart;
 
 	private int preBlood;
