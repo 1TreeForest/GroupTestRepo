@@ -29,9 +29,9 @@ public class GameUI extends JFrame implements ActionListener {
 		imagePanel.setLayout(null); // 设置布局管理器空
 
 		/* 设置按钮位置 */
-		begin.setBounds(320, 240, 100, 40);
+		begin.setBounds(200, 240, 100, 40);
 		rule.setBounds(126, 340, 60, 20);
-		exit.setBounds(556, 340, 60, 20);
+		exit.setBounds(325, 340, 60, 20);
 
 		/* 添加按钮到JFrame里 */
 		this.add(begin);
@@ -68,7 +68,7 @@ public class GameUI extends JFrame implements ActionListener {
 		if (e.getSource() == rule) {
 			RuleFrame r = new RuleFrame(); // 点击“规则”后，出现一个新界面
 			r.setTitle("游戏规则"); // 界面的标题
-			r.setSize(Constant.GAME_HEIGHT, Constant.GAME_WIDTH); // 界面初始大小
+			r.setSize(512,768); // 界面初始大小
 			r.setLocationRelativeTo(null); // 确定窗口位置，null时在屏幕中间
 			r.setVisible(true); // 令组件可见
 		}
