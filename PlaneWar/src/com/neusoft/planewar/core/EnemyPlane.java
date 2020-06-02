@@ -58,7 +58,7 @@ public class EnemyPlane extends Plane {
 		if (type == 100) {
 			if (pwc.bossMissiles.isEmpty()) {
 				List<Missile> bossMissilesTemp = new CopyOnWriteArrayList<>();
-				int num = 24;
+				int num = 20;
 				for (int i = 1; i <= num; i++) {
 					// Missile missile = new Missile(pwc, this.x, this.y, "enemyPlane_missile_0" +
 					// type, type+new Random().nextInt(3), good);
@@ -104,18 +104,27 @@ public class EnemyPlane extends Plane {
 				missile.y += height;
 				pwc.missiles.add(missile);
 			} else if (m == 1) {
-				Missile missile = new Missile(pwc, this.x, this.y, "enemyPlane_missile_0" + type, type, good);
+				Missile missile = new Missile(pwc, this.x, this.y, "enemyPlane_missile_0" + type, 11, good);
+			
 				int theta = 45 / 360;
+				/**
 				missile.x = (int) (missile.x + (width / 2 + r * Math.sin(Math.toRadians(theta)) - missile.width / 2));
 				missile.y = (int) (missile.y
 						- ((r * Math.cos(Math.toRadians(theta)) - height / 2 + missile.height / 2)));
+				*/
+				missile.x += (this.width - missile.width) / 2;
+				missile.y += height;
 				pwc.missiles.add(missile);
 			} else if (m == 2) {
-				Missile missile = new Missile(pwc, this.x, this.y, "enemyPlane_missile_0" + type, type, good);
+				Missile missile = new Missile(pwc, this.x, this.y, "enemyPlane_missile_0" + type, 12, good);
+				/**
 				int theta = 45 / 360;
 				missile.x = (int) (missile.x - (width / 2 + r * Math.sin(Math.toRadians(theta)) - missile.width / 2));
 				missile.y = (int) (missile.y
 						- ((r * Math.cos(Math.toRadians(theta)) - height / 2 + missile.height / 2)));
+				*/
+				missile.x += (this.width - missile.width) / 2;
+				missile.y += height;
 				pwc.missiles.add(missile);
 			}
 		}
