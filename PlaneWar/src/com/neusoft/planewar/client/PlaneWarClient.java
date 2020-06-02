@@ -76,7 +76,6 @@ public class PlaneWarClient extends MyFrame {
 							e1.printStackTrace();
 						}
 					}
-					//System.out.println("tt");
 					try {
 						Thread.sleep(10);
 					} catch (InterruptedException e1) {
@@ -138,7 +137,7 @@ public class PlaneWarClient extends MyFrame {
 						if (myPlane.score <= 10000) {
 							number = myPlane.score / 1000;
 						} else {
-							number = 12;
+							number = 10;
 						}
 						for (int i = 0; i < number; i++) {
 							enemyPlane = new EnemyPlane(pwc, (int) (-400 + 100 * Math.random() * 6), 300, t, false);

@@ -45,9 +45,9 @@ public class Missile extends PlaneWarObject {
 		if (this.getRectangle().intersects(p.getRectangle()) && this.good != p.isGood() && p.live) {
 			this.live = false;
 			if (p.level >= 1) {
-				p.blood -= 30 * p.level;
+				p.blood -= 50 * p.level;
 			} else {
-				p.blood -= 50;
+				p.blood -= 70;
 			}
 			if (type >= 100) {
 				this.pwc.bossMissiles.remove(this);
@@ -61,7 +61,7 @@ public class Missile extends PlaneWarObject {
 	}
 
 	/**
-	 * 子弹击打飞机的方法
+	 * 子弹击打多个飞机的方法
 	 */
 	public boolean hitPlanes(List<EnemyPlane> enemyPlanes) {
 		for (EnemyPlane enemyPlane : enemyPlanes) {
