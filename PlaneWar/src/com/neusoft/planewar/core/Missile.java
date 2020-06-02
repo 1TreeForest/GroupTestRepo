@@ -1,13 +1,10 @@
 package com.neusoft.planewar.core;
 
-import java.awt.Graphics;
-import java.awt.Image;
 import java.util.List;
 
 import com.neusoft.planewar.client.PlaneWarClient;
 import com.neusoft.planewar.constant.Constant;
 import com.neusoft.planewar.util.ImageUtil;
-import com.neusoft.planewar.util.MusicUtil;
 
 public class Missile extends PlaneWarObject {
 	boolean live;
@@ -48,11 +45,15 @@ public class Missile extends PlaneWarObject {
 		if (this.getRectangle().intersects(p.getRectangle()) && this.good != p.isGood() && p.live) {
 			this.live = false;
 			if (p.level >= 1) {
-				p.blood -= 50 * p.level;
+				p.blood -= 30 * p.level;
 			} else {
-				p.blood -= 100;
+				p.blood -= 50;
 			}
-			pwc.missiles.remove(this);
+			if (type >= 100) {
+				this.pwc.bossMissiles.remove(this);
+			} else {
+				this.pwc.missiles.remove(this);
+			}
 			return true;
 		} else {
 			return false;

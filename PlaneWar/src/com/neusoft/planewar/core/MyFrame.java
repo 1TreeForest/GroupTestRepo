@@ -4,18 +4,13 @@ import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Point;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import com.neusoft.planewar.constant.Constant;
-import com.neusoft.planewar.util.ImageUtil;
 
 /**
  * 游戏中自定义窗口的父类 设置一次，终身使用
- * 
- * @author zzk
- *
  */
 public class MyFrame extends Frame {
 	/**

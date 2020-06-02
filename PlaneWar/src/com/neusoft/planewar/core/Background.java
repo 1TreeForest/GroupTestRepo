@@ -8,8 +8,6 @@ import com.neusoft.planewar.util.ImageUtil;
 
 /**
  * 循环背景图
- * 
- * @author
  *
  */
 public class Background implements Drawable, Moveable {

@@ -9,9 +9,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.neusoft.planewar.client.PlaneWarClient;
 import com.neusoft.planewar.constant.Constant;
-import com.neusoft.planewar.util.GameUtil;
 import com.neusoft.planewar.util.ImageUtil;
-import com.neusoft.planewar.util.MusicUtil;
 
 public class EnemyPlane extends Plane {
 	public int type;// 类型
