@@ -21,9 +21,9 @@ public class GameUI extends JFrame implements ActionListener {
 
 	public GameUI(String name) {
 		super(name);
-		JLabel imgLabel = new JLabel(new ImageIcon("background.png"));// 将图片放在标签里。
+		JLabel imgLabel = new JLabel(new ImageIcon("com/neusoft/planewar/img/background.png"));// 将图片放在标签里。
 		this.getLayeredPane().add(imgLabel, new Integer(Integer.MIN_VALUE));// 将背景标签添加到JFrame的LayeredPane面板里（分层）
-		imgLabel.setBounds(0, 0, 1000, 700);// 设置背景标签的位置
+		imgLabel.setBounds(100, 100, 512, 768);// 设置背景标签的位置
 		imagePanel = (JPanel) this.getContentPane();// 将Frame的内容窗格放到Panel上
 		imagePanel.setOpaque(false);// 将内容面板设为透明。这样LayeredPane面板中的背景才能显示出来。
 		imagePanel.setLayout(null); // 设置布局管理器空

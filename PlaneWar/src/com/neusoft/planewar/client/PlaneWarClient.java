@@ -67,8 +67,8 @@ public class PlaneWarClient extends MyFrame {
 		new Thread() {
 			@Override
 			public void run() {
-				while(true) {
-					if(myPlane.fire) {
+				while (true) {
+					if (myPlane.fire) {
 						myPlane.fire();
 						try {
 							Thread.sleep(200);
@@ -173,7 +173,7 @@ public class PlaneWarClient extends MyFrame {
 				}
 			};
 		}.start();
-		new MusicUtil("bgm").start();
+		new MusicUtil("bgm", true).start();
 	}
 
 	final long start = System.currentTimeMillis();
@@ -213,7 +213,7 @@ public class PlaneWarClient extends MyFrame {
 	public static void main(String[] args) {
 		try {
 			JFrame f = new GameUI("飞机大战");
-			f.setSize(512,768);// 界面初始大小
+			f.setSize(512, 768);// 界面初始大小
 			f.setLocationRelativeTo(null);// 确定窗口位置，null时在屏幕中间
 			f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// 点击关闭，则程序退出
 			f.setVisible(true); // 令组件可见
