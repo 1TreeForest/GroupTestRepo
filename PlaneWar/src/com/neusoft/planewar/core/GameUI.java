@@ -57,6 +57,7 @@ public class GameUI extends JFrame implements ActionListener {
 			System.exit(0); // 退出的监听事件
 		}
 		if (e.getSource() == begin) {
+			this.dispose();
 			PlaneWarClient s = new PlaneWarClient();// 点“开始”后，出现一个新界面，作为游戏界面
 			s.setTitle("飞机大战");// 界面的标题
 			s.setSize(Constant.GAME_HEIGHT, Constant.GAME_WIDTH);// 界面初始大小
