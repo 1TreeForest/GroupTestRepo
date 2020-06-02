@@ -123,8 +123,14 @@ public class Missile extends PlaneWarObject {
 				y -= speed;
 				break;
 			case 10:
-				y += speed * 4;
+				y += speed * 3;
 				break;
+			case 11:
+				x += speed;
+				y += speed;
+			case 12:
+				x -= speed;
+				y += speed;
 			default:
 				y -= speed;
 				break;
