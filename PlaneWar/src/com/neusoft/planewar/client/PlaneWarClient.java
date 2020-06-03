@@ -47,6 +47,7 @@ public class PlaneWarClient extends MyFrame {
 	public long explodeTime;// 最后一次爆炸的时间
 
 	public Random random = new Random();
+	final long start = System.currentTimeMillis();
 
 	@Override
 	public void launchFrame() {
@@ -175,8 +176,6 @@ public class PlaneWarClient extends MyFrame {
 		}.start();
 		new MusicUtil("bgm", true).start();
 	}
-
-	final long start = System.currentTimeMillis();
 
 	@Override
 	public void paint(Graphics g) {

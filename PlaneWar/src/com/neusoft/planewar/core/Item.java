@@ -14,6 +14,23 @@ public class Item extends PlaneWarObject {
 	private int type;
 	public boolean live;
 	private Plane myPlane;
+	static Image imgs[] = new Image[6];
+	static {
+		for (int i = 0; i < imgs.length; i++) {
+			imgs[i] = ImageUtil.images.get("item_0" + (i + 1));
+		}
+	}
+	int changeY = 2;
+	private Random random = new Random();
+	int num = random.nextInt(100);
+	long effectStart;
+
+	private int preBlood;
+	private int preLevel;
+	private int preScore;
+	private int preType;
+	boolean flag = false;
+	long time = 0;
 
 	public Item(PlaneWarClient pwc, int x, int y) {
 		live = true;
@@ -25,28 +42,11 @@ public class Item extends PlaneWarObject {
 		this.myPlane = pwc.myPlane;
 	}
 
-	static Image imgs[] = new Image[6];
-	static {
-		for (int i = 0; i < imgs.length; i++) {
-			imgs[i] = ImageUtil.images.get("item_0" + (i + 1));
-		}
-	}
-	int changeY = 2;
-
 	@Override
 	public void move() {
 		// changeY+=1;
 		y += changeY;
 	}
-
-	private Random random = new Random();
-	int num = random.nextInt(100);
-	long effectStart;
-
-	private int preBlood;
-	private int preLevel;
-	private int preScore;
-	private int preType;
 
 	@Override
 	public void draw(Graphics g) {
@@ -89,8 +89,6 @@ public class Item extends PlaneWarObject {
 		}
 	}
 
-	boolean flag = false;
-
 	private void generateEffect(Graphics g) {
 		switch (type) {
 		case 1:// 升级
@@ -132,8 +130,6 @@ public class Item extends PlaneWarObject {
 			break;
 		}
 	}
-
-	long time = 0;
 
 	/**
 	 * 道具遇到我方飞机的方法

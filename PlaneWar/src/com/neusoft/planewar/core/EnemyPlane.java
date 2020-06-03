@@ -14,6 +14,19 @@ import com.neusoft.planewar.util.ImageUtil;
 public class EnemyPlane extends Plane {
 	public int type;// 类型
 	public int exp;// 经验
+	static Random random = new Random();
+	static int count[] = new int[6];
+	Point center = new Point(Constant.GAME_WIDTH / 2, Constant.GAME_HEIGHT / 2);
+	double theta;
+	int r = 100;
+	public static Image images[] = new Image[24];
+	static {
+		for (int i = 0; i < 6; i++) {
+			for (int j = 0; j < 4; j++) {
+				images[4 * i + j] = ImageUtil.images.get("enemyPlane_0" + (i + 1) + "_0" + (j + 1));
+			}
+		}
+	}
 
 	/**
 	 * 无参构造
@@ -106,37 +119,25 @@ public class EnemyPlane extends Plane {
 			} else if (m == 1) {
 				Missile missile = new Missile(pwc, this.x, this.y, "enemyPlane_missile_0" + type, 11, good);
 				/**
-				int theta = 45 / 360;
-				missile.x = (int) (missile.x + (width / 2 + r * Math.sin(Math.toRadians(theta)) - missile.width / 2));
-				missile.y = (int) (missile.y
-						- ((r * Math.cos(Math.toRadians(theta)) - height / 2 + missile.height / 2)));
-				*/
+				 * int theta = 45 / 360; missile.x = (int) (missile.x + (width / 2 + r *
+				 * Math.sin(Math.toRadians(theta)) - missile.width / 2)); missile.y = (int)
+				 * (missile.y - ((r * Math.cos(Math.toRadians(theta)) - height / 2 +
+				 * missile.height / 2)));
+				 */
 				missile.x += (this.width - missile.width) / 2;
 				missile.y += height;
 				pwc.missiles.add(missile);
 			} else if (m == 2) {
 				Missile missile = new Missile(pwc, this.x, this.y, "enemyPlane_missile_0" + type, 12, good);
 				/**
-				int theta = 45 / 360;
-				missile.x = (int) (missile.x - (width / 2 + r * Math.sin(Math.toRadians(theta)) - missile.width / 2));
-				missile.y = (int) (missile.y
-						- ((r * Math.cos(Math.toRadians(theta)) - height / 2 + missile.height / 2)));
-				*/
+				 * int theta = 45 / 360; missile.x = (int) (missile.x - (width / 2 + r *
+				 * Math.sin(Math.toRadians(theta)) - missile.width / 2)); missile.y = (int)
+				 * (missile.y - ((r * Math.cos(Math.toRadians(theta)) - height / 2 +
+				 * missile.height / 2)));
+				 */
 				missile.x += (this.width - missile.width) / 2;
 				missile.y += height;
 				pwc.missiles.add(missile);
-			}
-		}
-	}
-
-	Point center = new Point(Constant.GAME_WIDTH / 2, Constant.GAME_HEIGHT / 2);
-	double theta;
-	int r = 100;
-	public static Image images[] = new Image[24];
-	static {
-		for (int i = 0; i < 6; i++) {
-			for (int j = 0; j < 4; j++) {
-				images[4 * i + j] = ImageUtil.images.get("enemyPlane_0" + (i + 1) + "_0" + (j + 1));
 			}
 		}
 	}
@@ -198,9 +199,6 @@ public class EnemyPlane extends Plane {
 			fire();
 		}
 	}
-
-	static Random random = new Random();
-	static int count[] = new int[6];
 
 	@Override
 	public void draw(Graphics g) {

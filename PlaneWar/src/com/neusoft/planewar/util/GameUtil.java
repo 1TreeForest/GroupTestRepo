@@ -12,7 +12,6 @@ import javax.imageio.ImageIO;
 /**
  * 获取当前项目中各种资源
  * 
- * @author zzk
  *
  */
 public class GameUtil {

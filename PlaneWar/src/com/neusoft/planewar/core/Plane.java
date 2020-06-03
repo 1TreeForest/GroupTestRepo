@@ -24,6 +24,9 @@ public class Plane extends PlaneWarObject {
 	public int life = 3; // 初始3条命
 	public boolean lifeFlag = false; // 复活后无敌时间判断
 	public long timestart;
+	public int superFireCount = 0; // 大招剩余次数
+	public boolean fire; // 是否开火
+	boolean superFire;// 超级子弹
 
 	/**
 	 * 无参构造
@@ -92,11 +95,6 @@ public class Plane extends PlaneWarObject {
 	}
 
 	/**
-	 * 是否开火
-	 */
-	public boolean fire;
-
-	/**
 	 * 我方飞机发子弹的方法
 	 */
 	public void fire() {
@@ -108,8 +106,6 @@ public class Plane extends PlaneWarObject {
 		pwc.missiles.add(missile);
 
 	}
-
-	boolean superFire;
 
 	/**
 	 * 超级子弹
@@ -153,8 +149,8 @@ public class Plane extends PlaneWarObject {
 				y += speed;
 			}
 			outOfBounds();
-			//if (fire)
-				//fire();
+			// if (fire)
+			// fire();
 			if (superFire)
 				superFire();
 		}
@@ -252,11 +248,6 @@ public class Plane extends PlaneWarObject {
 	public int getLife() {
 		return life;
 	}
-
-	/**
-	 * 大招剩余次数
-	 */
-	public int superFireCount = 0;
 
 	/**
 	 * 按下键盘的方法

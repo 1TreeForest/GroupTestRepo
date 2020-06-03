@@ -8,7 +8,6 @@ import javazoom.jl.player.Player;
 
 /**
  * 音乐播放类
- * 
  *
  */
 public class MusicUtil extends Thread {

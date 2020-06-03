@@ -7,8 +7,8 @@ import java.util.Map;
 import com.neusoft.planewar.constant.Constant;
 
 /**
- * 存放项目中所有的图片<br>
- * 使用Map结构粗放时，使用静态代码块和静态初始化<br>
+ * 存放项目中所有的图片
+ * 使用Map结构粗放时，使用静态代码块和静态初始化
  *
  */
 public class ImageUtil {

@@ -10,6 +10,7 @@ public class Missile extends PlaneWarObject {
 	boolean live;
 	int speed;
 	int type;
+	private int theta;
 
 	public Missile() {
 		super();
@@ -35,8 +36,6 @@ public class Missile extends PlaneWarObject {
 	public void setTheta(int theta) {
 		this.theta = theta;
 	}
-
-	private int theta;
 
 	/**
 	 * 子弹击打飞机的方法
