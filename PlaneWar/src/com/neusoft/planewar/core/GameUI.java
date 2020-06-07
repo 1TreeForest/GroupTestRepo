@@ -69,7 +69,7 @@ public class GameUI extends JFrame implements ActionListener {
 		if (e.getSource() == rule) {
 			RuleFrame r = new RuleFrame(); // 点击“规则”后，出现一个新界面
 			r.setTitle("游戏规则"); // 界面的标题
-			r.setSize(224,420); // 界面初始大小
+			r.setSize(421,646); // 界面初始大小
 			r.setLocationRelativeTo(null); // 确定窗口位置，null时在屏幕中间
 			r.setVisible(true); // 令组件可见
 			
